@@ -12,12 +12,16 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\models\AbordCase;
+use yii\data\Pagination;
 
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
+    public $pageSize = 6;
+
     /**
      * @inheritdoc
      */
@@ -72,9 +76,18 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        var_dump(Yii::$app->getSecurity()->generatePasswordHash("123456"));
-        var_dump(Yii::$app->security->generateRandomString());
-        return $this->render('index');
+        $query = AbordCase::find()->with("user")->where(['status' => AbordCase::STATUS_RELEASE]);
+        $pages = new Pagination([
+            'totalCount' => $query->count(),
+            'pageSize' => $this->pageSize
+        ]);
+
+        $data = $query->offset($pages->offset)->limit($pages->limit)->orderBy("case_id DESC")->all();
+
+        return $this->render('index', [
+            'data' => $data,
+            'pages' => $pages
+        ]);
     }
 
     /**
