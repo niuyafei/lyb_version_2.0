@@ -52,7 +52,7 @@ $this->title = '留学案例';
             </div>
             <div class="modal-body m-t-15 m-b-30">
                 <div class="row m-t-10">
-                    <a href="" class="color-black">
+                    <a href="https://open.weixin.qq.com/connect/qrconnect?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect" class="color-black">
                         <div class="col-xs-6 text-center p-l-35">
                             <img src=<?= Url::to("/img/wechat.jpg"); ?> width="70" />
                             <p class="m-t-10">微信登录</p>

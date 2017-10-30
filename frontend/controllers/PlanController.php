@@ -14,6 +14,10 @@ use common\models\MeibenForm;
 use common\models\MeigaoForm;
 use common\models\MeiyanForm;
 use common\models\MeimbaForm;
+use yii\helpers\ArrayHelper;
+use common\models\Schools;
+use common\models\StudyPlan;
+use common\models\TimePlan;
 
 class PlanController extends Controller
 {
@@ -68,8 +72,39 @@ class PlanController extends Controller
 	{
 		$model = new MeibenForm();
 		if($model->load(Yii::$app->request->post()) && $model->validate()){
-			if($model->updates()){
-				return $this->redirect(['plan/pay']);
+			$toefl = ArrayHelper::getValue($model, "toefl");
+			$grade = ArrayHelper::getValue($model, "grade");
+			if($grade == "高一"){
+				$grade = 10;
+			}else if($grade == "高二"){
+				$grade = 11;
+			}else{
+				$grade = 12;
+			}
+			$sat = ArrayHelper::getValue($model, "sat");
+			$currentSchool = ArrayHelper::getValue($model, 'currentSchool');
+			$act = ArrayHelper::getValue($model, 'act');
+			$gpa = ArrayHelper::getValue($model, "gpa_h");
+			$ap = ArrayHelper::getValue($model, "ap");
+
+			$url = "http://fn.liuyangbang.cn/frontend/web/index.php?r=scheme/selectiontable&toefl={$toefl}&sat={$sat}&grade={$grade}&currentSchool={$currentSchool}&act={$act}&gpa={$gpa}&ap={$ap}";
+			$content = file_get_contents($url);
+			$data = json_decode($content, true);
+
+			if($plan_id = $model->updates()){
+				//选校列表
+				$SchoolModel = new Schools();
+				$SchoolModel->creates($data['dream'], 1, $plan_id);
+				$SchoolModel->creates($data['goal'], 2, $plan_id);
+				$SchoolModel->creates($data['end'], 3, $plan_id);
+				//选校策略
+				$studyPlanModel = new StudyPlan();
+				$studyPlanModel->creates($data, $plan_id);
+				//时间规划
+				$timePlanModel = new TimePlan();
+				$timePlanModel->creates($data['process'], $plan_id);
+
+//				return $this->redirect(['plan/pay']);
 			}
 		}
 		return $this->render("meiben", [

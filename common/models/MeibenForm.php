@@ -108,11 +108,12 @@ class MeibenForm extends Model
 		}
 
 		foreach($this as $key => $value){
+			if($key == "plan_id") continue;
 			$model->$key = $value;
 		}
 
 		if($model->save()){
-			return true;
+			return $model->plan_id;
 		}else{
 			return false;
 		}
