@@ -35,7 +35,7 @@ class TimePlan extends \yii\db\ActiveRecord
         return [
             [['user_id', 'plan_id', 'grade', 'type', 'dates', 'content'], 'required'],
             [['user_id', 'plan_id', 'grade', 'type', 'status'], 'integer'],
-            [['dates', 'created_at'], 'safe'],
+            [['created_at'], 'safe'],
             [['content'], 'string'],
         ];
     }
@@ -66,7 +66,7 @@ class TimePlan extends \yii\db\ActiveRecord
             $model->plan_id = $plan_id;
             $model->grade = $re['grade'];
             $model->type = $re['type'];
-            $model->dates = date("Y-m-d H:i:s");
+            $model->dates = $value['startTime']. "-" .$value['endTime'];
             $array = [];
             array_map(function($item) use(&$array){
                 $array[] = $item['name'];
@@ -132,5 +132,24 @@ class TimePlan extends \yii\db\ActiveRecord
                 break;
         }
         return $data;
+    }
+
+    public static function dropDown($column, $key)
+    {
+        $data = [
+            'grade' => [
+                '1' => '高一',
+                '2' => '高二',
+                '3' => '高三',
+            ],
+            'type' => [
+                '1' => '上学期',
+                '2' => '暑假',
+                '3' => '下学期',
+                '4' => '寒假',
+            ],
+        ];
+
+        return array_key_exists($column, $data[$key]) ? $data[$key][$column] : $data[$key];
     }
 }

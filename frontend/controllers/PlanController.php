@@ -52,7 +52,14 @@ class PlanController extends Controller
 	//查看留学规划
 	public function actionView()
 	{
+		$user_id = Yii::$app->user->getId();
+		$model = Plan::find()->where(['status' => Plan::STATUS_RELEASE, 'user_id' => $user_id])->one();
 
+		if($model){
+			return $this->render("view", [
+				'model' => $model
+			]);
+		}
 	}
 
 	public function actionMeigao()

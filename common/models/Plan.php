@@ -42,6 +42,11 @@ use Yii;
  */
 class Plan extends \yii\db\ActiveRecord
 {
+    //未发布
+    const STATUS_UNRELEASE = 1;
+    //已发布
+    const STATUS_RELEASE = 2;
+
     /**
      * @inheritdoc
      */
@@ -112,5 +117,20 @@ class Plan extends \yii\db\ActiveRecord
             'academicActivities' => '学术活动',
             'workExperience' => '工作经历',
         ];
+    }
+
+    public function getSchools()
+    {
+        return $this->hasMany(Schools::className(), ["plan_id" => "plan_id"]);
+    }
+
+    public function getStudyPlan()
+    {
+        return $this->hasOne(StudyPlan::className(), ["plan_id" => "plan_id"]);
+    }
+
+    public function getTimePlan()
+    {
+        return $this->hasMany(TimePlan::className(), ["plan_id" => "plan_id"]);
     }
 }

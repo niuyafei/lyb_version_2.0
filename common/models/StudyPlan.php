@@ -66,10 +66,10 @@ class StudyPlan extends \yii\db\ActiveRecord
         $model-> plan_id = $plan_id;
         $model->user_id = Yii::$app->user->getId();
         $model->strategy = $data['sqcl'];
-        $ylsfx = implode("，", $data['ylsfx']);
+        $ylsfx = implode("-*-", $data['ylsfx']);
         $model->analysis = $ylsfx;
         $model->advice = $data['ztjy'];
-        $tjly = implode("，", $data['tjly']);
+        $tjly = implode("-*-", $data['tjly']);
         $model->recommendation = $tjly;
         $model->schoolStrategy = $data['xxcl'];
         $model->created_at = date("Y-m-d H:i:s");
