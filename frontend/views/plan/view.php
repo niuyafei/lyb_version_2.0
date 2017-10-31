@@ -131,7 +131,7 @@ $this->title = "留学规划";
 					<table class="table table-bordered school-list">
 						<tbody>
 						<tr>
-							<td rowspan="5" class="text-center school-list-tit color-green" width="110"> <b>目标学校</b></td>
+							<td rowspan="8" class="text-center school-list-tit color-green" width="110"> <b>目标学校</b></td>
 							<td class="text-center"><b>学校排名</b></td>
 							<td class="text-center"><b>学校名称</b></td>
 							<td class="text-center"><b>SAT要求</b></td>
