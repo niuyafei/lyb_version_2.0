@@ -221,7 +221,7 @@ $this->title = "留学规划";
 							<?php endforeach; ?>
 						</div>
 					</div>
-				<? endforeach; ?>
+				<?php endforeach; ?>
 			</div>
 		</div>
 
