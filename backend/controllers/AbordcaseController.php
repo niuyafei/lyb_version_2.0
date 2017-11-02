@@ -5,15 +5,15 @@ namespace backend\controllers;
 use Yii;
 use common\models\AbordCase;
 use common\models\search\AbordCaseSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\Pagination;
+use backend\base\BaseController;
 
 /**
  * AbordCaseController implements the CRUD actions for AbordCase model.
  */
-class AbordcaseController extends Controller
+class AbordcaseController extends BaseController
 {
     public $pageSize = 10;
 
@@ -38,12 +38,16 @@ class AbordcaseController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new AbordCaseSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $query = AbordCase::find()->where(['status' => [1,2]]);
+        $pages = new Pagination([
+            'totalCount' => $query->count(),
+            'pageSize' => $this->pageSize,
+        ]);
+        $data = $query->offset($pages->offset)->limit($pages->limit)->all();
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'data' => $data,
+            'pages' => $pages,
         ]);
     }
 
@@ -121,7 +125,7 @@ class AbordcaseController extends Controller
         }else{
             Yii::$app->session->setFlash('error', '修改失败');
         }
-        return $this->redirect(['abordcase/index']);
+        $this->goFrom();
     }
 
     /**

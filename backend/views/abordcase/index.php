@@ -1,79 +1,61 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use yii\helpers\Url;
+use yii\widgets\LinkPager;
 use common\models\AbordCase;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\search\AbordCaseSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Abord Cases';
+$this->title = '留学案例';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="abord-case-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Abord Case', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'case_id',
-            [
-                'label' => '用户名',
-                'attribute' => 'user_id',
-                'value' => 'users.username'
-            ],
-            [
-                'label' => '性别',
-                'attribute' => 'gender',
-                'value' => function($model){
-                    return $model->users['gender'] == 1 ? '男' : '女';
-                },
-                'filter' => [1=>'男', 2=>'女'],
-            ],
-            'grade',
-            'currentSchool',
-            [
-                'attribute' => 'applicationProject',
-                'value' => function($model){
-                    return AbordCase::dropDown('applicationProject', $model->applicationProject);
-                },
-                'filter' => AbordCase::dropDown('applicationProject'),
-            ],
-            [
-                'format' => 'raw',
-                'attribute' => 'status',
-                'value' => function($model){
-                    return Html::dropDownList('status', $model->status, AbordCase::dropDown('status'), ['class' => 'case_status', 'case_id' => $model->case_id]);
-                },
-                'filter' => AbordCase::dropDown('status'),
-            ],
-
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{add-course}{view-course}{expert-comments}{view}{update}{delete}',
-                'buttons' => [
-                    'add-course' => function($url, $model, $key){
-                        return Html::a("<span class='glyphicon glyphicon-plus'></span>", ['course/create?user_id=' . $model->user_id . "&case_id=" . $model->case_id], ['class' => 'btn btn-default btn-xs', 'title' => '添加申请历程']);
-                    },
-                    'view-course' => function($url, $model, $key){
-                        return Html::a("<span class='glyphicon glyphicon-tasks'></span>" , ['course/index?user_id=' . $model->user_id . "&case_id=" . $model->case_id], ['class' => 'btn btn-default btn-xs', 'title' => '查看申请历程']);
-                    },
-                    'expert-comments' => function($url, $model, $key){
-                        return Html::a("<span class='glyphicon glyphicon-user'></span>" , ['expertcomments/create?user_id=' . $model->user_id . "&case_id=" . $model->case_id], ['class' => 'btn btn-default btn-xs', 'title' => '专家点评']);
-                    }
-                ]
-            ],
-        ],
-    ]); ?>
+<div class="col-xs-10">
+    <h4 class="color-blue"><?= $this->title; ?> <small class="pull-right p-t-5 p-r-15"><a href="<?= Url::to(['abordcase/create']); ?>">+ 增加</a></small></h4>
+    <hr class="m-t-5" />
+    <div class="p-20 p-t-0">
+        <table class="table text-center admin-cont-table-col">
+            <thead>
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">姓名</th>
+                    <th class="text-center">性别</th>
+                    <th class="text-center">所在年级</th>
+                    <th class="text-center">所在学校</th>
+                    <th class="text-center">申请项目</th>
+                    <th class="text-center">发布状态</th>
+                    <th class="text-center">案例详情</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach($data as $key => $value): ?>
+                    <tr>
+                        <td><?= $value['case_id'] ?></td>
+                        <td><?= $value['user']['nickname']; ?></td>
+                        <td><?= $value['user']['gender'] == 1 ? "男" : "女"; ?></td>
+                        <td><?= $value['grade']; ?></td>
+                        <td><?= $value['currentSchool']; ?></td>
+                        <td><?= AbordCase::dropDown('applicationProject', $value['applicationProject']); ?></td>
+                        <td>
+                            <select class="form-control case_status" case_id="<?= $value['case_id']; ?>" name="status">
+                                <option value="1" <?= $value['status'] == 1 ? "selected" : ""; ?> >未发布</option>
+                                <option value="2" <?= $value['status'] == 2 ? "selected" : ""; ?> >已发布</option>
+                            </select>
+                        </td>
+                        <td><a href="<?= url::to(['abordcase/edit?case_id='.$value['case_id']]); ?>">编辑</a><span class="p-l-5 p-r-5 color-lightgray"> | </span><a href="<?= Url::to(['abordcase/changestatus?case_id='.$value['case_id']."&status=3"]); ?>" class="color-red">删除</a></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <hr class="m-0" />
+        <nav class="text-center">
+            <?= LinkPager::widget([
+                'pagination' => $pages,
+            ]); ?>
+        </nav>
+    </div>
 </div>
 <?php
 $js = <<<JS

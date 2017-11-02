@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\models\search\PlanSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Plans';
+$this->title = '留学规划';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="plan-index">

@@ -6,6 +6,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\models\LoginForm;
+use backend\models\Admin;
+use yii\data\Pagination;
 
 /**
  * Site controller
@@ -60,7 +62,17 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $query = Admin::find()->where(["not in", "role", [5,6]]);
+        $pages = new Pagination([
+            'totalCount' => $query->count(),
+            'pageSize' => 10,
+        ]);
+        $data = $query->offset($pages->offset)->limit($pages->limit)->all();
+
+        return $this->render('index', [
+            'data' => $data,
+            'pages' => $pages
+        ]);
     }
 
     /**

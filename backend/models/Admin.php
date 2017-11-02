@@ -192,4 +192,22 @@ class Admin extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+    public static function dropDown($key = null)
+    {
+        //1-》新注册，2-》审核通过，3-》管理员，4-》超级管理员，5-》审核失败，6-》删除
+        $data = [
+            '1' => '未审核',
+            '2' => '审核通过',
+            '3' => '管理员',
+            '4' => '超级管理员',
+            '5' => '审核失败',
+            '6' => '删除',
+        ];
+        if(!is_null($key) && array_key_exists($key, $data)){
+            return $data[$key];
+        }else{
+            return $data;
+        }
+    }
 }
