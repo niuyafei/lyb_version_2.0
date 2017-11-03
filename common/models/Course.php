@@ -37,6 +37,7 @@ class Course extends \yii\db\ActiveRecord
             [['case_id', 'user_id', 'type', 'status', 'state'], 'integer'],
             [['dates', 'created_at'], 'safe'],
             [['content'], 'string'],
+            ['created_at', 'default', 'value' => date('Y-m-d H:i:s')],
         ];
     }
 

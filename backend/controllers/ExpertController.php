@@ -10,12 +10,16 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use common\models\Upload;
 use yii\web\UploadedFile;
+use backend\base\BaseController;
+use yii\data\Pagination;
 
 /**
  * ExpertController implements the CRUD actions for Expert model.
  */
-class ExpertController extends Controller
+class ExpertController extends BaseController
 {
+    public $pageSize = 10;
+
     /**
      * @inheritdoc
      */
@@ -37,12 +41,16 @@ class ExpertController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Expert::find(),
+        $query = Expert::find();
+        $pages = new Pagination([
+            'totalCount' => $query->count(),
+            'pageSize' => $this->pageSize,
         ]);
+        $data = $query->offset($pages->offset)->limit($pages->limit)->all();
 
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'data' => $data,
+            'pages' => $pages,
         ]);
     }
 
@@ -76,8 +84,9 @@ class ExpertController extends Controller
             $name = "collegenode_expert_" . time() . $ext;
             $model->headimgurl = $path . $name;
 
-            if(move_uploaded_file($_FILES['Expert']['tmp_name']['headimgurl'], $path . $name) && $model->save()){
-                return $this->redirect(['view', 'id' => $model->expert_id]);
+            if(move_uploaded_file($_FILES['Expert']['tmp_name']['headimgurl'], dirname(__DIR__) . '/web' . $path . $name) && $model->save()){
+                return $this->redirect(['index']);
+//                return $this->redirect(['view', 'id' => $model->expert_id]);
             }
         } else {
             return $this->render('create', [
@@ -116,6 +125,14 @@ class ExpertController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionRemove()
+    {
+        $id = Yii::$app->request->get("id");
+        $this->findModel($id)->delete();
+
+        return $this->goFrom();
     }
 
     /**

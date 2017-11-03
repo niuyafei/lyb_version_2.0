@@ -33,8 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php foreach($data as $key => $value): ?>
                     <tr>
                         <td><?= $value['case_id'] ?></td>
-                        <td><?= $value['user']['nickname']; ?></td>
-                        <td><?= $value['user']['gender'] == 1 ? "男" : "女"; ?></td>
+                        <td><?= $value['username']; ?></td>
+                        <td><?= $value['gender'] == 1 ? "男" : "女"; ?></td>
                         <td><?= $value['grade']; ?></td>
                         <td><?= $value['currentSchool']; ?></td>
                         <td><?= AbordCase::dropDown('applicationProject', $value['applicationProject']); ?></td>
@@ -44,7 +44,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <option value="2" <?= $value['status'] == 2 ? "selected" : ""; ?> >已发布</option>
                             </select>
                         </td>
-                        <td><a href="<?= url::to(['abordcase/edit?case_id='.$value['case_id']]); ?>">编辑</a><span class="p-l-5 p-r-5 color-lightgray"> | </span><a href="<?= Url::to(['abordcase/changestatus?case_id='.$value['case_id']."&status=3"]); ?>" class="color-red">删除</a></td>
+                        <td>
+                            <a href="<?= url::to(['abordcase/update?id='.$value['case_id']]); ?>">编辑</a>
+                            <span class="p-l-5 p-r-5 color-lightgray"> | </span>
+                            <?= Html::a("申请历程", ['course/create?case_id='.$value['case_id']."&user_id=".$value['user_id']]); ?>
+                            <span class="p-l-5 p-r-5 color-lightgray"> | </span>
+                            <?= Html::a("专家点评", ['expertcomments/create?case_id='.$value['case_id']."&user_id=".$value['user_id']]); ?>
+                            <span class="p-l-5 p-r-5 color-lightgray"> | </span>
+                            <a href="<?= Url::to(['abordcase/changestatus?case_id='.$value['case_id']."&status=3"]); ?>" class="color-red">删除</a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

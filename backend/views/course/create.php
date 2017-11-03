@@ -6,18 +6,76 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Course */
 
-$this->title = 'Create Course';
+use yii\widgets\ActiveForm;
+use common\models\Course;
+
+$this->title = '留学案例';
 $this->params['breadcrumbs'][] = ['label' => 'Courses', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="course-create">
+<div class="col-xs-10">
+    <h4 class="color-blue">申请历程 - 新增</h4>
+    <hr class="m-t-5" />
+    <div class="p-20 p-t-0">
+        <?php
+        $form = ActiveForm::begin([
+            'method' => 'post',
+            'action' => ['course/create'],
+        ]);
 
-    <h1><?= Html::encode($this->title) ?></h1>
+        ?>
+        <input type="hidden" value="<?= $url ?>" name="url" >
 
-    <?= $this->render('_form', [
-        'model' => $model,
-        'user_id' => $userModel->id,
-        'case_id' => $case_id
-    ]) ?>
+        <?= $form->field($model, 'case_id')->hiddenInput(['value' => $case_id])->label(false); ?>
 
+        <?= $form->field($model, 'user_id')->hiddenInput(['value' => $user_id])->label(false); ?>
+
+        <div class="case-edit-cont">
+            <div class="case-edit-cont">
+                <h4 class="text-center m-b-20">申请历程</h4>
+                <div class="row case-edit-formwidth p-l-0 p-r-0 case-edit-licheng">
+<!--                    <h5 class="color-blue">1. 规划方案</h5>-->
+                    <p></p>
+                    <div class="col-xs-6">
+                        <div class="row">
+                            <div class="col-xs-3 text-right p-t-5 p-r-0">
+                                <b>申请历程：</b>
+                            </div>
+                            <div class="col-xs-9">
+                                <?= $form->field($model, "type")->dropDownList(Course::dropDown())->label(false); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="row">
+                            <div class="col-xs-3 text-right p-t-5 p-r-0">
+                                <b>时间：</b>
+                            </div>
+                            <div class="col-xs-9">
+                                <?= $form->field($model, "dates")->textInput(['placeholder' => '申请时间 2017-10-01'])->label(false); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 m-t-25">
+                        <div class="row">
+                            <div class="col-xs-3 text-right p-t-5 p-r-0">
+                                <b>内容：</b>
+                            </div>
+                            <div class="col-xs-10">
+                                <?= $form->field($model, "content")->textarea()->label(false); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="col-xs-12 text-right m-t-25 m-b-20"></p>
+                </div>
+            </div>
+            <hr />
+        </div>
+        <div class="row">
+            <div class="col-xs-6 text-right">
+                <?= Html::submitButton("保存", ['class' => 'btn btn-blue btn-lg p-l-20 p-r-20']) ?>
+            </div>
+        </div>
+        <?php ActiveForm::end(); ?>
+    </div>
 </div>

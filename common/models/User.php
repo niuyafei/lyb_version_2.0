@@ -57,6 +57,13 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            "email" => '邮箱'
+        ];
+    }
+
     /**
      * @inheritdoc
      */

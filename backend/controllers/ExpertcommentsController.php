@@ -79,7 +79,9 @@ class ExpertcommentsController extends Controller
 
             if (move_uploaded_file($_FILES['ExpertComments']['tmp_name']['video'], dirname(__DIR__).'/web'.$fileName.$ext) && $model->save()) {
                 exec($command);
-                return $this->redirect(['view', 'id' => $model->comment_id]);
+                Yii::$app->session->setFlash('success', "保存成功");
+                return $this->redirect(['abordcase/index']);
+//                return $this->redirect(['view', 'id' => $model->comment_id]);
             }
 
         }

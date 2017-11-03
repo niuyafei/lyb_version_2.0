@@ -12,9 +12,11 @@ use yii\web\Controller;
 
 class BaseController extends Controller
 {
-	public function goFrom()
+	public function goFrom($url=null)
 	{
-		$url = Yii::$app->request->referrer;
+		if(is_null($url)){
+			$url = Yii::$app->request->referrer;
+		}
 		echo "<script>window.location.href='".$url."'</script>";
 	}
 

@@ -14,7 +14,7 @@ $this->title = '留学案例';
         <?php foreach($data as $value): ?>
             <div class="col-xs-4 case-list-bg">
                 <ul class="case-list-cont">
-                    <li><span class="color-gray">学生姓名：</span><?= $value->user->nickname; ?></li>
+                    <li><span class="color-gray">学生姓名：</span><?= $value->username; ?></li>
                     <li><span class="color-gray">申请项目：</span><?= \common\models\AbordCase::dropDown("applicationProject", $value->applicationProject); ?></li>
                     <li><span class="color-gray">成绩信息：</span>SAT <?= $value->sat; ?>，托福 <?= $value->toefl; ?></li>
                     <li><span class="color-gray">录取学校：</span><?= $value->admissionSchool; ?></li>

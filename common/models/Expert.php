@@ -64,4 +64,16 @@ class Expert extends \yii\db\ActiveRecord
 
         return $array;
     }
+
+    public static function dropDown($column=null)
+    {
+        $data = [
+            '1' => '待审核',
+            '2' => '审核通过',
+            '3' => '审核失败',
+            '4' => '暂停服务',
+        ];
+
+        return is_null($column) ? $data : $data[$column];
+    }
 }

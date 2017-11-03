@@ -73,8 +73,10 @@ class AbordcaseController extends BaseController
         $model = new AbordCase();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->case_id]);
+            Yii::$app->session->setFlash('success', "保存成功");
+            return $this->redirect(['abordcase/index']);
         } else {
+            Yii::$app->session->setFlash('error', "数据校验失败");
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -92,12 +94,13 @@ class AbordcaseController extends BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->case_id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            Yii::$app->session->setFlash('success', "更新成功");
+            return $this->redirect(['index']);
         }
+
+        return $this->render("update", [
+            'model' => $model
+        ]);
     }
 
     /**

@@ -5,15 +5,18 @@ namespace backend\controllers;
 use Yii;
 use common\models\Plan;
 use common\models\search\PlanSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\base\BaseController;
+use yii\data\Pagination;
 
 /**
  * PlanController implements the CRUD actions for Plan model.
  */
-class PlanController extends Controller
+class PlanController extends BaseController
 {
+    public $pageSize = 10;
+
     /**
      * @inheritdoc
      */
@@ -35,12 +38,16 @@ class PlanController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PlanSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $query = Plan::find();
+        $pages = new Pagination([
+            'totalCount' => $query->count(),
+            'pageSize' => $this->pageSize,
+        ]);
+        $data = $query->offset($pages->offset)->limit($pages->limit)->all();
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'data' => $data,
+            'pages' => $pages,
         ]);
     }
 

@@ -11,11 +11,12 @@ use yii\filters\VerbFilter;
 use common\models\AbordCase;
 use common\models\User;
 use yii\data\ActiveDataProvider;
+use backend\base\BaseController;
 
 /**
  * CourseController implements the CRUD actions for Course model.
  */
-class CourseController extends Controller
+class CourseController extends BaseController
 {
     /**
      * @inheritdoc
@@ -73,14 +74,18 @@ class CourseController extends Controller
      */
     public function actionCreate()
     {
+        $url = Yii::$app->request->referrer;
         $model = new Course();
-
         if ($model->load(Yii::$app->request->post())) {
+            $url = Yii::$app->request->post("url");
             $model->created_at = date('Y-m-d H:i:s');
 
             if($model->validate() && $model->save()){
-                return $this->redirect(['abordcase/index']);
+                Yii::$app->session->setFlash('success', "保存成功");
+            }else{
+                Yii::$app->session->setFlash('error', "数据校验失败");
             }
+            $this->goFrom($url);
         } else {
             $user_id = Yii::$app->request->get('user_id', '');
             $case_id = Yii::$app->request->get('case_id', '');
@@ -88,12 +93,12 @@ class CourseController extends Controller
             if(!$case_id || !$user_id || !User::find()->where(['id' => $user_id])->exists() || !AbordCase::find()->where(['case_id' => $case_id])->exists()){
                 return $this->redirect(['abordcase/index']);
             }
-            $userModel = User::findOne($user_id);
 
             return $this->render('create', [
                 'model' => $model,
-                'userModel' => $userModel,
-                'case_id' => $case_id
+                'user_id' => $user_id,
+                'case_id' => $case_id,
+                'url' => $url,
             ]);
         }
     }

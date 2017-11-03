@@ -133,4 +133,21 @@ class Plan extends \yii\db\ActiveRecord
     {
         return $this->hasMany(TimePlan::className(), ["plan_id" => "plan_id"]);
     }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ["id" => "user_id"]);
+    }
+
+    public static function dropDown($column = null)
+    {
+        $data = [
+            '1' => '美高',
+            '2' => '美本',
+            '3' => '美研',
+            '4' => 'MBA/EMBA'
+        ];
+
+        return is_null($column) ? $data : $data[$column];
+    }
 }

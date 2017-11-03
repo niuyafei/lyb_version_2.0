@@ -55,10 +55,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="col-xs-9">
                             <div class="radio radio-style">
                                 <label class="p-r-15">
-                                    <input type="radio" checked="checked" name="optionsRadios"> 男
+                                    <input type="radio" checked="checked" name="gender"> 男
                                 </label>
                                 <label class="p-r-15">
-                                    <input type="radio" name="optionsRadios"> 女
+                                    <input type="radio" name="gender"> 女
                                 </label>
                             </div>
                         </div>
@@ -185,10 +185,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="row">
             <div class="col-xs-6 text-right">
-                <a href="#" class="btn btn-blue btn-lg p-l-20 p-r-20">本地保存</a>
-            </div>
-            <div class="col-xs-6">
-                <a href="#" class="btn btn-blue btn-lg p-l-20 p-r-20">生成案例</a>
+                <?= Html::submitButton("保存", ['class' => 'btn btn-blue btn-lg p-l-20 p-r-20']) ?>
             </div>
         </div>
         <?php ActiveForm::end(); ?>

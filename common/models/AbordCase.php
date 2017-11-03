@@ -46,8 +46,8 @@ class AbordCase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'grade', 'currentSchool', 'applicationProject', 'specialty', 'winning', 'sat', 'toefl', 'act', 'gpa', 'ielts'], 'required', 'message' => '{attribute}不能为空'],
-            [['user_id', 'applicationProject', 'status'], 'integer'],
+            [['username', 'grade', 'currentSchool', 'admissionSchool', 'applicationProject', 'specialty', 'winning', 'sat', 'toefl', 'act', 'gpa', 'ielts'], 'required', 'message' => '{attribute}不能为空'],
+            [['user_id', 'applicationProject', 'status', 'gender'], 'integer'],
             [['specialty', 'winning'], 'string'],
             [['created_at'], 'safe'],
             [['username', 'grade', 'currentSchool'], 'string', 'max' => 50],
@@ -68,6 +68,7 @@ class AbordCase extends \yii\db\ActiveRecord
             'case_id' => '案例id',
             'user_id' => '用户id',
             'username' => '姓名',
+            'gender' => '性别',
             'grade' => '年级',
             'currentSchool' => '就读学校',
             'applicationProject' => '申请项目',
