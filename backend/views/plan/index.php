@@ -44,8 +44,10 @@ $this->title = '留学规划';
                         <td><?= $value['status'] == 1 ? "未发布" : "已发布"; ?></td>
                         <td>
                             <a href="<?= Url::to(["plan/view?id=" . $value['plan_id']]); ?>">查看信息</a>
-                            <br>
-                            <span class="color-gray"><a href="<?= Url::to(['plan/update?id=' . $value['plan_id']]); ?>">编辑方案</a></span>
+                            |
+                            <span class="color-gray"><a href="<?= Url::to(['plan/update?id=' . $value['plan_id']]); ?>">更新方案</a></span>
+                            |
+                            <span class="color-gray"><a href="<?= Url::to(['plan/create?id=' . $value['plan_id']]); ?>">编辑方案</a></span>
                         </td>
                     </tr>
                 <?php endforeach; ?>

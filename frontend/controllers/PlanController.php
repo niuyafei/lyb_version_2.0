@@ -124,6 +124,9 @@ class PlanController extends Controller
 	{
 		$model = new MeiyanForm();
 		if($model->load(Yii::$app->request->post()) && $model->validate()){
+			$model->winning = $_POST['MeiyanForm']['winning'];
+			$model->communityActivities = $_POST['MeiyanForm']['communityActivities'];
+			$model->publicBenefitActivities = $_POST['MeiyanForm']['publicBenefitActivities'];
 			if($model->updates()){
 				return $this->redirect(['plan/pay']);
 			}

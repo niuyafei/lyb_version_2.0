@@ -35,7 +35,7 @@ class Schools extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'plan_id', 'schoolName', 'schoolName_en', 'rank', 'type', 'sat', 'applyType'], 'required'],
+            [['user_id', 'plan_id', 'schoolName', 'rank', 'type', 'sat', 'applyType'], 'required'],
             [['user_id', 'plan_id', 'rank', 'type', 'status'], 'integer'],
             [['created_at'], 'safe'],
             [['schoolName', 'schoolName_en'], 'string', 'max' => 100],

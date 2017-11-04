@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
 
 use common\models\Plan;
 
-$this->title = "留学案例";
+$this->title = "留学规划";
 ?>
 <div class="col-xs-10">
     <h4 class="color-blue"><?= $this->title; ?> - 查看规划信息</h4>
@@ -170,7 +170,7 @@ $this->title = "留学案例";
                                 <b>获奖情况：</b>
                             </div>
                             <div class="col-xs-9">
-                                <div class="p-l-10"><?= $model->winning; ?></div>
+                                <div class="p-l-10"><?= !is_null($model->winning) ? $model->winning : "暂无内容"; ?></div>
                                 <hr class="m-t-5 m-b-0" />
                             </div>
                         </div>
@@ -183,7 +183,7 @@ $this->title = "留学案例";
                                 <b>社团活动：</b>
                             </div>
                             <div class="col-xs-9">
-                                <div class="p-l-10 color-gray"><?= $model->communityActivities; ?></div>
+                                <div class="p-l-10 color-gray"><?= !is_null($model->communityActivities) ? $model->communityActivities : "暂无内容"; ?></div>
                                 <hr class="m-t-5 m-b-0" />
                             </div>
                         </div>
@@ -196,16 +196,11 @@ $this->title = "留学案例";
                                 <b>公益活动：</b>
                             </div>
                             <div class="col-xs-9">
-                                <div class="p-l-10"><?= $model->publicBenefitActivities; ?></div>
+                                <div class="p-l-10"><?= !is_null($model->publicBenefitActivities) ? $model->publicBenefitActivities : "暂无内容"; ?></div>
                                 <hr class="m-t-5 m-b-0" />
                             </div>
                         </div>
                     </div>
-                </div>
-                <hr />
-                <div class="text-center">
-                    <?php Html::a("编辑规划", ["plan/update?plan_id=".$model->plan_id]); ?>
-<!--                    <a href="plan_edit_admin.html" class="btn btn-blue btn-lg p-l-20 p-r-20">编辑规划</a>-->
                 </div>
             </div>
         </div>
