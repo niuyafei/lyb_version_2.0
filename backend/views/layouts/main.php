@@ -71,7 +71,7 @@ AppAsset::register($this);
                         <a href="<?= Url::to(['course/index']); ?>" class="<?= $this->title == "预约咨询" ? "focus" : "";?>">预约咨询</a>
                     </li>
                     <li class="list-group-item text-center">
-                        <a href="<?= Url::to(['other/index']); ?>" class="<?= $this->title == "延伸服务" ? "focus" : "";?>">延伸服务</a>
+                        <a href="<?= Url::to(['service/index']); ?>" class="<?= $this->title == "延伸服务" ? "focus" : "";?>">延伸服务</a>
                     </li>
                     <li class="list-group-item text-center">
                         <a href="<?= Url::to(['site/index']); ?>" class="<?= $this->title == "账号管理" ? "focus" : "";?>">账号管理</a>

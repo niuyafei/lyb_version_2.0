@@ -46,12 +46,27 @@ class Service extends \yii\db\ActiveRecord
     {
         return [
             'service_id' => 'Service ID',
-            'user_id' => 'User ID',
-            'username' => 'Username',
-            'phone' => 'Phone',
-            'type' => 'Type',
-            'status' => 'Status',
-            'created_at' => 'Created At',
+            'user_id' => '用户id',
+            'username' => '姓名',
+            'phone' => '手机号',
+            'type' => '预约类型',
+            'status' => '预约状态',
+            'expert_id' => '沟通专家',
+            'updated_at' => '沟通时间',
+            'created_at' => '预约时间',
         ];
+    }
+
+    public static function dropDown($column = null)
+    {
+//        1=》背景提升，2-》面试特训，3-》夏校项目，4-》实习项目',
+        $data = [
+            '1' => '背景提升',
+            '2' => '面试特训',
+            '3' => '夏校项目',
+            '4' => '实习项目',
+        ];
+
+        return array_key_exists($column, $data) ? $data[$column] : $data;
     }
 }

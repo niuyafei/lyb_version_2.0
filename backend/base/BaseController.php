@@ -12,6 +12,8 @@ use yii\web\Controller;
 
 class BaseController extends Controller
 {
+	public $pageSize = 10;
+
 	public function goFrom($url=null)
 	{
 		if(is_null($url)){
