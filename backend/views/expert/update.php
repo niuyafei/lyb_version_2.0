@@ -17,7 +17,8 @@ $this->title = '专家管理';
         <?php
         $form = ActiveForm::begin([
             'method' => 'post',
-            'action' => ['expert/update'],
+            'action' => ['expert/update?id='.$model->expert_id],
+            'options' => ['enctype' => 'multipart/form-data'],
         ]);
         ?>
         <div class="case-edit-cont">

@@ -31,7 +31,7 @@ class Expert extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'headimgurl', 'desc', 'created_at'], 'required'],
+            [['username', 'desc', 'created_at'], 'required'],
             [['desc'], 'string'],
             [['status'], 'integer'],
             [['created_at'], 'safe'],

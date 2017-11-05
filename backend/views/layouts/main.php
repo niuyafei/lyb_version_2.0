@@ -68,7 +68,7 @@ AppAsset::register($this);
                         <a href="<?= Url::to(['plan/index']); ?>" class="<?= $this->title == "留学规划" ? "focus" : "";?>">留学规划</a>
                     </li>
                     <li class="list-group-item text-center">
-                        <a href="<?= Url::to(['course/index']); ?>" class="<?= $this->title == "预约咨询" ? "focus" : "";?>">预约咨询</a>
+                        <a href="<?= Url::to(['consultation/index']); ?>" class="<?= $this->title == "预约咨询" ? "focus" : "";?>">预约咨询</a>
                     </li>
                     <li class="list-group-item text-center">
                         <a href="<?= Url::to(['service/index']); ?>" class="<?= $this->title == "延伸服务" ? "focus" : "";?>">延伸服务</a>

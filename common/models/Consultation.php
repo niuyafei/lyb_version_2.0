@@ -81,4 +81,36 @@ class Consultation extends \yii\db\ActiveRecord
             'created_at' => '创建时间',
         ];
     }
+
+    public static function dropDown($column, $value=null)
+    {
+//        '预约内容，1-》选校定位，2-》专业定位，3-》就业定位，4-》背景提升，5-》时间规划'
+//        '沟通状态，1-》未沟通，2-》已沟通，3-》待评价，4-》已完成'
+        $data = [
+            'type' => [
+                '1' => '选校定位',
+                '2' => '专业定位',
+                '3' => '就业定位',
+                '4' => '背景提升',
+                '5' => '时间规划',
+            ],
+            'status' => [
+                '1' => '未沟通',
+                '2' => '已沟通',
+                '3' => '待评价',
+                '4' => '已完成',
+            ],
+        ];
+
+        if(!is_null($value)){
+            return $data[$column][$value];
+        }else{
+            return $data[$column];
+        }
+    }
+
+    public function getExpert()
+    {
+        return $this->hasOne(Expert::className(), ["expert_id" => "admin_id"]);
+    }
 }

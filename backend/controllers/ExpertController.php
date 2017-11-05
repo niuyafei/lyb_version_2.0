@@ -105,8 +105,25 @@ class ExpertController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->expert_id]);
+        if ($data =Yii::$app->request->post()) {
+            unset($data['Expert']['headimgurl']);
+            $model->load($data);
+            if($_FILES['Expert']['name']['headimgurl']){
+                $filename = $_FILES['Expert']['name']['headimgurl'];
+                $ext = mb_substr($filename, strrpos($filename, '.'));
+                $path = "/Uploads/headImgs/";
+                $name = "collegenode_expert_" . time() . $ext;
+                $model->headimgurl = $path . $name;
+                move_uploaded_file($_FILES['Expert']['tmp_name']['headimgurl'], dirname(__DIR__) . '/web' . $path . $name);
+            }
+
+
+            if($model->save()){
+                Yii::$app->session->setFlash('success', "更新成功");
+            }else{
+                Yii::$app->session->setFlash('error', "更新失败");
+            }
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
