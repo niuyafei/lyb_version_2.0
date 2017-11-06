@@ -44,17 +44,35 @@ AppAsset::register($this);
             ['label' => '延伸服务', 'url' => ['/service/index']],
         ];
         if (Yii::$app->user->isGuest) {
-//            $menuItems[] = ['label' => '注册', 'url' => ['/site/signup']];
             $menuItems[] = ['label' => '登录', 'linkOptions' => ['data-toggle'=>'modal', 'data-target'=>'#login']];
         } else {
-            $menuItems[] = '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->nickname . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>';
+//            $menuItems[] = '<li>'
+//                . Html::beginForm(['/site/logout'], 'post')
+//                . Html::submitButton(
+//                    'Logout (' . Yii::$app->user->identity->nickname . ')',
+//                    ['class' => 'btn btn-link logout']
+//                )
+//                . Html::endForm()
+//                . '</li>';
+            $menuItems[] = '<li class="dropdown">
+                <div class="pull-left m-t-10 m-r-10 img-circle">
+                    <img width="35" height="35" src="'.Yii::$app->getUser()->identity->headImgUrl.'" />
+                </div>
+                <a href="#" class="dropdown-toggle pull-left top-nav-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'.Yii::$app->getUser()->identity->nickname.' <span class="caret"></span>
+                    <p>
+                        <a href="/site/logout" class="color-blue p-0 m-0"><small>退出</small></a>
+                    </p>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="text-right">
+                        <a href="/plan/view">我的方案</a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li class="text-right">
+                        <a href="/consultation/view">我的咨询</a>
+                    </li>
+                </ul>
+            </li>';
         }
         echo Nav::widget([
             'options' => ['class' => 'nav navbar-nav navbar-right'],
