@@ -62,8 +62,8 @@ class WxController extends Controller
     public function getAccessToken($code)
     {
         $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={appid}&secret={secret}&code={code}&grant_type=authorization_code';
-        $url = str_replace('{appid}', $this->appid, $url);
-        $url = str_replace('{secret}', $this->secret, $url);
+        $url = str_replace('{appid}', $this->appId, $url);
+        $url = str_replace('{secret}', $this->appSecret, $url);
         $url = str_replace('{code}', $code, $url);
         $re = file_get_contents($url);
         return json_decode($re, true);
