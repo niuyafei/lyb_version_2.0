@@ -78,4 +78,19 @@ class WxController extends Controller
         $re = file_get_contents($url);
         return json_decode($re, true);
     }
+
+    public function actionTest()
+    {
+        $data = file_get_contents("access_token.json");
+        $data = json_decode($data, true);
+        $accessToken = $data['access_token'];
+        $cookies = Yii::$app->request->cookies;
+        $openid = $cookies->getValue('openid');
+        $url = 'https://api.weixin.qq.com/sns/userinfo?access_token={ACCESS_TOKEN}&openid={OPENID}&lang=zh_CN';
+        $url = str_replace('{ACCESS_TOKEN}', $accessToken, $url);
+        $url = str_replace('{OPENID}', $openid, $url);
+        $re = file_get_contents($url);
+        $userInfo = json_decode($re, true);
+        var_dump($userInfo);
+    }
 }
