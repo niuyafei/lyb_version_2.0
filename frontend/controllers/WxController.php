@@ -33,6 +33,7 @@ class WxController extends Controller
         $cookies = Yii::$app->request->cookies;
         if(!$cookies->has('openid')){
             $re = $this->getAccessToken($code);
+            var_dump($re);exit;
             $userInfo = $this->getUserInfo($re);
             $openid = $userInfo['openid'];
             if(!$openid) throw new exception(404, "ERROE");
