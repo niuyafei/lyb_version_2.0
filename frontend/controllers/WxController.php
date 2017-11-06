@@ -1,6 +1,8 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\LoginForm;
+use frontend\models\SignupForm;
 use Yii;
 use yii\web\Controller;
 use common\models\User;
@@ -45,18 +47,27 @@ class WxController extends Controller
         }else{
             $openid = $cookies->getValue('openid');
         }
-        
-        // if(!User::find()->where(['openid'=>$openid])->exists()){
-        //     $model = new User();
-        //     $model->openid = $openid;
-        //     $model->nickname = $userInfo['nickname'];
-        //     $model->headimgurl = $userInfo['headimgurl'];
-        //     $model->created_at = date('Y-m-d H:i:s');
-        //     if(!$model->save()) throw new exception("SAVE ERROR");
-        // }
-
-        var_dump($openid);
-        // $this->redirect(["site/$state", 'openid'=>$openid]);
+        if(User::find()->where(['openId' => $openid])->exists()){
+            $model = User::find()->where(['openId' => $openid])->one();
+        }else{
+            $userInfo = $this->getUserInfoByopenId($openid);
+            $model = new User();
+            $model->username = $userInfo['openid'];
+            $model->nickname = $userInfo['nickname'];
+            $model->openId = $openid;
+            $model->auth_key = Yii::$app->security->generateRandomString();
+            $model->password_hash = Yii::$app->security->generatePasswordHash('123456');
+            $model->headImgUrl = $userInfo['headimgurl'];
+            $model->gender = $userInfo['sex'];
+            $model->save();
+        }
+        $loginForm = new LoginForm();
+        $loginForm->username = $userInfo['openid'];
+        $loginForm->password = "123456";
+        $loginForm->rememberMe = true;
+        if($loginForm->login()){
+            return $this->redirect(['site/index']);
+        }
     }
     
     public function getAccessToken($code)
@@ -71,7 +82,12 @@ class WxController extends Controller
             $url = str_replace('{secret}', $this->appSecret, $url);
             $url = str_replace('{code}', $code, $url);
             $re = file_get_contents($url);
-            file_put_contents("access_token.json", $re);
+            $re = json_encode($re, true);
+            $json = [
+                "access_token" => $re['access_token'],
+                "expires_in" => time() + $re['expires_in'],
+            ];
+            file_put_contents("access_token.json", json_encode($json));
             return json_decode($re, true);
         }
     }
@@ -99,5 +115,18 @@ class WxController extends Controller
         $re = file_get_contents($url);
         $userInfo = json_decode($re, true);
         var_dump($userInfo);
+    }
+
+    public function getUserInfoByopenId($openId)
+    {
+        $data = file_get_contents("access_token.json");
+        $data = json_decode($data, true);
+        $accessToken = $data['access_token'];
+        $url = 'https://api.weixin.qq.com/sns/userinfo?access_token={ACCESS_TOKEN}&openid={OPENID}&lang=zh_CN';
+        $url = str_replace('{ACCESS_TOKEN}', $accessToken, $url);
+        $url = str_replace('{OPENID}', $openId, $url);
+        $re = file_get_contents($url);
+        $userInfo = json_decode($re, true);
+        return $userInfo;
     }
 }
