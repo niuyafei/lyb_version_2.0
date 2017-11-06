@@ -5,7 +5,8 @@ use common\models\LoginForm;
 use frontend\models\SignupForm;
 use Yii;
 use yii\web\Controller;
-use common\models\User;
+//use common\models\User;
+use frontend\models\User;
 
 /**
  * Weixin controller
@@ -47,6 +48,7 @@ class WxController extends Controller
         }else{
             $openid = $cookies->getValue('openid');
         }
+
         if(User::find()->where(['openId' => $openid])->exists()){
             $model = User::find()->where(['openId' => $openid])->one();
         }else{
