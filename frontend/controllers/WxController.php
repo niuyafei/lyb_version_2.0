@@ -13,19 +13,19 @@ class WxController extends Controller
     private $appId = 'wxd66fddd82cb463cb';
     private $appSecret = '301b614ea571ded677add47b31f39af8';
     
-    public function beforeAction($action)
-    {
-        $data = file_get_contents('access_token.json');
-        $data = json_decode($data);
-        if($data->expires_in < time()+7000){
-            $accessToekUrl = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$this->appId.'&secret='.$this->appSecret;
-            $re = file_get_contents($accessToekUrl);
-            $re = json_decode($re);
-            $re->expires_in = time()+$re->expires_in;
-            file_put_contents('access_token.json', json_encode($re));
-        }
-        return true;
-    }
+//    public function beforeAction($action)
+//    {
+//        $data = file_get_contents('access_token.json');
+//        $data = json_decode($data);
+//        if($data->expires_in < time()+7000){
+//            $accessToekUrl = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$this->appId.'&secret='.$this->appSecret;
+//            $re = file_get_contents($accessToekUrl);
+//            $re = json_decode($re);
+//            $re->expires_in = time()+$re->expires_in;
+//            file_put_contents('access_token.json', json_encode($re));
+//        }
+//        return true;
+//    }
 
     public function actionGetCode()
     {
@@ -61,12 +61,19 @@ class WxController extends Controller
     
     public function getAccessToken($code)
     {
-        $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={appid}&secret={secret}&code={code}&grant_type=authorization_code';
-        $url = str_replace('{appid}', $this->appId, $url);
-        $url = str_replace('{secret}', $this->appSecret, $url);
-        $url = str_replace('{code}', $code, $url);
-        $re = file_get_contents($url);
-        return json_decode($re, true);
+        $data = file_get_contents("access_token.json");
+        $data = json_decode($data, true);
+        if($data['expires_in'] > time()){
+            return $data;
+        }else{
+            $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={appid}&secret={secret}&code={code}&grant_type=authorization_code';
+            $url = str_replace('{appid}', $this->appId, $url);
+            $url = str_replace('{secret}', $this->appSecret, $url);
+            $url = str_replace('{code}', $code, $url);
+            $re = file_get_contents($url);
+            file_put_contents("access_token.json", $re);
+            return json_decode($re, true);
+        }
     }
     
     public function getUserInfo($data)
