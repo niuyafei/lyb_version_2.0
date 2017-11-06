@@ -59,6 +59,9 @@ class PlanController extends Controller
 			return $this->render("view", [
 				'model' => $model
 			]);
+		}else{
+			Yii::$app->session->setFlash("error", "您还没有方案");
+			return $this->redirect(['site/index']);
 		}
 	}
 

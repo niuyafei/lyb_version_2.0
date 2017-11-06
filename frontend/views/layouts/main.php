@@ -146,3 +146,12 @@ AppAsset::register($this);
 </body>
 </html>
 <?php $this->endPage() ?>
+<script type="text/javascript">
+    var message = "<?= Yii::$app->session->hasFlash('success') ? Yii::$app->session->getFlash('success') : (Yii::$app->session->hasFlash('error') ? Yii::$app->session->getFlash('error') : ""); ?>";
+    if(message.length > 0){
+        layer.open({
+            title:'警告信息',
+            'content':message
+        });
+    }
+</script>

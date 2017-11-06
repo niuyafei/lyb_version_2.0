@@ -23,7 +23,6 @@ class AppAsset extends AssetBundle
         'bootstrap/js/ie10-viewport-bug-workaround.js',
         '/js/modal-middle.js',
         '/layui/layui.all.js',
-        '',
     ];
     public $depends = [
         'yii\web\YiiAsset',
