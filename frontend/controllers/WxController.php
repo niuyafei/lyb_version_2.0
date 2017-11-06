@@ -5,8 +5,7 @@ use common\models\LoginForm;
 use frontend\models\SignupForm;
 use Yii;
 use yii\web\Controller;
-//use common\models\User;
-use frontend\models\User;
+use common\models\User;
 
 /**
  * Weixin controller
