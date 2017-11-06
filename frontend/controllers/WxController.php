@@ -24,6 +24,7 @@ class WxController extends Controller
             $re->expires_in = time()+$re->expires_in;
             file_put_contents('access_token.json', json_encode($re));
         }
+        return true;
     }
 
     public function actionGetCode()
@@ -33,7 +34,6 @@ class WxController extends Controller
         $cookies = Yii::$app->request->cookies;
         if(!$cookies->has('openid')){
             $re = $this->getAccessToken($code);
-            var_dump($re);exit;
             $userInfo = $this->getUserInfo($re);
             $openid = $userInfo['openid'];
             if(!$openid) throw new exception(404, "ERROE");
