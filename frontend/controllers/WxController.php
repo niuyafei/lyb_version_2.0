@@ -62,7 +62,7 @@ class WxController extends Controller
             $model->save();
         }
         $loginForm = new LoginForm();
-        $loginForm->username = $userInfo['openid'];
+        $loginForm->username = $openid;
         $loginForm->password = "123456";
         $loginForm->rememberMe = true;
         if($loginForm->login()){
@@ -72,24 +72,36 @@ class WxController extends Controller
     
     public function getAccessToken($code)
     {
-        $data = file_get_contents("access_token.json");
-        $data = json_decode($data, true);
-        if($data['expires_in'] > time()){
-            return $data;
-        }else{
-            $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={appid}&secret={secret}&code={code}&grant_type=authorization_code';
-            $url = str_replace('{appid}', $this->appId, $url);
-            $url = str_replace('{secret}', $this->appSecret, $url);
-            $url = str_replace('{code}', $code, $url);
-            $re = file_get_contents($url);
-            $re = json_encode($re, true);
-            $json = [
+//        $data = file_get_contents("access_token.json");
+//        $data = json_decode($data, true);
+//        if($data['expires_in'] > time()){
+//            return $data;
+//        }else{
+//            $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={appid}&secret={secret}&code={code}&grant_type=authorization_code';
+//            $url = str_replace('{appid}', $this->appId, $url);
+//            $url = str_replace('{secret}', $this->appSecret, $url);
+//            $url = str_replace('{code}', $code, $url);
+//            $re = file_get_contents($url);
+//            $json = [
+//                "access_token" => $re['access_token'],
+//                "expires_in" => time() + $re['expires_in'],
+//            ];
+//            file_put_contents("access_token.json", json_encode($json));
+//            return $re;
+//        }
+        $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid={appid}&secret={secret}&code={code}&grant_type=authorization_code';
+        $url = str_replace('{appid}', $this->appId, $url);
+        $url = str_replace('{secret}', $this->appSecret, $url);
+        $url = str_replace('{code}', $code, $url);
+        $re = file_get_contents($url);
+        $re = json_decode($re, true);
+        $json = [
                 "access_token" => $re['access_token'],
                 "expires_in" => time() + $re['expires_in'],
             ];
-            file_put_contents("access_token.json", json_encode($json));
-            return json_decode($re, true);
-        }
+        file_put_contents("access_token.json", json_encode($json));
+
+        return $re;
     }
     
     public function getUserInfo($data)

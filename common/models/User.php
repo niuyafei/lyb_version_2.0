@@ -60,7 +60,16 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            "email" => '邮箱'
+            'id' => 'id',
+            "email" => '邮箱',
+            'username' => '用户名',
+            'nickname' => '昵称',
+            'auth_key' => 'auth_key',
+            'password_hash' => "密码",
+            'gender' => '性别',
+            'openId' => 'openId',
+            'unionId' => 'unionId',
+            'headImgUrl' => '头像',
         ];
     }
 
