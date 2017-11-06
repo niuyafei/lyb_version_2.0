@@ -42,33 +42,3 @@ $this->title = '留学案例';
         ]) ?>
     </nav>
 </div>
-
-<div class="modal" tabindex="-1" role="dialog" id="login">
-    <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title color-blue">登录</h4>
-            </div>
-            <div class="modal-body m-t-15 m-b-30">
-                <div class="row m-t-10">
-                    <a href="https://open.weixin.qq.com/connect/qrconnect?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=SCOPE&state=STATE#wechat_redirect" class="color-black">
-                        <div class="col-xs-6 text-center p-l-35">
-                            <img src=<?= Url::to("/img/wechat.jpg"); ?> width="70" />
-                            <p class="m-t-10">微信登录</p>
-                        </div>
-                    </a>
-                    <a href="" class="color-black">
-                        <div class="col-xs-6 text-center p-r-35">
-                            <img src="<?= Url::to("/img/qq.jpg"); ?>" width="70" />
-                            <p class="m-t-10">QQ登录</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->

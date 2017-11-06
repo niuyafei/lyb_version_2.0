@@ -10,10 +10,8 @@ use common\models\User;
  */
 class WxController extends Controller
 {
-    // private $appid='wx9d3d82b5591c6624';
-    // private $secret='9512c0f0ebf6620a73976146263fab33';
-    private $appId = 'wxecb57496c66f1a70';
-    private $appSecret = '5975124a039fd2b860616395de53d4a6';
+    private $appId = 'wxd66fddd82cb463cb';
+    private $appSecret = '301b614ea571ded677add47b31f39af8';
     
     public function beforeAction($action)
     {
