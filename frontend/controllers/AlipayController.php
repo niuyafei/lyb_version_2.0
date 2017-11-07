@@ -34,13 +34,13 @@ class AlipayController extends Controller
         $body = "北京联校传奇信息科技有限公司";
 
         //构造参数
-        $payRequestBuilder = new \AlipayTradePagePayContentBuilder();
+        $payRequestBuilder = new AlipayTradePagePayContentBuilder();
         $payRequestBuilder->setBody($body);
         $payRequestBuilder->setSubject($subject);
         $payRequestBuilder->setTotalAmount($total_amount);
         $payRequestBuilder->setOutTradeNo($out_trade_no);
 
-        $aop = new \AlipayTradeService($config);
+        $aop = new AlipayTradeService($config);
 
         /**
          * pagePay 电脑网站支付请求
