@@ -124,7 +124,8 @@ class AlipayController extends Controller
 
     public function actionTest()
     {
-        var_dump(Yii::$app->user->getId());
+        $arr = ['h' => 'hello world'];
+        file_put_contents("/test.txt", json_encode($arr));
         exit;
     }
 }
