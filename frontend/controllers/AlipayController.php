@@ -19,6 +19,8 @@ use yii\web\Controller;
 class AlipayController extends Controller
 {
 
+    public $enableCsrfValidation = false;
+
     /**
      * @desc 支付宝扫码支付
      * @params ['subject', 'amount', 'body', 'case_id', 'payment']
@@ -125,7 +127,7 @@ class AlipayController extends Controller
     public function actionTest()
     {
         $arr = ['h' => 'hello world'];
-        file_put_contents("/test.txt", json_encode($arr));
+        file_put_contents("test.txt", json_encode($arr));
         exit;
     }
 }
