@@ -70,7 +70,7 @@ class AlipayTradeService {
 
 		$biz_content=$builder->getBizContent();
 		//打印业务参数
-		$this->writeLog($biz_content);
+//		$this->writeLog($biz_content);
 
 		$request = new AlipayTradePagePayRequest();
 
@@ -114,7 +114,7 @@ class AlipayTradeService {
 		}
 
 		//打开后，将报文写入log文件
-		$this->writeLog("response: ".var_export($result,true));
+//		$this->writeLog("response: ".var_export($result,true));
 		return $result;
 	}
 
@@ -126,7 +126,7 @@ class AlipayTradeService {
 	function Query($builder){
 		$biz_content=$builder->getBizContent();
 		//打印业务参数
-		$this->writeLog($biz_content);
+//		$this->writeLog($biz_content);
 		$request = new AlipayTradeQueryRequest();
 		$request->setBizContent ( $biz_content );
 
@@ -143,7 +143,7 @@ class AlipayTradeService {
 	function Refund($builder){
 		$biz_content=$builder->getBizContent();
 		//打印业务参数
-		$this->writeLog($biz_content);
+//		$this->writeLog($biz_content);
 		$request = new AlipayTradeRefundRequest();
 		$request->setBizContent ( $biz_content );
 
@@ -160,7 +160,7 @@ class AlipayTradeService {
 	function Close($builder){
 		$biz_content=$builder->getBizContent();
 		//打印业务参数
-		$this->writeLog($biz_content);
+//		$this->writeLog($biz_content);
 		$request = new AlipayTradeCloseRequest();
 		$request->setBizContent ( $biz_content );
 
@@ -177,7 +177,7 @@ class AlipayTradeService {
 	function refundQuery($builder){
 		$biz_content=$builder->getBizContent();
 		//打印业务参数
-		$this->writeLog($biz_content);
+//		$this->writeLog($biz_content);
 		$request = new AlipayTradeFastpayRefundQueryRequest();
 		$request->setBizContent ( $biz_content );
 
