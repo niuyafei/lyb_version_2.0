@@ -69,7 +69,7 @@ $this->title = "案例详情";
 							<?php if($casePayment && $casePayment->status == 1): ?>
 								<a href="#guihua" role="tab" data-toggle="tab" class="case-detail-tab-menu-outline">规划<br />方案</a>
 							<?php else: ?>
-								<a href="#" class="m-l-20" data-toggle="modal" data-target="#pay" class="case-detail-tab-menu-outline">规划<br />方案</a>
+								<a href="#" class="m-l-20" data-toggle="modal" data-target="#pay" case_id="<?= $model->case_id; ?>" payment="1" class="case-detail-tab-menu-outline">规划<br />方案</a>
 							<?php endif; ?>
 						</li>
 						<li class="col-xs-2 p-t-10">
@@ -87,7 +87,7 @@ $this->title = "案例详情";
 							<?php if($schoolPayment && $schoolPayment->status == 1): ?>
 								<a href="#shenxiao" role="tab" data-toggle="tab" class="case-detail-tab-menu-outline">申校<br />名单</a>
 							<?php else: ?>
-								<a href="#" class="m-l-20" data-toggle="modal" data-target="#pay" class="case-detail-tab-menu-outline">申校<br />名单</a>
+								<a href="#" class="m-l-20" data-toggle="modal" data-target="#pay" case_id="<?= $model->case_id;  ?>" payment="3" class="case-detail-tab-menu-outline">申校<br />名单</a>
 							<?php endif; ?>
 						</li>
 						<li class="col-xs-2 p-t-10">
@@ -207,7 +207,7 @@ $this->title = "案例详情";
 	</div>
 </div>
 
-<div class="modal" tabindex="-1" role="dialog" id="pay">
+<div class="modal payment" tabindex="-1" role="dialog" id="pay">
 	<div class="modal-dialog modal-sm" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -222,7 +222,7 @@ $this->title = "案例详情";
 							<img src="<?= Url::to("/img/wechat_icon.jpg"); ?>" width="50" />
 							<div class="radio">
 								<label>
-									<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+									<input type="radio" name="optionsRadios" id="optionsRadios1" value="wxpay" checked>
 									微信
 								</label>
 							</div>
@@ -231,7 +231,7 @@ $this->title = "案例详情";
 							<img src="<?= Url::to("/img/alipay_icon.jpg"); ?>" width="50" />
 							<div class="radio">
 								<label>
-									<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+									<input type="radio" name="optionsRadios" id="optionsRadios2" value="alipay">
 									支付宝
 								</label>
 							</div>
@@ -239,11 +239,37 @@ $this->title = "案例详情";
 					</div>
 				</form>
 				<div class="text-center m-t-10">
-					<a href="" class="btn btn-blue btn-big-size btn-lg btn-block">点击支付</a>
+					<button id="payment" class="btn btn-blue btn-big-size btn-lg btn-block">点击支付</button>
+<!--					<a href="" class="btn btn-blue btn-big-size btn-lg btn-block">点击支付</a>-->
 				</div>
 			</div>
 		</div>
-		<!-- /.modal-content -->
 	</div>
-	<!-- /.modal-dialog -->
 </div>
+<?php
+$js = <<<JS
+	var domain = document.domain;
+	var payment;
+	var case_id;
+
+	$("#pay").on("shown.bs.modal", function(e){
+		obj = $(e.relatedTarget);
+		case_id = obj.attr("case_id");
+		payment = obj.attr("payment");
+	});
+
+	$("#payment").click(function(){
+		var pay_from = $("input[type='radio']:checked").val();
+		var subject = "留学案例";
+		var amount = "5";
+		var body = "北京联校传奇信息科技有限公司";
+		if(pay_from == "alipay"){
+			//支付宝
+			//'subject', 'amount', 'body', 'case_id', 'payment'
+			window.location.href = "http://" + domain + "/alipay/index?case_id=" + case_id + "&subject=" + subject + "&amount=" + amount + "&body=" + body + "&payment=" + payment;
+		}
+	});
+JS;
+
+$this->registerJs($js);
+?>
