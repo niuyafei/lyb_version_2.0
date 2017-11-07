@@ -6,7 +6,7 @@
  * Time: 下午11:28
  */
 
-namespace common\models;
+namespace common\alipay;
 
 class AlipayTradeService {
 
@@ -200,26 +200,4 @@ class AlipayTradeService {
 		$response = $response->alipay_data_dataservice_bill_downloadurl_query_response;
 		return $response;
 	}
-
-	/**
-	 * 验签方法
-	 * @param $arr 验签支付宝返回的信息，使用支付宝公钥。
-	 * @return boolean
-	 */
-	function check($arr){
-		$aop = new AopClient();
-		$aop->alipayrsaPublicKey = $this->alipay_public_key;
-		$result = $aop->rsaCheckV1($arr, $this->alipay_public_key, $this->signtype);
-
-		return $result;
-	}
-
-	/**
-	 * 请确保项目文件有可写权限，不然打印不了日志。
-	 */
-//	function writeLog($text) {
-//		// $text=iconv("GBK", "UTF-8//IGNORE", $text);
-//		//$text = characet ( $text );
-//		file_put_contents ( dirname ( __FILE__ ).DIRECTORY_SEPARATOR."./../../log.txt", date ( "Y-m-d H:i:s" ) . "  " . $text . "\r\n", FILE_APPEND );
-//	}
 }

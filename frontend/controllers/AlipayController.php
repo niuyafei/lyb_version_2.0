@@ -12,6 +12,7 @@ use yii;
 use common\alipay\AlipayNotify;
 use common\alipay\AlipaySubmit;
 use common\alipay\AlipayTradePagePayContentBuilder;
+use common\alipay\AlipayTradeService;
 use yii\web\Controller;
 
 class AlipayController extends Controller
