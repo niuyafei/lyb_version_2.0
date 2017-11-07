@@ -90,6 +90,7 @@ class AlipayController extends Controller
     {
         $config = Yii::$app->params['alipay_config'];
         $arr = Yii::$app->request->post();
+        file_put_contents("test.txt", json_encode($arr));
         $alipaySevice = new AlipayTradeService($config);
         $result = $alipaySevice->check($arr);
         if($result){

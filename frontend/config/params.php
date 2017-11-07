@@ -10,7 +10,7 @@ return [
         //异步通知地址
         'notify_url' => "http://helper.liuyangbang.cn/alipay/notifyurl",
         //同步跳转
-        'return_url' => "http://helper.liuyangbang.cn/alipay/returnurl.php",
+        'return_url' => "http://helper.liuyangbang.cn/alipay/returnurl",
         //编码格式
         'charset' => "UTF-8",
         //签名方式
@@ -18,6 +18,7 @@ return [
         //支付宝网关
         'gatewayUrl' => "https://openapi.alipay.com/gateway.do",
         //支付宝公钥,查看地址：https://openhome.alipay.com/platform/keyManage.htm 对应APPID下的支付宝公钥。
-        'alipay_public_key' => "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmCvFSz+kCq4f+CTFllU7aFmVStLBn2F3ryuyrZg7XXwnwrdRLNZtbNxIcMrlX0u8Ih0Tt+0Uq/+b/tTpQ5yGE51luoKpNUPVMynpIg/U+m0grsaMcmCP4Ns6wfhCjXh6ddAyntXfE/22irrik6X27dHypRzM874OMVqpFDdHuEGX21zEUSV2I42CIv/MXvbCjrAlb0ZkKxHRWG8i1uYah/bWRA0T1fzgoZDhis719S4Sy+l3PtkPwSBX1QrK75RvznU4SIYCJiE1XpriagvDSHpoMUAv/Nm5yn+Hu9bDF6pxghFnIk80+pa6ECnpKv4r1BzoPRDyRqm6EOnTfWLSlQIDAQAB",
+//        'alipay_public_key' => "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmCvFSz+kCq4f+CTFllU7aFmVStLBn2F3ryuyrZg7XXwnwrdRLNZtbNxIcMrlX0u8Ih0Tt+0Uq/+b/tTpQ5yGE51luoKpNUPVMynpIg/U+m0grsaMcmCP4Ns6wfhCjXh6ddAyntXfE/22irrik6X27dHypRzM874OMVqpFDdHuEGX21zEUSV2I42CIv/MXvbCjrAlb0ZkKxHRWG8i1uYah/bWRA0T1fzgoZDhis719S4Sy+l3PtkPwSBX1QrK75RvznU4SIYCJiE1XpriagvDSHpoMUAv/Nm5yn+Hu9bDF6pxghFnIk80+pa6ECnpKv4r1BzoPRDyRqm6EOnTfWLSlQIDAQAB",
+        'alipay_public_key' => getcwd()."/cacert.pem",
     ],
 ];
