@@ -93,35 +93,53 @@ class AlipayController extends Controller
         $config = Yii::$app->params['alipay_config'];
         $arr = Yii::$app->request->post();
         file_put_contents("test.txt", json_encode($arr));
-        $alipaySevice = new AlipayTradeService($config);
-        $result = $alipaySevice->check($arr);
-        if($result){
-            //验签成功
-            //商户订单号
-            $out_trade_no = $_POST['out_trade_no'];
-            //支付宝交易号
-            $trade_no = $_POST['trade_no'];
-            //交易状态
-            $trade_status = $_POST['trade_status'];
-            if($_POST['trade_status'] == 'TRADE_FINISHED') {
-                //交易结束
-            }
-            else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
-                //交易成功
-                $model = Payment::find()->where(['order_id'=>$out_trade_no])->one();
-                $model->status = 1;
-                $model->save();
-            }else{
-                //交易失败
-                $model = Payment::find()->where(['order_id'=>$out_trade_no])->one();
-                $model->status = 2;
-                $model->save();
-            }
+
+        $out_trade_no = $_POST['out_trade_no'];
+        $trade_no = $_POST['trade_no'];
+        $trade_status = $_POST['trade_status'];
+        if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
+            //交易成功
+            $model = Payment::find()->where(['order_id'=>$out_trade_no])->one();
+            $model->status = 1;
+            $model->save();
             echo "success";
         }else{
-            //验签失败
+            //交易失败
+            $model = Payment::find()->where(['order_id'=>$out_trade_no])->one();
+            $model->status = 2;
+            $model->save();
             echo "fail";
         }
+
+//        $alipaySevice = new AlipayTradeService($config);
+//        $result = $alipaySevice->check($arr);
+//        if($result){
+//            //验签成功
+//            //商户订单号
+//            $out_trade_no = $_POST['out_trade_no'];
+//            //支付宝交易号
+//            $trade_no = $_POST['trade_no'];
+//            //交易状态
+//            $trade_status = $_POST['trade_status'];
+//            if($_POST['trade_status'] == 'TRADE_FINISHED') {
+//                //交易结束
+//            }
+//            else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
+//                //交易成功
+//                $model = Payment::find()->where(['order_id'=>$out_trade_no])->one();
+//                $model->status = 1;
+//                $model->save();
+//            }else{
+//                //交易失败
+//                $model = Payment::find()->where(['order_id'=>$out_trade_no])->one();
+//                $model->status = 2;
+//                $model->save();
+//            }
+//            echo "success";
+//        }else{
+//            //验签失败
+//            echo "fail";
+//        }
     }
 
     public function actionTest()
