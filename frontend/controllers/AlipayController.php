@@ -85,7 +85,10 @@ class AlipayController extends Controller
     public function actionReturnurl()
     {
         //http://helper.liuyangbang.cn/alipay/returnurl.php?total_amount=0.01&timestamp=2017-11-07+23%3A53%3A54&sign=jqDMurWHSLdnb1a%2F3IbzEWunPmAZGqk90FwS74PLzuTyN4fxuED%2BEappZMG6JgXntGO%2BbLb%2BZR3ikKi4fzz9%2BJW%2BvEJFw8YSyGbZTq6q7prdEZpRLs57zuYgiUUOPZ782GANmaEgo0%2FLCpd7B52l6iX6QzSTAOJnVOt9xZfKclHKkO9RxmetS5znyoCajO4lCSnQP8nuyJEsULZZksrFBJiD3hIQHHlRwe4oSLohJ%2FqLKGUxq1GmvSCgKTSoe%2B0C%2FAGoS658lL8rW0xe4W2wLY01XcL8P%2Fi1whV2C4yOpAh0%2B6%2F%2FfRtElzw1HTFbKVM6U6Z%2FYo%2BRbqA2vpTk1DaliQ%3D%3D&trade_no=2017110721001004240247983106&sign_type=RSA2&auth_app_id=2017110109659857&charset=UTF-8&seller_id=2088111554148912&method=alipay.trade.page.pay.return&app_id=2017110109659857&out_trade_no=151006998795502&version=1.0
-        $this->redirect(['site/index']);
+        $out_trade_no = Yii::$app->request->get("out_trade_no");
+        $model = Payment::find()->where(['order_id' => $out_trade_no])->one();
+
+        $this->redirect(['abordcase/detail?case_id=' . $model->case_id]);
     }
 
     public function actionNotifyurl()
