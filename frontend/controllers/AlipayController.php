@@ -22,11 +22,15 @@ class AlipayController extends Controller
         //商户订单号，商户网站订单系统中唯一订单号，必填
         $out_trade_no = time() . rand(10000, 99999);
         //订单名称，必填
-        $subject = trim($_POST['subject']);
-        //付款金额，必填
-        $total_amount = trim($_POST['amount']);
-        //商品描述，可空
-        $body = trim($_POST['body']);
+//        $subject = trim($_POST['subject']);
+//        //付款金额，必填
+//        $total_amount = trim($_POST['amount']);
+//        //商品描述，可空
+//        $body = trim($_POST['body']);
+
+        $subject = "查看案例";
+        $total_amount = 0.01;
+        $body = "北京联校传奇信息科技有限公司";
 
         //构造参数
         $payRequestBuilder = new AlipayTradePagePayContentBuilder();
