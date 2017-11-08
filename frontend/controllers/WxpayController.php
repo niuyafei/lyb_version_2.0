@@ -15,7 +15,7 @@ class WxpayController extends Controller
 {
 	public function actionIndex()
 	{
-		ini_set("time_zone", "Asia/Shanghai");
+		date_default_timezone_set('Asia/Shanghai');
 
 		require_once(__DIR__."/../web/wxpay/WxPay.Api.php");
 		require_once(__DIR__."/../web/WxPay.NativePay.php");
