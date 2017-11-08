@@ -97,7 +97,7 @@ class AlipayController extends Controller
         date_default_timezone_set('PRC');
         $config = Yii::$app->params['alipay_config'];
         $arr = Yii::$app->request->post();
-        file_put_contents("test.txt", json_encode($arr));
+//        file_put_contents("test.txt", json_encode($arr));
 
         $out_trade_no = $_POST['out_trade_no'];
         $trade_no = $_POST['trade_no'];
