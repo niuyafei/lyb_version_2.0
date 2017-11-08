@@ -147,8 +147,11 @@ class AlipayController extends Controller
 
     public function actionTest()
     {
-        $arr = ['h' => 'hello world'];
-        file_put_contents("test.txt", json_encode($arr));
+//        $arr = ['h' => 'hello world'];
+//        file_put_contents("test.txt", json_encode($arr));
+        var_dump(date("Y-m-d H:i:s"));
+        $date = new \DateTime();
+        var_dump($date->format("Y-m-d H:i:s"));
         exit;
     }
 }
