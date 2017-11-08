@@ -27,6 +27,7 @@ class AlipayController extends Controller
      */
     public function actionIndex()
     {
+        date_default_timezone_set('PRC');
         $config = Yii::$app->params['alipay_config'];
         $gets = Yii::$app->request->get();
         //商户订单号，商户网站订单系统中唯一订单号，必填
@@ -93,6 +94,7 @@ class AlipayController extends Controller
 
     public function actionNotifyurl()
     {
+        date_default_timezone_set('PRC');
         $config = Yii::$app->params['alipay_config'];
         $arr = Yii::$app->request->post();
         file_put_contents("test.txt", json_encode($arr));
