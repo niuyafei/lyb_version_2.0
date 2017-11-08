@@ -267,6 +267,9 @@ $js = <<<JS
 			//支付宝
 			//'subject', 'amount', 'body', 'case_id', 'payment'
 			window.location.href = "http://" + domain + "/alipay/index?case_id=" + case_id + "&subject=" + subject + "&amount=" + amount + "&body=" + body + "&payment=" + payment;
+		}else if(pay_from == "wxpay"){
+			//微信支付
+			window.location.href = "http://" + domain + "/wxpay/index?case_id=" + case_id + "&subject=" +subject + "&amount=" + amount + "&body=" + body + "&payment=" + payment;
 		}
 	});
 JS;
