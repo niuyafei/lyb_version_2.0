@@ -5,6 +5,5 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'timeZone'=>'Asia/Chongqing',
     ],
 ];
