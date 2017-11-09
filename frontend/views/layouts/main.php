@@ -30,7 +30,7 @@ AppAsset::register($this);
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="<?= Url::to(['site/index']); ?>">
                 <img src="<?= Url::to("/img/logo.jpg"); ?>" height="60" />
             </a>
         </div>
@@ -40,7 +40,7 @@ AppAsset::register($this);
         $menuItems = [
             ['label' => '留学案例', 'url' => ['/site/index']],
             ['label' => '留学规划', 'url' => ['/plan/index']],
-            ['label' => '留学咨询', 'url' => ['/consultation/index']],
+            ['label' => '预约咨询', 'url' => ['/consultation/index']],
             ['label' => '延伸服务', 'url' => ['/service/index']],
         ];
         if (Yii::$app->user->isGuest) {

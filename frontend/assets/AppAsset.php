@@ -14,7 +14,8 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         'css/style.css',
-        'bootstrap/css/dashboard.css'
+        'bootstrap/css/dashboard.css',
+        'bootstrap/css/bootstrapDatepickr-1.0.0.css',
     ];
     public $js = [
         'bootstrap/js/ie-emulation-modes-warning.js',
@@ -22,6 +23,7 @@ class AppAsset extends AssetBundle
         'bootstrap/js/modal-middle.js',
         'lib/jquery.raty.min.js',
         '/layui/layui.all.js',
+        'bootstrap/js/bootstrapDatepickr-1.0.0.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

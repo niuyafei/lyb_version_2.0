@@ -9,11 +9,11 @@
 namespace frontend\controllers;
 
 use yii;
-use yii\web\Controller;
+use frontend\base\BaseController;
 use common\models\Consultation;
 use yii\data\Pagination;
 
-class ConsultationController extends Controller
+class ConsultationController extends BaseController
 {
 	public function actionIndex()
 	{
@@ -25,6 +25,9 @@ class ConsultationController extends Controller
 	 */
 	public function actionMyconsultation()
 	{
+		if(!$this->isLogin()){
+			return $this->redirect(["index"]);
+		}
 		$model = new Consultation();
 		if($model->load(Yii::$app->request->post())){
 			$model->user_id = Yii::$app->user->getId();
@@ -39,6 +42,9 @@ class ConsultationController extends Controller
 
 	public function actionPay()
 	{
+		if(!$this->isLogin()){
+			return $this->redirect(["index"]);
+		}
 		return $this->render("pay");
 	}
 
@@ -88,5 +94,10 @@ class ConsultationController extends Controller
 				'code' => 20,
 			]);
 		}
+	}
+
+	public function actionSuccess()
+	{
+		return $this->render("success");
 	}
 }

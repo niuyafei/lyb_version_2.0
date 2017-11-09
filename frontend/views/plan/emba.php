@@ -13,6 +13,7 @@ $this->title = "留学规划";
 ?>
 	<style>
 		.form-group{margin-bottom: 10px;}
+		h4{width:75px;}
 	</style>
 <?php $form = ActiveForm::begin([
 	'action' => ['plan/emba'],
@@ -26,27 +27,27 @@ $this->title = "留学规划";
 	<hr class="cont-tit-border" />
 	<div class="row step-style">
 		<div class="col-xs-2 text-center">
-					<span class="red-circle">
-						1
-					</span>
+			<span class="red-circle">
+				1
+			</span>
 			<h4 class="color-red">填写信息</h4>
 		</div>
 		<div class="col-xs-3">
 			<p class="gray-line"></p>
 		</div>
 		<div class="col-xs-2 text-center">
-					<span class="blue-circle">
-						2
-					</span>
+			<span class="blue-circle">
+				2
+			</span>
 			<h4 class="color-blue">支付费用</h4>
 		</div>
 		<div class="col-xs-3">
 			<p class="gray-line"></p>
 		</div>
 		<div class="col-xs-2 text-center">
-					<span class="blue-circle">
-						3
-					</span>
+			<span class="blue-circle">
+				3
+			</span>
 			<h4 class="color-blue">查看方案</h4>
 		</div>
 	</div>
@@ -163,7 +164,7 @@ $this->title = "留学规划";
 							<div class="col-xs-12">
 								<label for="input13" class="col-xs-3 control-label"> 获奖情况</label>
 								<div class="col-xs-9 p-t-5">
-									<?= $form->field($model, 'winning')->textInput(['class' => 'form-control', 'id' => 'input13', 'placeholder' => '点击填写您的获奖情况'])->label(false); ?>
+									<?= $form->field($model, 'winning')->textarea(['class' => 'form-control', 'rows' => 5, 'placeholder' => '点击填写您的获奖情况'])->label(false); ?>
 <!--									<textarea class="form-control" rows="5" placeholder="写明您的获奖情况"></textarea>-->
 								</div>
 							</div>

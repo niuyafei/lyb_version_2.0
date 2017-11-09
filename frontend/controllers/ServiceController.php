@@ -9,11 +9,11 @@
 namespace frontend\controllers;
 
 use yii;
-use yii\web\Controller;
+use frontend\base\BaseController;
 use frontend\models\ServiceForm;
 use common\models\Service;
 
-class ServiceController extends Controller
+class ServiceController extends BaseController
 {
 	//背景提升
 	public function actionIndex()
@@ -57,6 +57,9 @@ class ServiceController extends Controller
 
 	public function actionCreate()
 	{
+		if(!$this->isLogin()){
+			return $this->redirect(["index"]);
+		}
 		$model = new Service();
 		if($model->load(Yii::$app->request->post())){
 			$model->user_id = Yii::$app->user->getId();

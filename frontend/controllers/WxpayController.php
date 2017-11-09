@@ -22,7 +22,7 @@ class WxpayController extends Controller
 
 		//array(5) { ["case_id"]=> string(1) "9" ["subject"]=> string(12) "留学案例" ["amount"]=> string(1) "5" ["body"]=> string(42) "北京联校传奇信息科技有限公司" ["payment"]=> string(1) "1" }
 		$gets = Yii::$app->request->get();
-		$case_id = $gets['case_id'];
+		$case_id = isset($gets['case_id']) ? $gets['case_id'] : null;
 		$payment = $gets['payment'];
 		$body = $gets['subject'];
 		$trade_no = time().rand(10000, 99999);
@@ -34,7 +34,7 @@ class WxpayController extends Controller
 		$paymentModel->user_id = Yii::$app->user->getId();
 		$paymentModel->order_id = $trade_no;
 		$paymentModel->pay_from = 1;
-		$paymentModel->amount = $gets['amount'];
+		$paymentModel->amount = $total_fee;
 		$paymentModel->payment = $payment;
 		$paymentModel->status = 3;
 		$paymentModel->created_at = date("Y-m-d H:i:s");
@@ -77,5 +77,18 @@ class WxpayController extends Controller
 //		}
 
 		file_put_contents("test.txt", json_encode($response));
+	}
+
+	public function actionIspayment()
+	{
+		date_default_timezone_set('Asia/Shanghai');
+		require_once(__DIR__."/../web/wxpay/WxPay.Api.php");
+		$gets = Yii::$app->request->get();
+		$out_trade_no = $gets['out_trade_no'];
+		$input = new \WxPayOrderQuery();
+		$input->SetOut_trade_no($out_trade_no);
+		var_dump(\WxPayApi::orderQuery($input));
+		exit();
+
 	}
 }

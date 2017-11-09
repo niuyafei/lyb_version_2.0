@@ -163,7 +163,7 @@ $this->title = "留学规划";
 						</div>
 						<div class="form-group m-b-20">
 							<div class="col-xs-6">
-								<label for="input11" class="col-xs-3 control-label">高中GPA</label>
+								<label for="input11" class="col-xs-3 control-label"><b class="color-red">*</b>高中GPA</label>
 								<div class="col-xs-9">
 									<?= $form->field($model, 'gpa_h')->textInput(['class' => 'form-control', 'id' => 'input11', 'placeholder' => '点击填写您的高中GPA'])->label(false); ?>
 <!--									<input type="text" class="form-control" id="input11" placeholder="点击填写您的高中GPA">-->

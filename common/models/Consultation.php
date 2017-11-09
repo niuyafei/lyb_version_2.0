@@ -46,7 +46,7 @@ class Consultation extends \yii\db\ActiveRecord
             [['others', 'communicationRecord', 'advic'], 'string'],
             [['created_at'], 'safe'],
             [['username'], 'string', 'max' => 20],
-            [['phone'], 'string', 'max' => 11],
+            ['phone', 'match', 'pattern' => '/^1[3|4|5|7|8]\d{9}$/', 'message' => '手机号格式不正确'],
             [['times'], 'string', 'max' => 13],
             ['dates', 'match', 'pattern' => '/^201[789]-(0\d{1}|1[012])-([012]\d{1}|3[01])$/', 'message' => '预约日期格式不正确'],
 //            [['dates'], 'date', 'message' => '格式不正确'],

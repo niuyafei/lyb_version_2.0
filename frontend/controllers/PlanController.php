@@ -8,7 +8,7 @@
 namespace frontend\controllers;
 
 use Yii;
-use yii\web\Controller;
+use frontend\base\BaseController;
 use common\models\Plan;
 use common\models\MeibenForm;
 use common\models\MeigaoForm;
@@ -19,7 +19,7 @@ use common\models\Schools;
 use common\models\StudyPlan;
 use common\models\TimePlan;
 
-class PlanController extends Controller
+class PlanController extends BaseController
 {
 	public function actionIndex()
 	{
@@ -29,6 +29,9 @@ class PlanController extends Controller
 	//申请留学规划
 	public function actionEdit()
 	{
+		if(!$this->isLogin()){
+			return $this->redirect(['plan/index']);
+		}
 		$model = new Plan();
 		if(Yii::$app->request->post()){
 			if(Plan::find()->where(['user_id'=>Yii::$app->user->getId()])->exists()){
@@ -52,6 +55,9 @@ class PlanController extends Controller
 	//查看留学规划
 	public function actionView()
 	{
+		if(!$this->isLogin()){
+			return $this->redirect(['plan/index']);
+		}
 		$user_id = Yii::$app->user->getId();
 		$model = Plan::find()->where(['status' => Plan::STATUS_RELEASE, 'user_id' => $user_id])->one();
 
@@ -67,6 +73,9 @@ class PlanController extends Controller
 
 	public function actionMeigao()
 	{
+		if(!$this->isLogin()){
+			return $this->redirect(['plan/index']);
+		}
 		$model = new MeigaoForm();
 		if($model->load(Yii::$app->request->post()) && $model->validate()){
 			if($model->updates()){
@@ -80,6 +89,9 @@ class PlanController extends Controller
 
 	public function actionMeiben()
 	{
+		if(!$this->isLogin()){
+			return $this->redirect(['plan/index']);
+		}
 		$model = new MeibenForm();
 		if($model->load(Yii::$app->request->post()) && $model->validate()){
 			$toefl = ArrayHelper::getValue($model, "toefl");
@@ -114,7 +126,10 @@ class PlanController extends Controller
 				$timePlanModel = new TimePlan();
 				$timePlanModel->creates($data['process'], $plan_id);
 
-//				return $this->redirect(['plan/pay']);
+				return $this->redirect(['plan/pay']);
+			}else{
+				Yii::$app->session->setFlash('error', "保存失败");
+				return $this->redirect(['meiben']);
 			}
 		}
 		return $this->render("meiben", [
@@ -125,6 +140,9 @@ class PlanController extends Controller
 
 	public function actionMeiyan()
 	{
+		if(!$this->isLogin()){
+			return $this->redirect(['plan/index']);
+		}
 		$model = new MeiyanForm();
 		if($model->load(Yii::$app->request->post()) && $model->validate()){
 			$model->winning = $_POST['MeiyanForm']['winning'];
@@ -141,6 +159,9 @@ class PlanController extends Controller
 
 	public function actionEmba()
 	{
+		if(!$this->isLogin()){
+			return $this->redirect(['plan/index']);
+		}
 		$model = new MeimbaForm();
 		if($model->load(Yii::$app->request->post()) && $model->validate()){
 			if($model->updates()){

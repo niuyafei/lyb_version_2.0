@@ -9,10 +9,9 @@ namespace frontend\controllers;
 
 use common\models\AbordCase;
 use Yii;
-use yii\web\Controller;
-use yii\helpers\ArrayHelper;
+use frontend\base\BaseController;
 
-class AbordcaseController extends Controller
+class AbordcaseController extends BaseController
 {
 	public function actionDetail($case_id)
 	{

@@ -15,27 +15,27 @@ $this->title = "留学规划";
 	<hr class="cont-tit-border" />
 	<div class="row step-style">
 		<div class="col-xs-2 text-center">
-					<span class="gray-circle">
-						1
-					</span>
+			<span class="gray-circle">
+				1
+			</span>
 			<h4 class="color-gray">填写信息</h4>
 		</div>
 		<div class="col-xs-3">
 			<p class="gray-line"></p>
 		</div>
 		<div class="col-xs-2 text-center">
-					<span class="red-circle">
-						2
-					</span>
+			<span class="red-circle">
+				2
+			</span>
 			<h4 class="color-red">支付费用</h4>
 		</div>
 		<div class="col-xs-3">
 			<p class="gray-line"></p>
 		</div>
 		<div class="col-xs-2 text-center">
-					<span class="blue-circle">
-						3
-					</span>
+			<span class="blue-circle">
+				3
+			</span>
 			<h4 class="color-blue">查看方案</h4>
 		</div>
 	</div>
@@ -53,7 +53,7 @@ $this->title = "留学规划";
 				订单号
 			</div>
 			<div class="col-xs-10">
-				lyb0001
+				<?= "lyb" . time().rand(10000,99999); ?>
 			</div>
 		</div>
 		<div class="row m-b-20">
@@ -67,7 +67,7 @@ $this->title = "留学规划";
 							<img src="<?= Url::to("/img/wechat_icon.jpg"); ?>" width="50" />
 							<div class="radio">
 								<label>
-									<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+									<input type="radio" name="optionsRadios" value="wxpay" checked>
 									微信
 								</label>
 							</div>
@@ -76,7 +76,7 @@ $this->title = "留学规划";
 							<img src="<?= Url::to("/img/alipay_icon.jpg"); ?>" width="50" />
 							<div class="radio">
 								<label>
-									<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+									<input type="radio" name="optionsRadios" value="alipay">
 									支付宝
 								</label>
 							</div>
@@ -87,6 +87,30 @@ $this->title = "留学规划";
 		</div>
 	</div>
 	<div class="text-center m-t-50">
-		<a href="plan_view.html" class="btn btn-blue btn-big-size btn-lg">点击支付</a>
+		<button id="payment" class="btn btn-blue btn-big-size btn-lg">点击支付</button>
+<!--		<a href="plan_view.html" class="btn btn-blue btn-big-size btn-lg">点击支付</a>-->
 	</div>
 </div>
+<?php
+$js = <<<JS
+	var domain = document.domain;
+	var url = "http://" + domain;
+	$("#payment").click(function(){
+		var payType = $("input[name='optionsRadios']:checked").val();
+		//'subject', 'amount', 'body', 'case_id', 'payment'
+		var subject = "留学规划";
+		var amount = "9.9";
+		var body = "";
+		var payment = "3";
+		if(payType == "alipay"){
+			//支付宝
+			window.location.href = url + "/alipay/index?subject=" + subject + "&amount=" + amount + "&body=" + body + "&payment=" + payment;
+		}else if(payType == "wxpay"){
+			//微信
+			window.location.href = "http://" + domain + "/wxpay/index?subject=" +subject + "&amount=" + amount + "&body=" + body + "&payment=" + payment;
+		}
+	});
+JS;
+
+$this->registerJs($js);
+?>

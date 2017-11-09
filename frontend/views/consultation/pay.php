@@ -62,7 +62,7 @@ $this->title = "预约咨询";
 				<b>订单号</b>
 			</div>
 			<div class="col-xs-10">
-				lyb0001
+				<?= 'lyb' . time() . rand(10000, 99999); ?>
 			</div>
 		</div>
 		<div class="row m-b-20">
@@ -76,7 +76,7 @@ $this->title = "预约咨询";
 							<img src="<?= Url::to("/img/wechat_icon.jpg"); ?>" width="50" />
 							<div class="radio">
 								<label>
-									<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+									<input type="radio" name="optionsRadios" value="wxpay" checked>
 									微信
 								</label>
 							</div>
@@ -85,7 +85,7 @@ $this->title = "预约咨询";
 							<img src="<?= Url::to("/img/alipay_icon.jpg"); ?>" width="50" />
 							<div class="radio">
 								<label>
-									<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+									<input type="radio" name="optionsRadios" value="alipay">
 									支付宝
 								</label>
 							</div>
@@ -96,6 +96,29 @@ $this->title = "预约咨询";
 		</div>
 	</div>
 	<div class="text-center m-t-50">
-		<a href="order_success.html" class="btn btn-blue btn-big-size btn-lg">点击支付</a>
+		<button id="payment" class="btn btn-blue btn-big-size btn-lg">点击支付</button>
 	</div>
 </div>
+<?php
+$js = <<<JS
+	var domain = document.domain;
+	var url = "http://" + domain;
+	$("#payment").click(function(){
+		var payType = $("input[name='optionsRadios']:checked").val();
+		//'subject', 'amount', 'body', 'case_id', 'payment'
+		var subject = "预约咨询";
+		var amount = "99";
+		var body = "";
+		var payment = "4";
+		if(payType == "alipay"){
+			//支付宝
+			window.location.href = url + "/alipay/index?subject=" + subject + "&amount=" + amount + "&body=" + body + "&payment=" + payment;
+		}else if(payType == "wxpay"){
+			//微信
+			window.location.href = "http://" + domain + "/wxpay/index?subject=" +subject + "&amount=" + amount + "&body=" + body + "&payment=" + payment;
+		}
+	});
+JS;
+
+$this->registerJs($js);
+?>

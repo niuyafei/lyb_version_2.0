@@ -46,7 +46,7 @@ $this->title = "预约咨询";
 						<td>
 							<select name="status" class="form-control">
 								<?php foreach(\common\models\Consultation::dropDown("status") as $k => $v): ?>
-									<option value="<?= $k; ?>"><?= $v; ?></option>
+									<option value="<?= $k; ?>" <?= $value['status'] == $k ? "selected" : ""; ?>  ><?= $v; ?></option>
 								<?php endforeach; ?>
 							</select>
 						</td>
@@ -57,7 +57,7 @@ $this->title = "预约咨询";
 								<a href="#" data-toggle="modal" data-target="#wanchenggoutong" consultation_id="<?= $value['consultation_id']; ?>">完成沟通</a>
 							<?php else: ?>
 								<a href="#" data-toggle="modal" data-target="#goutongjilu" consultation_id="<?= $value['consultation_id']; ?>">沟通记录</a><br/>
-								<a href="#" data-toggle="modal" data-target="#pingjiajianyi" consultation_id="<?= $value['consultation_id']; ?>">评价建议</a>
+								<a href="#" data-toggle="modal" data-target="#pingjiajianyi_<?= $value['consultation_id'] ?>" consultation_id="<?= $value['consultation_id']; ?>">评价建议</a>
 							<?php endif; ?>
 						</td>
 					</tr>
@@ -157,7 +157,8 @@ $this->title = "预约咨询";
 <!-- 沟通记录结束 -->
 
 <!-- 评价建议开始 -->
-<div class="modal" tabindex="-1" role="dialog" id="pingjiajianyi">
+<?php foreach($data as $key => $value): ?>
+<div class="modal" tabindex="-1" role="dialog" id="pingjiajianyi_<?= $value['consultation_id'] ?>">
 	<div class="modal-dialog modal-sm" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -170,19 +171,25 @@ $this->title = "预约咨询";
 						<b>星级评价</b>
 					</p>
 					<p>
-						<img src="/img/star-on-big.png"/> <img src="/img/star-on-big.png"/> <img src="/img/star-on-big.png"/> <img src="/img/star-on-big.png"/> <img src="/img/star-off-big.png"/>
+						<?php for($i=1; $i<=5; $i++): ?>
+							<?php if($i<=$value['starts']): ?>
+								<img src="/img/star-on-big.png"/>
+							<?php else: ?>
+								<img src="/img/star-off-big.png"/>
+							<?php endif; ?>
+						<?php endfor; ?>
+<!--						<img src="/img/star-on-big.png"/> <img src="/img/star-on-big.png"/> <img src="/img/star-on-big.png"/> <img src="/img/star-on-big.png"/> <img src="/img/star-off-big.png"/>-->
 					</p>
 					<p>
 						<b>相关建议</b>
 					</p>
-					<p>整个沟通过程中张三同学一共提 了四个问题，分别是：1.我要考耶鲁大学，现 在需要做些什么；2.需要具备什么条件；3.我 现在应该做些什么；4.什么时候开始申请，我 需要做什么
-
-					</p>
+					<p><?= $value['advic']; ?></p>
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
+<?php endforeach; ?>
 <!-- 评价建议 -->
 
 <?php

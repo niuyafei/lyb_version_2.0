@@ -11,6 +11,10 @@ use yii\helpers\Html;
 
 $this->title = "预约咨询";
 ?>
+<style>
+	h4{width:75px;}
+</style>
+
 <?php $form = ActiveForm::begin([
 	'action' => ['consultation/myconsultation'],
 	'method' => 'post',
@@ -109,7 +113,7 @@ $this->title = "预约咨询";
 			<div class="form-group m-b-20">
 				<label for="input5" class="col-xs-2 control-label"><b class="color-red">*</b> 预约日期</label>
 				<div class="col-xs-10">
-					<?= $form->field($model, "dates")->textInput(['class'=>'calendar pull-left', 'placeholder'=>'截止日期', 'id'=>'calendar', 'style'=>'width:200px;'])->label(false); ?>
+					<?= $form->field($model, "dates")->textInput(['class'=>'calendar form-control pull-left', 'placeholder'=>'截止日期', 'id'=>'calendar', 'style'=>'width:200px;'])->label(false); ?>
 <!--						<input type="text" id="calendar" placeholder="截止日期" class="calendar form-control pull-left" style="width: 200px;">-->
 					<div class="color-gray p-t-10">（注：只能选择24小时后的日期）</div>
 				</div>
@@ -191,10 +195,10 @@ $this->title = "预约咨询";
 					</label>
 				</div>
 			</div>
+			<?= $form->field($model, "cost")->hiddenInput(['value'=>99])->label(false); ?>
 			<div class="form-group m-b-20">
 				<label for="input5" class="col-xs-2 control-label">预约费用</label>
 				<div class="col-xs-10">
-					<?= $form->field($model, "cost")->hiddenInput(['value'=>99])->label(false); ?>
 					<h3 class="m-0"><span class="color-red">99</span> <small class="color-black">元</small></h3>
 				</div>
 			</div>

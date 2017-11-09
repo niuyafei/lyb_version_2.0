@@ -22,7 +22,7 @@ $this->title = "延伸服务";
 			<a href="<?= Url::to(['service/interview']); ?>">面试特训</a>
 		</li>
 		<li>
-			<a href="<= Url::to(['service/summery']); ?>">夏校项目</a>
+			<a href="<?= Url::to(['service/summer']); ?>">夏校项目</a>
 		</li>
 		<li>
 			<a href="<?= Url::to(['service/practice']); ?>">实习项目</a>
@@ -178,7 +178,7 @@ $this->title = "延伸服务";
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title color-blue">预约咨询</h4>
+				<h4 class="modal-title color-blue">联系信息</h4>
 			</div>
 			<div class="modal-body">
 				<p class="color-red"><small>我们会在24小时内联系您，请保持手机畅通。</small></p>
@@ -194,7 +194,7 @@ $this->title = "延伸服务";
 				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-blue submit">提交</button>
+				<button id="submit" type="button" class="btn btn-blue submit">提交</button>
 			</div>
 		</div>
 	</div>
@@ -202,16 +202,23 @@ $this->title = "延伸服务";
 <?php ActiveForm::end(); ?>
 <?php
 $js = <<<JS
-	$(".submit").click(function(){
+	$("#submit").click(function(){
 		var username = $("input[name='ServiceForm[username]']").val();
 		var phone = $("input[name='ServiceForm[phone]']").val();
 		var csrf = $("input[name='_csrf-frontend']").val();
 		var type = 1;
 		$.post("/service/create", {"_csrf-frontend":csrf,"Service[username]":username,"Service[phone]":phone,"Service[type]:":type}, function(re){
 			if(re){
-				$(".modal").modal("toggle");
+				layer.open({
+		            title:'success',
+		            'content':'预约成功'
+		        });
+				$("#order").modal("toggle");
 			}else{
-				alert("保存失败");
+				layer.open({
+		            title:'error',
+		            'content':'预约失败，请联系管理员大哥~'
+		        });
 			}
 		});
 	});

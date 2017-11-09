@@ -227,7 +227,7 @@ $this->title = "留学规划";
 
 	</div>
 	<div class="text-center m-t-50">
-		<a href="<?= Url::to("consultation/index"); ?>" class="btn btn-blue btn-big-size btn-lg">预约咨询</a>
+		<a href="<?= Url::to("/consultation/index"); ?>" class="btn btn-blue btn-big-size btn-lg">预约咨询</a>
 	</div>
 </div>
 <!-- 模态框开始 -->

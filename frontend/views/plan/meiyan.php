@@ -209,7 +209,8 @@ $this->title = "留学规划";
 							<div class="col-xs-12">
 								<label for="input15" class="col-xs-3 control-label"> 学术活动</label>
 								<div class="col-xs-9 p-t-5">
-									<textarea class="form-control" rows="5" placeholder="写明您参加过的学术活动"></textarea>
+									<?= $form->field($model, "academicActivities")->textarea(['class' => 'form-control', 'rows' => 5, 'placeholder' => '写明您参加过的学术活动'])->label(false); ?>
+<!--									<textarea class="form-control" rows="5" placeholder="写明您参加过的学术活动"></textarea>-->
 								</div>
 							</div>
 						</div>
