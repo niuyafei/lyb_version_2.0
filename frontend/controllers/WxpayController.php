@@ -27,7 +27,7 @@ class WxpayController extends Controller
 		$case_id = isset($gets['case_id']) ? $gets['case_id'] : null;
 		$payment = $gets['payment'];
 		$body = $gets['subject'];
-		$trade_no = 'lyb' . time().rand(100, 99);
+		$trade_no = time().rand(100, 99);
 		$total_fee = $gets['amount'] * 100;
 		$total_fee = 1;
 
@@ -49,14 +49,14 @@ class WxpayController extends Controller
 		$notify = new \NativePay();
 		$input = new \WxPayUnifiedOrder();
 		$input->SetBody($body);
-		$input->SetOut_trade_no(\WxPayConfig::MCHID.date("YmdHis"));
+		$input->SetOut_trade_no($trade_no);
 		$input->SetTotal_fee($total_fee);
 		$input->SetTime_start(date("YmdHis"));
 		$input->SetTime_expire(date("YmdHis", time() + 600));
 		$input->SetGoods_tag("留样帮-申校系统2.0");
 		$input->SetNotify_url("http://helper.liuyangbang.cn/wxpay/notifyurl");
-		$input->SetTrade_type($trade_no);
-		$input->SetProduct_id($trade_no);
+		$input->SetTrade_type("NATIVE");
+		$input->SetProduct_id("");
 		$result = $notify->GetPayUrl($input);
 		$url2 = $result["code_url"];
 
@@ -72,7 +72,7 @@ class WxpayController extends Controller
 		if ($postObj === false || $postObj->return_code != 'SUCCESS') {
 			echo "FAIL";
 		}
-		$trade_no = $postObj->trade_type;
+		$trade_no = $postObj->out_trade_no;
 		$model = Payment::find()->where(['order_id' => $trade_no])->one();
 		if($model->status == 1){
 			echo "SUCCESS";
