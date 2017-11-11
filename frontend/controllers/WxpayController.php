@@ -27,7 +27,7 @@ class WxpayController extends Controller
 		$case_id = isset($gets['case_id']) ? $gets['case_id'] : null;
 		$payment = $gets['payment'];
 		$body = $gets['subject'];
-		$trade_no = time().rand(100, 99);
+		$trade_no = 'lyb' . time().rand(100, 99);
 		$total_fee = $gets['amount'] * 100;
 		$total_fee = 1;
 
@@ -61,7 +61,9 @@ class WxpayController extends Controller
 		$url2 = $result["code_url"];
 
 		return $this->renderPartial("index", [
-			'url' => $url2
+			'url' => $url2,
+			'case_id' => $case_id,
+			'out_trade_no' => $trade_no
 		]);
 	}
 
@@ -89,14 +91,18 @@ class WxpayController extends Controller
 
 	public function actionIspayment()
 	{
-		date_default_timezone_set('Asia/Shanghai');
-		require_once(__DIR__."/../web/wxpay/WxPay.Api.php");
 		$gets = Yii::$app->request->get();
 		$out_trade_no = $gets['out_trade_no'];
-		$input = new \WxPayOrderQuery();
-		$input->SetOut_trade_no($out_trade_no);
-		var_dump(\WxPayApi::orderQuery($input));
-		exit();
+		if(Payment::find()->where(['order_id' => $out_trade_no, 'status' => 1])->exists()){
+			echo 'true';
+		}else{
+			echo 'false';
+		}
 
+	}
+
+	public function actionTest()
+	{
+		echo "true";
 	}
 }

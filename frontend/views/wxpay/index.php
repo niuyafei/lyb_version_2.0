@@ -32,5 +32,19 @@
 	</div>
 </div>
 </body>
-
+<script src="/bootstrap/js/jquery-2.1.3.min.js"></script>
+<script src="/layui/layui.all.js"></script>
+<script>
+	var domain = document.domain;
+	var url = "http://" + domain;
+	var out_trade_no = "<?= $out_trade_no; ?>";
+	var case_id = "<?= $case_id; ?>";
+	setInterval(function(){
+		$.get(url+"/wxpay/test?out_trade_no=" + out_trade_no, function(re){
+			if(re){
+				window.location.href = url + "/abordcase/detail?case_id=" + case_id;
+			}
+		});
+	}, 1500);
+</script>
 </html>
