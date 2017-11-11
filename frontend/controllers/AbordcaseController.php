@@ -10,6 +10,7 @@ namespace frontend\controllers;
 use common\models\AbordCase;
 use Yii;
 use frontend\base\BaseController;
+use common\models\Payment;
 
 class AbordcaseController extends BaseController
 {
@@ -17,11 +18,11 @@ class AbordcaseController extends BaseController
 	{
 		$user_id = Yii::$app->user->getId();
 		$model = AbordCase::find()->with("user")->where(['case_id' => $case_id])->one();
-		$casePayment = \common\models\Payment::find()->where(['case_id' => $model->case_id, 'payment' => 1, 'user_id' => $user_id])->one();
-		$schoolPayment = \common\models\Payment::find()->where(['case_id' => $model->case_id, 'payment' => 3, 'user_id' => $user_id])->one();
-		$expertPayment = \common\models\Payment::find()->where(['case_id' => $model->case_id, 'payment' => 2, 'user_id' => $user_id])->one();
+		$casePayment = Payment::find()->where(['case_id' => $model->case_id, 'payment' => 1, 'user_id' => $user_id])->one();
+		$schoolPayment = Payment::find()->where(['case_id' => $model->case_id, 'payment' => 3, 'user_id' => $user_id])->one();
+		$expertPayment = Payment::find()->where(['case_id' => $model->case_id, 'payment' => 2, 'user_id' => $user_id])->one();
 
-		$audio = $model->expertComments->video;
+		$audio = isset($model->expertComments->video) ? $model->expertComments->video : "";
 		if(!$expertPayment){
 			$audioName = mb_substr($audio, 0, mb_strrpos($audio, "."), "utf-8");
 			$ext = mb_substr($audio, mb_strrpos($audio, "."));
