@@ -13,6 +13,8 @@ use common\models\Payment;
 
 class WxpayController extends Controller
 {
+	public $enableCsrfValidation = false;
+
 	public function actionIndex()
 	{
 		date_default_timezone_set('Asia/Shanghai');
