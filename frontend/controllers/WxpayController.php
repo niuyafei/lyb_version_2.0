@@ -65,18 +65,16 @@ class WxpayController extends Controller
 
 	public function actionNotifyurl()
 	{
-		$response = Yii::$app->request->post();
-//		$out_trade_no = $response['out_trade_no'];
-//		if(Payment::find()->where(['trade_no' => $out_trade_no])->exists()){
-//			$model = Payment::find()->where(['trade_no' => $out_trade_no])->one();
-//			$model->status = 1;
-//			$model->save();
-//			echo "SUCCESS";
-//		}else{
-//			echo "FAIL";
-//		}
-
-		file_put_contents("test.txt", json_encode($response));
+		$postStr = Yii::$app->request->getRawBody();
+		file_put_contents("test.txt", $postStr);
+		exit;
+		$postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+		if ($postObj === false) {
+			die('parse xml error');
+		}
+		if ($postObj->return_code != 'SUCCESS') {
+			die($postObj->return_msg);
+		}
 	}
 
 	public function actionIspayment()

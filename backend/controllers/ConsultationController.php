@@ -83,4 +83,33 @@ class ConsultationController extends BaseController
 
 		return json_encode($array);
 	}
+
+	public function actionChangestatus()
+	{
+		$gets = Yii::$app->request->get();
+		$consultation_id = isset($gets['consultation_id']) ? $gets['consultation_id'] : "";
+		$status = isset($gets['status']) ? $gets['status'] : "";
+		$model = Consultation::findOne($consultation_id);
+		if(!$model){
+			return json_encode([
+				'code' => 20,
+				'message' => '参数错误',
+			]);
+		}
+		if($model->status == 4){
+			return json_encode([
+				'code' => 20,
+				'message' => '评价已完成',
+			]);
+		}
+		$model->status = $status;
+		if($model->save()){
+			return json_encode(['code' => 200]);
+		}else{
+			return json_encode([
+				'code' => 20,
+				'message' => '保存失败',
+			]);
+		}
+	}
 }

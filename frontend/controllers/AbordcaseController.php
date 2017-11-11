@@ -18,6 +18,10 @@ class AbordcaseController extends BaseController
 	{
 		$user_id = Yii::$app->user->getId();
 		$model = AbordCase::find()->with("user")->where(['case_id' => $case_id])->one();
+		if(!is_object($model->expertComments)){
+			Yii::$app->session->setFlash('error', "留学案例生成失败，请联系管理员");
+			return $this->redirect(['site/index']);
+		}
 		$casePayment = Payment::find()->where(['case_id' => $model->case_id, 'payment' => 1, 'user_id' => $user_id])->one();
 		$schoolPayment = Payment::find()->where(['case_id' => $model->case_id, 'payment' => 3, 'user_id' => $user_id])->one();
 		$expertPayment = Payment::find()->where(['case_id' => $model->case_id, 'payment' => 2, 'user_id' => $user_id])->one();

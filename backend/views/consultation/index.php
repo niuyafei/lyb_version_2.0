@@ -44,7 +44,7 @@ $this->title = "预约咨询";
 						<td>12:00-14:00</td>
 						<td>已付款</td>
 						<td>
-							<select name="status" class="form-control">
+							<select name="status" class="form-control" consultation_id="<?= $value['consultation_id']; ?>">
 								<?php foreach(\common\models\Consultation::dropDown("status") as $k => $v): ?>
 									<option value="<?= $k; ?>" <?= $value['status'] == $k ? "selected" : ""; ?>  ><?= $v; ?></option>
 								<?php endforeach; ?>
@@ -236,6 +236,31 @@ $js = <<<JS
 			$("p[name='admin_id']").text(data.expert_username);
 			$("p[name='communicationRecord']").text(data.communicationRecord);
 		})
+	});
+
+	$("select[name='status']").change(function(){
+		var status = $(this).val();
+		var consultation_id = $(this).attr("consultation_id");
+		$.get(url+"/consultation/changestatus?status=" + status + "&consultation_id=" + consultation_id, function(re){
+			data = eval("(" + re + ")");
+			if(data.code == 200){
+				//修改成功
+				layer.open({
+		            title:'警告信息',
+		            'content':'修改成功',
+		        });
+			}else{
+				//修改失败
+				layer.open({
+		            title:'警告信息',
+		            'content':data.message,
+		        });
+		        setTimeout(function(){
+		        	window.location.reload();
+		        }, 1000);
+			}
+		});
+
 	});
 JS;
 

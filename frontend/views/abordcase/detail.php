@@ -11,6 +11,7 @@ use yii\helpers\ArrayHelper;
 
 $this->title = "案例详情";
 ?>
+<a id="expert_payment" href="#" class="m-l-20" data-toggle="modal" data-target="#pay" case_id="<?= $model->case_id; ?>" payment="2" ></a>
 <div class="container">
 	<h2 class="text-center m-t-30">留学案例</h2>
 	<hr class="cont-tit-border" />
@@ -190,17 +191,17 @@ $this->title = "案例详情";
 				<hr class="cont-tit-border-sm">
 				<div class="media col-xs-12 p-l-35 p-r-35">
 					<div class="media-left media-middle">
-						<img class="media-object" data-src="holder.js/64x64" alt="64x64" src="<?= Url::to($model->expertComments->expert->headimgurl); ?>" width="70">
+						<img class="media-object" data-src="holder.js/64x64" alt="64x64" src="<?= isset($model->expertComments->expert->headimgurl) ? Url::to($model->expertComments->expert->headimgurl) : ""; ?>" width="70">
 					</div>
 					<div class="media-body p-l-10">
-						<h5 class="media-heading"><b><?= $model->expertComments->expert->username; ?>老师</b></h5>
-						<p class="m-0"><?= $model->expertComments->content; ?></p>
+						<h5 class="media-heading"><b><?= isset($model->expertComments->expert->username) ?  $model->expertComments->expert->username : ""; ?>老师</b></h5>
+						<p class="m-0"><?= isset($model->expertComments->content) ? $model->expertComments->content : ""; ?></p>
 					</div>
 					<hr class="border-dashed" />
 				</div>
 				<div class="col-xs-12 p-l-35 p-r-35" data-toggle="modal" data-target="#pay">
 					<span class="color-gray">案例分析音频</span>
-					<audio src="<?= Url::to($audio); ?>" controls="controls" preload="auto" class="audio-style m-l-10"> </audio> <span class="m-l-10 color-lightgray">（此音频语言为<?= $model->expertComments->language == 1 ? "中文" : "英文"; ?>）</span>
+					<audio id="expert_comment" src="<?= Url::to($audio); ?>" controls="controls" preload="auto" class="audio-style m-l-10"> </audio> <span class="m-l-10 color-lightgray">（此音频语言为<?= isset($model->expertComments->language) ? ($model->expertComments->language == 1 ? "中文" : "英文") : ""; ?>）</span>
 				</div>
 			</div>
 		</div>
@@ -256,6 +257,7 @@ $js = <<<JS
 		obj = $(e.relatedTarget);
 		case_id = obj.attr("case_id");
 		payment = obj.attr("payment");
+		console.log(obj);
 	});
 
 	$("#payment").click(function(){
@@ -271,6 +273,11 @@ $js = <<<JS
 			//微信支付
 			window.location.href = "http://" + domain + "/wxpay/index?case_id=" + case_id + "&subject=" +subject + "&amount=" + amount + "&body=" + body + "&payment=" + payment;
 		}
+	});
+
+
+	$("#expert_comment").on('ended', function(){
+		$("#expert_payment").trigger("click");
 	});
 JS;
 
