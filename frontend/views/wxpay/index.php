@@ -41,7 +41,7 @@
 	var case_id = "<?= $case_id; ?>";
 	setInterval(function(){
 		$.get(url+"/wxpay/ispayment?out_trade_no=" + out_trade_no, function(re){
-			if(re){
+			if(re=='true'){
 				window.location.href = url + "/abordcase/detail?case_id=" + case_id;
 			}
 		});
