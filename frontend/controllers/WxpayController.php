@@ -27,7 +27,7 @@ class WxpayController extends Controller
 		$case_id = isset($gets['case_id']) ? $gets['case_id'] : null;
 		$payment = $gets['payment'];
 		$body = $gets['subject'];
-		$trade_no = time().rand(10000, 99999);
+		$trade_no = 'lyb' . time().rand(100, 99);
 		$total_fee = $gets['amount'] * 100;
 		$total_fee = 1;
 
@@ -38,6 +38,7 @@ class WxpayController extends Controller
 		$paymentModel->pay_from = 1;
 		$paymentModel->amount = $total_fee;
 		$paymentModel->payment = $payment;
+		$paymentModel->trade_type = $trade_no;
 		$paymentModel->status = 3;
 		$paymentModel->created_at = date("Y-m-d H:i:s");
 		if(!$paymentModel->save()){
@@ -68,15 +69,23 @@ class WxpayController extends Controller
 	public function actionNotifyurl()
 	{
 		$postStr = Yii::$app->request->getRawBody();
-		file_put_contents("test.txt", $postStr);
-		exit;
 		$postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-		if ($postObj === false) {
-			die('parse xml error');
+		if ($postObj === false || $postObj->return_code != 'SUCCESS') {
+			echo "FAIL";
 		}
-		if ($postObj->return_code != 'SUCCESS') {
-			die($postObj->return_msg);
+		$trade_no = $postObj->trade_type;
+		$model = Payment::find()->where(['order_id' => $trade_no])->one();
+		if($model->status == 1){
+			echo "SUCCESS";
+		}else{
+			$model->status = 1;
+			if($model->save()){
+				echo "SUCCESS";
+			}else{
+				echo "FAIL";
+			}
 		}
+
 	}
 
 	public function actionIspayment()
