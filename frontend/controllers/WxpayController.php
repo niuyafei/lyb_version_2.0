@@ -38,7 +38,6 @@ class WxpayController extends Controller
 		$paymentModel->pay_from = 1;
 		$paymentModel->amount = $total_fee;
 		$paymentModel->payment = $payment;
-		$paymentModel->trade_type = $trade_no;
 		$paymentModel->status = 3;
 		$paymentModel->created_at = date("Y-m-d H:i:s");
 		if(!$paymentModel->save()){
@@ -56,7 +55,7 @@ class WxpayController extends Controller
 		$input->SetTime_expire(date("YmdHis", time() + 600));
 		$input->SetGoods_tag("留样帮-申校系统2.0");
 		$input->SetNotify_url("http://helper.liuyangbang.cn/wxpay/notifyurl");
-		$input->SetTrade_type("NATIVE");
+		$input->SetTrade_type($trade_no);
 		$input->SetProduct_id($trade_no);
 		$result = $notify->GetPayUrl($input);
 		$url2 = $result["code_url"];
