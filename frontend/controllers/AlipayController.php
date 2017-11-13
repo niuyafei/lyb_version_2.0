@@ -25,17 +25,14 @@ class AlipayController extends BaseController
      */
     public function actionIndex()
     {
+        if(!$this->isLogin()){
+            $this->goFrom();
+            exit;
+        }
         date_default_timezone_set('PRC');
         $config = Yii::$app->params['alipay_config'];
         $gets = Yii::$app->request->get();
         $case_id = isset($gets['case_id']) ? $gets['case_id'] : null;
-        if(!$this->isLogin()){
-            if($case_id){
-                return $this->redirect(['abordcase/detail?case_id=' . $case_id]);
-            }else{
-                return $this->redirect(['site/index']);
-            }
-        }
         //商户订单号，商户网站订单系统中唯一订单号，必填
         $out_trade_no = time() . rand(10000, 99999);
         //订单名称，必填
@@ -162,11 +159,8 @@ class AlipayController extends BaseController
 
     public function actionTest()
     {
-//        $arr = ['h' => 'hello world'];
-//        file_put_contents("test.txt", json_encode($arr));
-        var_dump(date("Y-m-d H:i:s"));
-        $date = new \DateTime();
-        var_dump($date->format("Y-m-d H:i:s"));
+        Yii::$app->session->setFlash('error', "hello world");
+        Yii::$app->user->setReturnUrl("http://test.collegenode.com/abordcase/detail?case_id=12");
         exit;
     }
 }

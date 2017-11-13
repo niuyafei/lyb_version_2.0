@@ -67,7 +67,7 @@ class WxController extends Controller
         $loginForm->password = "123456";
         $loginForm->rememberMe = true;
         if($loginForm->login()){
-            return $this->redirect(['site/index']);
+            return $this->redirect([$state]);
         }
     }
     

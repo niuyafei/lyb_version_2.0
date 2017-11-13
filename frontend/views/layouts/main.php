@@ -124,7 +124,7 @@ AppAsset::register($this);
             </div>
             <div class="modal-body m-t-15 m-b-30">
                 <div class="row m-t-10">
-                    <a href="https://open.weixin.qq.com/connect/qrconnect?appid=wxd66fddd82cb463cb&redirect_uri=http%3a%2f%2fhelper.liuyangbang.cn%2fwx%2fget-code&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect" class="color-black">
+                    <a id="qqLogin" href="#" class="color-black">
                         <div class="col-xs-6 text-center p-l-35">
                             <img src=<?= Url::to("/img/wechat.jpg"); ?> width="70" />
                             <p class="m-t-10">微信登录</p>
@@ -147,6 +147,12 @@ AppAsset::register($this);
 </html>
 <?php $this->endPage() ?>
 <script type="text/javascript">
+    var request_url = '<?= $_SERVER['REQUEST_URI'] ?>';
+    $("#qqLogin").click(function(){
+        request_url = encodeURI(request_url);
+        url = "https://open.weixin.qq.com/connect/qrconnect?appid=wxd66fddd82cb463cb&redirect_uri=http%3a%2f%2fhelper.liuyangbang.cn%2fwx%2fget-code&response_type=code&scope=snsapi_login&state="+request_url+"#wechat_redirect";
+        window.location.href = url;
+    });
     var message = "<?= Yii::$app->session->hasFlash('success') ? Yii::$app->session->getFlash('success') : (Yii::$app->session->hasFlash('error') ? Yii::$app->session->getFlash('error') : ""); ?>";
     if(message.length > 0){
         layer.open({

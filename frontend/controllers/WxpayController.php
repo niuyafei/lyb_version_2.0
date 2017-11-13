@@ -8,15 +8,19 @@
 namespace frontend\controllers;
 
 use yii;
-use yii\web\Controller;
+use frontend\base\BaseController;
 use common\models\Payment;
 
-class WxpayController extends Controller
+class WxpayController extends BaseController
 {
 	public $enableCsrfValidation = false;
 
 	public function actionIndex()
 	{
+		if(!$this->isLogin()){
+			$this->goFrom();
+			exit;
+		}
 		date_default_timezone_set('Asia/Shanghai');
 
 		require_once(__DIR__."/../web/wxpay/WxPay.Api.php");
