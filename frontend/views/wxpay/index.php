@@ -42,7 +42,8 @@
 	setInterval(function(){
 		$.get(url+"/wxpay/ispayment?out_trade_no=" + out_trade_no, function(re){
 			if(re=='true'){
-				window.location.href = url + "/abordcase/detail?case_id=" + case_id;
+				history.go(-1);
+//				window.location.href = url + "/abordcase/detail?case_id=" + case_id;
 			}
 		});
 	}, 1500);
