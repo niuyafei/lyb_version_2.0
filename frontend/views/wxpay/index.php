@@ -48,7 +48,7 @@
 				}else if(data.payment == 4){
 					window.location.href = url + "/consultation/success";
 				}else if(data.payment == 5){
-
+					window.location.href = url + "/plan/result";
 				}
 			}
 		});

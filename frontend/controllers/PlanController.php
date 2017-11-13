@@ -178,4 +178,10 @@ class PlanController extends BaseController
 			'model' => $model
 		]);
 	}
+
+	public function actionResult()
+	{
+		Yii::$app->session->setFlash('success', "支付成功，方案审核后才可以查看呦！");
+		return $this->redirect(['site/index']);
+	}
 }
