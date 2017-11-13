@@ -12,6 +12,7 @@ use yii;
 use frontend\base\BaseController;
 use common\models\Consultation;
 use yii\data\Pagination;
+use common\models\Payment;
 
 class ConsultationController extends BaseController
 {
@@ -98,6 +99,12 @@ class ConsultationController extends BaseController
 
 	public function actionSuccess()
 	{
-		return $this->render("success");
+		$user_id = Yii::$app->user->getId();
+		if(Payment::find()->where(['user_id' => $user_id, "payment" => 5, "status" => 1])->exists()){
+			return $this->render("success");
+		}else{
+			Yii::$app->session->setFlash('error', "请支付后再查看");
+			return $this->redirect(['consultation/pay']);
+		}
 	}
 }

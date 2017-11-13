@@ -41,9 +41,15 @@
 	var case_id = "<?= $case_id; ?>";
 	setInterval(function(){
 		$.get(url+"/wxpay/ispayment?out_trade_no=" + out_trade_no, function(re){
-			if(re=='true'){
-				history.go(-1);
-//				window.location.href = url + "/abordcase/detail?case_id=" + case_id;
+			data = eval("(" + re + ")");
+			if(data.code == 200){
+				if(data.case_id){
+					window.location.href = url + "/abordcase/detail?case_id=" + case_id;
+				}else if(data.payment == 4){
+					window.location.href = url + "/consultation/success";
+				}else if(data.payment == 5){
+
+				}
 			}
 		});
 	}, 1500);

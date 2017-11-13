@@ -97,10 +97,17 @@ class WxpayController extends BaseController
 	{
 		$gets = Yii::$app->request->get();
 		$out_trade_no = $gets['out_trade_no'];
-		if(Payment::find()->where(['order_id' => $out_trade_no, 'status' => 1])->exists()){
-			echo 'true';
+		$model = Payment::find()->where(['order_id' => $out_trade_no, 'status' => 1])->one();
+		if($model){
+			echo json_encode([
+				'code' => 200,
+				'case_id' => is_null($model->case_id) ? "" : $model->case_id,
+				'payment' => $model->payment,
+			]);
 		}else{
-			echo 'false';
+			echo json_encode([
+				'code' => 20
+			]);
 		}
 
 	}
