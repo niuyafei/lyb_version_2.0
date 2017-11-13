@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             </select>
                         </td>
                         <td>
-                            <a href="<?= url::to(['abordcase/update?id='.$value['case_id']]); ?>">编辑</a>
+                            <a href="<?= url::to(['abordcase/update?id='.$value['case_id']]); ?>">基本信息</a>
                             <span class="p-l-5 p-r-5 color-lightgray"> | </span>
                             <?= Html::a("申请历程", ['course/create?case_id='.$value['case_id']."&user_id=".$value['user_id']]); ?>
                             <span class="p-l-5 p-r-5 color-lightgray"> | </span>

@@ -46,7 +46,7 @@ class AbordCase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'grade', 'currentSchool', 'admissionSchool', 'applicationProject', 'specialty', 'winning', 'sat', 'toefl', 'act', 'gpa', 'ielts'], 'required', 'message' => '{attribute}不能为空'],
+            [['username', 'grade', 'currentSchool', 'admissionSchool', 'applicationProject'], 'required', 'message' => '{attribute}不能为空'],
             [['user_id', 'applicationProject', 'status', 'gender'], 'integer'],
             [['specialty', 'winning'], 'string'],
             [['created_at'], 'safe'],

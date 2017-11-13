@@ -99,7 +99,7 @@ $this->title = '留学案例';
                 <div class="col-xs-12">
                     <div class="row">
                         <div class="col-xs-3 text-right p-t-5 p-r-0">
-                            <b><span class="color-red">*</span> 特长：</b>
+                            <b> 特长：</b>
                         </div>
                         <div class="col-xs-10">
                             <?= $form->field($model, "specialty")->textarea()->label(false); ?>
@@ -111,7 +111,7 @@ $this->title = '留学案例';
                 <div class="col-xs-12">
                     <div class="row">
                         <div class="col-xs-3 text-right p-t-5 p-r-0">
-                            <b><span class="color-red">*</span> 所获奖项：</b>
+                            <b> 所获奖项：</b>
                         </div>
                         <div class="col-xs-10">
                             <?= $form->field($model, "winning")->textarea()->label(false); ?>
@@ -127,7 +127,7 @@ $this->title = '留学案例';
                 <div class="col-xs-6">
                     <div class="row">
                         <div class="col-xs-3 text-right p-t-5 p-r-0">
-                            <b><span class="color-red">*</span> SAT：</b>
+                            <b> SAT：</b>
                         </div>
                         <div class="col-xs-9">
                             <?= $form->field($model, "sat")->textInput()->label(false); ?>
@@ -137,7 +137,7 @@ $this->title = '留学案例';
                 <div class="col-xs-6">
                     <div class="row">
                         <div class="col-xs-3 text-right p-t-5 p-r-0">
-                            <b><span class="color-red">*</span> TOEFL：</b>
+                            <b> TOEFL：</b>
                         </div>
                         <div class="col-xs-9">
                             <?= $form->field($model, "toefl")->textInput()->label(false); ?>
@@ -149,7 +149,7 @@ $this->title = '留学案例';
                 <div class="col-xs-6">
                     <div class="row">
                         <div class="col-xs-3 text-right p-t-5 p-r-0">
-                            <b><span class="color-red">*</span> 雅思：</b>
+                            <b> 雅思：</b>
                         </div>
                         <div class="col-xs-9">
                             <?= $form->field($model, "ielts")->textInput()->label(false); ?>
@@ -159,7 +159,7 @@ $this->title = '留学案例';
                 <div class="col-xs-6">
                     <div class="row">
                         <div class="col-xs-3 text-right p-t-5 p-r-0">
-                            <b><span class="color-red">*</span> ACT：</b>
+                            <b> ACT：</b>
                         </div>
                         <div class="col-xs-9">
                             <?= $form->field($model, "act")->textInput()->label(false); ?>
@@ -171,7 +171,7 @@ $this->title = '留学案例';
                 <div class="col-xs-6">
                     <div class="row">
                         <div class="col-xs-3 text-right p-t-5 p-r-0">
-                            <b><span class="color-red">*</span> GPA：</b>
+                            <b> GPA：</b>
                         </div>
                         <div class="col-xs-9">
                             <?= $form->field($model, "gpa")->textInput()->label(false); ?>
