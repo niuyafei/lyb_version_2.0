@@ -139,6 +139,10 @@ $js = <<<JS
 		}
 		$.post("/service/create", {"_csrf-frontend":csrf,"Service[username]":username,"Service[phone]":phone,"Service[type]:":type}, function(re){
 			if(re){
+				layer.open({
+		            title:'success',
+		            'content':'预约成功'
+		        });
 				$("#order").modal("toggle");
 			}else{
 				alert("保存失败");

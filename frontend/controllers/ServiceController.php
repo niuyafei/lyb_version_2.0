@@ -61,7 +61,7 @@ class ServiceController extends BaseController
 			return $this->redirect(["index"]);
 		}
 		$user_id = Yii::$app->user->getId();
-		$model = Service::find()->where(['user_id' => $user_id, 'phone' => Yii::$app->request->post("Service[phone]")])->one();
+		$model = Service::find()->where(['user_id' => $user_id])->one();
 		if(!$model){
 			$model = new Service();
 		}
