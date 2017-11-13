@@ -91,14 +91,14 @@ class AlipayController extends BaseController
         $out_trade_no = Yii::$app->request->get("out_trade_no");
         $model = Payment::find()->where(['order_id' => $out_trade_no])->one();
         if($model->case_id){
-            //留学案例
+            //留学案例、申校列表、专家点评
             return $this->redirect(['abordcase/detail?case_id=' . $model->case_id]);
         }else if($model->payment == 4){
             //预约咨询
             return $this->redirect(['consultation/success']);
-        }else if($model->payment == 2){
-            //专家点评
-            return $this->redirect(['']);
+        }else if($model->payment == 5){
+            //留学规划
+            return $this->redirect(['plan/result']);
         }
     }
 

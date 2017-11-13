@@ -60,7 +60,11 @@ class ServiceController extends BaseController
 		if(!$this->isLogin()){
 			return $this->redirect(["index"]);
 		}
-		$model = new Service();
+		$user_id = Yii::$app->user->getId();
+		$model = Service::find()->where(['user_id' => $user_id, 'phone' => Yii::$app->request->post("Service[phone]")])->one();
+		if(!$model){
+			$model = new Service();
+		}
 		if($model->load(Yii::$app->request->post())){
 			$model->user_id = Yii::$app->user->getId();
 			$model->created_at = date("Y-m-d H:i:s");

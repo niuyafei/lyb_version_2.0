@@ -130,9 +130,16 @@ $js = <<<JS
 		var phone = $("input[name='ServiceForm[phone]']").val();
 		var csrf = $("input[name='_csrf-frontend']").val();
 		var type = 2;
+		if(!phone.match(/^(((13[0-9]{1})|159|153)+\d{8})$/)){
+			layer.open({
+				title:'警告信息',
+				content:'手机号码不正确',
+			});
+			return false;
+		}
 		$.post("/service/create", {"_csrf-frontend":csrf,"Service[username]":username,"Service[phone]":phone,"Service[type]:":type}, function(re){
 			if(re){
-				$(".modal").modal("toggle");
+				$("#order").modal("toggle");
 			}else{
 				alert("保存失败");
 			}
