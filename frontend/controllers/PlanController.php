@@ -7,7 +7,6 @@
  */
 namespace frontend\controllers;
 
-use Faker\Provider\it_IT\Payment;
 use Yii;
 use frontend\base\BaseController;
 use common\models\Plan;
@@ -19,6 +18,7 @@ use yii\helpers\ArrayHelper;
 use common\models\Schools;
 use common\models\StudyPlan;
 use common\models\TimePlan;
+use common\models\Payment;
 
 class PlanController extends BaseController
 {
