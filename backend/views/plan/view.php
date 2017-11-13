@@ -183,7 +183,7 @@ $this->title = "留学规划";
                                 <b>社团活动：</b>
                             </div>
                             <div class="col-xs-9">
-                                <div class="p-l-10 color-gray"><?= !is_null($model->communityActivities) ? $model->communityActivities : "暂无内容"; ?></div>
+                                <div class="p-l-10"><?= !is_null($model->communityActivities) ? $model->communityActivities : "暂无内容"; ?></div>
                                 <hr class="m-t-5 m-b-0" />
                             </div>
                         </div>

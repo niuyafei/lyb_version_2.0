@@ -135,7 +135,7 @@ $this->title = "留学规划";
 <!--									<input type="text" class="form-control" id="input7" placeholder="点击填写您的TOFEL成绩">-->
 								</div>
 								<label for="input8" class="col-xs-2 control-label">
-									<b class="color-red m-r-10">或</b> 雅思
+									雅思
 								</label>
 								<div class="col-xs-4 p-0">
 									<?= $form->field($model, 'ielts')->textInput(['class' => 'form-control', 'id' => 'input8', 'placeholder' => '点击填写您的雅思成绩'])->label(false); ?>
@@ -153,7 +153,7 @@ $this->title = "留学规划";
 <!--									<input type="text" class="form-control" id="input9" placeholder="点击填写您的SAT成绩">-->
 								</div>
 								<label for="input10" class="col-xs-2 control-label">
-									<b class="color-red m-r-10">或</b> ACT
+									ACT
 								</label>
 								<div class="col-xs-4 p-0">
 									<?= $form->field($model, 'act')->textInput(['class' => 'form-control', 'id' => 'input10', 'placeholder' => '点击填写您的ACT成绩'])->label(false); ?>
@@ -170,7 +170,7 @@ $this->title = "留学规划";
 								</div>
 							</div>
 							<div class="col-xs-6">
-								<label for="input12" class="col-xs-3 control-label">AP课程数量</label>
+								<label for="input12" class="col-xs-3 control-label">AP</label>
 								<div class="col-xs-9">
 									<?= $form->field($model, 'ap')->textInput(['class' => 'form-control', 'id' => 'input12', 'placeholder' => '点击填写您的AP课程数量'])->label(false); ?>
 <!--									<input type="text" class="form-control" id="input12" placeholder="点击填写您的AP课程数量">-->

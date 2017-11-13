@@ -101,7 +101,7 @@ $js = <<<JS
 		var subject = "留学规划";
 		var amount = "9.9";
 		var body = "";
-		var payment = "3";
+		var payment = "5";
 		if(payType == "alipay"){
 			//支付宝
 			window.location.href = url + "/alipay/index?subject=" + subject + "&amount=" + amount + "&body=" + body + "&payment=" + payment;

@@ -63,7 +63,7 @@ $this->title = "预约咨询";
 		<div class="p-20">
 			<div class="form-group m-b-20">
 				<label for="input1" class="col-xs-2 control-label"><b class="color-red">*</b> 姓名</label>
-				<div class="col-xs-3">
+				<div class="col-xs-3" style="height:35px;">
 					<?= $form->field($model, "username")->textInput(['id' => 'input1', 'placeholder' => '点击填写您的姓名'])->label(false); ?>
 				</div>
 			</div>
@@ -80,7 +80,7 @@ $this->title = "预约咨询";
 			</div>
 			<div class="form-group m-b-20">
 				<label for="input2" class="col-xs-2 control-label"><b class="color-red">*</b> 联系电话</label>
-				<div class="col-xs-3">
+				<div class="col-xs-3" style="height:35px;">
 					<?= $form->field($model, 'phone')->textInput(['id' => 'input2', 'placeholder' => '点击填写您的手机号'])->label(false); ?>
 				</div>
 			</div>

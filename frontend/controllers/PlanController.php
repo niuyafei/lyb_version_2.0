@@ -7,6 +7,7 @@
  */
 namespace frontend\controllers;
 
+use Faker\Provider\it_IT\Payment;
 use Yii;
 use frontend\base\BaseController;
 use common\models\Plan;
@@ -49,7 +50,12 @@ class PlanController extends BaseController
 	//支付
 	public function actionPay()
 	{
-		return $this->render("pay");
+		$user_id = Yii::$app->user->getId();
+		if(Payment::find()->where(['user_id' => $user_id, 'payment'=>5, 'status'=>1])->exists()){
+			return $this->redirect(['plan/view']);
+		}else{
+			return $this->render("pay");
+		}
 	}
 
 	//查看留学规划

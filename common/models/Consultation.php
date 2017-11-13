@@ -41,7 +41,7 @@ class Consultation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'username', 'phone', 'type', 'others', 'dates', 'times', 'cost'], 'required', 'message' => '{attribute}不能为空'],
+            [['user_id', 'username', 'phone', 'type', 'dates', 'times', 'cost'], 'required', 'message' => '{attribute}不能为空'],
             [['user_id', 'gender', 'type', 'pay_type', 'status', 'admin_id', 'starts'], 'integer'],
             [['others', 'communicationRecord', 'advic'], 'string'],
             [['created_at'], 'safe'],

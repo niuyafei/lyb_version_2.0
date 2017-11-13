@@ -57,6 +57,7 @@ class MeimbaForm extends Model
 			[['toefl', 'sat', 'act', 'ielts', 'gpa_h', 'gpa_m', 'gpa_u', 'gpa_major', 'ssat', 'gre', 'gmat', 'ap'], 'number', 'message' => '{attribute}成绩格式不正确'],
 			['user_id', 'default', 'value' => Yii::$app->user->getId()],
 			['applicationProject', 'default', 'value' => 4],
+			[['winning', 'communityActivities', 'publicBenefitActivities', 'relatives'], 'string'],
 		];
 	}
 
