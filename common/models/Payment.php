@@ -32,7 +32,7 @@ class Payment extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'payment', 'status', 'order_id', 'amount', 'created_at'], 'required'],
-            [['user_id', 'case_id', 'pay_type', 'payment', 'status'], 'integer'],
+            [['user_id', 'case_id', 'consultation_id', 'pay_type', 'payment', 'status'], 'integer'],
             [['created_at'], 'safe'],
         ];
     }
@@ -47,6 +47,7 @@ class Payment extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'case_id' => 'Case ID',
             'order_id' => '订单号',
+            'consultation_id' => '预约咨询id',
             'pay_from' => '支付渠道',
             'amount' => '支付金额',
             'pay_type' => 'Pay Type',

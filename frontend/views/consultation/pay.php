@@ -110,12 +110,13 @@ $js = <<<JS
 		var amount = "99";
 		var body = "";
 		var payment = "4";
+		var consultation_id = '<?= $consultation_id; ?>';
 		if(payType == "alipay"){
 			//支付宝
-			window.location.href = url + "/alipay/index?subject=" + subject + "&amount=" + amount + "&body=" + body + "&payment=" + payment;
+			window.location.href = url + "/alipay/index?subject=" + subject + "&amount=" + amount + "&body=" + body + "&payment=" + payment + "&consultation_id=" + consultation_id;
 		}else if(payType == "wxpay"){
 			//微信
-			window.location.href = "http://" + domain + "/wxpay/index?subject=" +subject + "&amount=" + amount + "&body=" + body + "&payment=" + payment;
+			window.location.href = "http://" + domain + "/wxpay/index?subject=" +subject + "&amount=" + amount + "&body=" + body + "&payment=" + payment + "&consultation_id=" + consultation_id;
 		}
 	});
 JS;

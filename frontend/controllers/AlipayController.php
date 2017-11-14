@@ -51,6 +51,7 @@ class AlipayController extends BaseController
         $model->user_id = Yii::$app->user->getId();
         $model->case_id = $case_id;
         $model->order_id = $out_trade_no;
+        $model->consultation_id = $gets['consultation_id'];
         $model->pay_from = 2;
         $model->amount = $total_amount;
         $model->payment = $payment;

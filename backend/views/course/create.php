@@ -16,6 +16,48 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="col-xs-10">
     <h4 class="color-blue">申请历程 - 新增</h4>
     <hr class="m-t-5" />
+    <?php foreach($courseArr as $key => $value): ?>
+        <div class="case-edit-cont">
+            <div class="case-edit-cont">
+                <h4 class="text-center m-b-20"><?= \common\models\Course::dropDown($value['type']); ?></h4>
+                <div class="row case-edit-formwidth p-l-0 p-r-0 case-edit-licheng">
+                    <p></p>
+                    <div class="col-xs-6">
+                        <div class="row">
+                            <div class="col-xs-3 text-right p-t-5 p-r-0">
+                                <b>申请历程：</b>
+                            </div>
+                            <div class="col-xs-9">
+                                <?= \common\models\Course::dropDown($value['type']); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="row">
+                            <div class="col-xs-3 text-right p-t-5 p-r-0">
+                                <b>时间：</b>
+                            </div>
+                            <div class="col-xs-9">
+                                <?= $value['dates']; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 m-t-25">
+                        <div class="row">
+                            <div class="col-xs-3 text-right p-t-5 p-r-0">
+                                <b>内容：</b>
+                            </div>
+                            <div class="col-xs-10">
+                                <?= $value['content']; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="col-xs-12 text-right m-t-25 m-b-20"></p>
+                </div>
+            </div>
+            <hr />
+        </div>
+    <?php endforeach; ?>
     <div class="p-20 p-t-0">
         <?php
         $form = ActiveForm::begin([
@@ -34,7 +76,6 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="case-edit-cont">
                 <h4 class="text-center m-b-20">申请历程</h4>
                 <div class="row case-edit-formwidth p-l-0 p-r-0 case-edit-licheng">
-<!--                    <h5 class="color-blue">1. 规划方案</h5>-->
                     <p></p>
                     <div class="col-xs-6">
                         <div class="row">

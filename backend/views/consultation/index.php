@@ -40,9 +40,9 @@ $this->title = "预约咨询";
 						<td>
 							<a href="#" data-toggle="modal" data-target="#chakanneirong_<?= $value['consultation_id']; ?>">查看内容</a>
 						</td>
-						<td>2017-10-19</td>
-						<td>12:00-14:00</td>
-						<td>已付款</td>
+						<td><?= $value['dates']; ?></td>
+						<td><?= $value['times']; ?></td>
+						<td><?= $value['payment']['status'] == 1 ? "未支付" : "已支付"; ?></td>
 						<td>
 							<select name="status" class="form-control" consultation_id="<?= $value['consultation_id']; ?>">
 								<?php foreach(\common\models\Consultation::dropDown("status") as $k => $v): ?>

@@ -113,4 +113,9 @@ class Consultation extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Expert::className(), ["expert_id" => "admin_id"]);
     }
+
+    public function getPayment()
+    {
+        return $this->hasOne(Payment::className(), ["consultation_id" => "consultation_id"]);
+    }
 }

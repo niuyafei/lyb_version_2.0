@@ -33,7 +33,7 @@ class ConsultationController extends BaseController
 		if($model->load(Yii::$app->request->post())){
 			$model->user_id = Yii::$app->user->getId();
 			if($model->validate() && $model->save()){
-				return $this->redirect(['consultation/pay']);
+				return $this->redirect(['consultation/pay?consultation_id=' . Yii::$app->db->getLastInsertID()]);
 			}
 		}
 		return $this->render("myconsultation", [
@@ -46,7 +46,19 @@ class ConsultationController extends BaseController
 		if(!$this->isLogin()){
 			return $this->redirect(["index"]);
 		}
-		return $this->render("pay");
+		$consultation_id = Yii::$app->request->get("consultation_id");
+		if(!$consultation_id){
+			Yii::$app->session->setFlash('error', "参数错误");
+			return $this->redirect(['myconsultation']);
+		}
+		$user_id = Yii::$app->user->getId();
+		if(Payment::find()->where(['user_id'=>$user_id, 'consultation_id'=>$consultation_id, 'payment'=>4, 'status' => 1])->exists()){
+			return $this->redirect(['view']);
+		}else{
+			return $this->render("pay", [
+				'consultation_id' => $consultation_id,
+			]);
+		}
 	}
 
 	public function actionView()

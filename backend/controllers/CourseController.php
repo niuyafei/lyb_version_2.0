@@ -94,11 +94,14 @@ class CourseController extends BaseController
                 return $this->redirect(['abordcase/index']);
             }
 
+            $courseArr = Course::find()->where(['user_id'=>$user_id, 'case_id'=>$case_id])->asArray()->all();
+
             return $this->render('create', [
                 'model' => $model,
                 'user_id' => $user_id,
                 'case_id' => $case_id,
                 'url' => $url,
+                'courseArr' => $courseArr,
             ]);
         }
     }
