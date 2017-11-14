@@ -34,6 +34,7 @@ class ServiceController extends BaseController
 
 	public function actionAddexpert()
 	{
+		date_default_timezone_set("PRC");
 		$gets = Yii::$app->request->get();
 		$service_id = $gets['service_id'];
 		$expert_id = $gets['expert_id'];

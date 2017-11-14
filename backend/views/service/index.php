@@ -77,10 +77,16 @@ $js = <<<JS
 			$.get(url+"?expert_id="+expert_id+"&service_id="+service_id , function(re){
 				var data = eval("(" + re + ")");
 				if(data.code == 200){
-					alert("沟通成功");
+					layer.open({
+						title:'成功信息',
+						content:'沟通完成'
+					});
 					$("#updated").text(data.updated);
 				}else{
-					alert(data.message);
+					layer.open({
+						title:'失败信息',
+						content:data.message
+					});
 				}
 			})
 		}

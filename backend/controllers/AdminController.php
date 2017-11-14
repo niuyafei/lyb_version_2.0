@@ -37,6 +37,7 @@ class AdminController extends BaseController
 		foreach($gets as $key => $value){
 			$model->$key = $value;
 		}
+		$model->username = $model->email;
 		if($model->save()){
 			Yii::$app->session->setFlash('error', "更新成功");
 			$this->goFrom();

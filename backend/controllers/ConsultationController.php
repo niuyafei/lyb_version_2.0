@@ -58,7 +58,9 @@ class ConsultationController extends BaseController
 		$record = $gets['record'];
 		$model = Consultation::findOne($consultation_id);
 		$model->communicationRecord = $record;
+		$model->status = 3;
 		if($model->save()){
+
 			return json_encode([
 				'code' => 200,
 				'message' => '保存成功'

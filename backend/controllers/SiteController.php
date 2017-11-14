@@ -8,6 +8,8 @@ use yii\filters\AccessControl;
 use backend\models\LoginForm;
 use backend\models\Admin;
 use yii\data\Pagination;
+use backend\models\AddUserForm;
+
 
 /**
  * Site controller
@@ -68,10 +70,12 @@ class SiteController extends Controller
             'pageSize' => 10,
         ]);
         $data = $query->offset($pages->offset)->limit($pages->limit)->all();
+        $addUserForm = new AddUserForm();
 
         return $this->render('index', [
             'data' => $data,
-            'pages' => $pages
+            'pages' => $pages,
+            'addUserForm' => $addUserForm,
         ]);
     }
 

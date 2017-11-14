@@ -42,7 +42,7 @@ $this->title = "预约咨询";
 						</td>
 						<td><?= $value['dates']; ?></td>
 						<td><?= $value['times']; ?></td>
-						<td><?= $value['payment']['status'] == 1 ? "未支付" : "已支付"; ?></td>
+						<td><?= $value['payment']['status'] == 1 ? "已支付" : "未支付"; ?></td>
 						<td>
 							<select name="status" class="form-control" consultation_id="<?= $value['consultation_id']; ?>">
 								<?php foreach(\common\models\Consultation::dropDown("status") as $k => $v): ?>
@@ -208,11 +208,17 @@ $js = <<<JS
 		$.get(url+"/consultation/addexpert?consultation_id="+consultation_id+"&expert_id="+expert_id, function(re){
 			data = eval("(" + re + ")");
 			if(data.code == 200){
-				alert("专家选择成功");
+				layer.open({
+		            title:'成功信息',
+		            content:'专家选择成功',
+		        });
 			}else{
-				alert(data.message);
+				layer.open({
+		            title:'警告信息',
+		            content:data.message,
+		        });
 			}
-			window.location.reload();
+			setTimeout(function(){window.location.reload();}, 1000);
 		})
 	});
 
@@ -221,12 +227,17 @@ $js = <<<JS
 		$.get(url+"/consultation/addrecord?consultation_id="+consultation_id+"&record="+record, function(re){
 			data = eval("(" + re + ")");
 			if(data.code == 200){
-				alert("专家选择成功");
+				layer.open({
+		            title:'成功信息',
+		            content:'沟通成功',
+		        });
 			}else{
-				alert(data.message);
+				layer.open({
+		            title:'警告信息',
+		            content:data.message,
+		        });
 			}
-			//$("#wanchenggoutong").modal("toggle");
-			window.location.reload();
+			setTimeout(function(){window.location.reload();}, 1000);
 		});
 	});
 

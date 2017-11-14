@@ -4,6 +4,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
+use yii\widgets\ActiveForm;
 
 $this->title = '账号管理';
 ?>
@@ -57,7 +58,10 @@ $this->title = '账号管理';
                 <h5 class="modal-title color-blue">账号添加</h5>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal">
+<!--                <form class="form-horizontal">-->
+                <?php $form = ActiveForm::begin([
+                    'options' => ['class' => 'form-horizontal'],
+                ]); ?>
                     <div class="form-group">
                         <label for="name" class="col-xs-3 control-label color-8b">姓名</label>
                         <div class="col-xs-9 p-l-5">
@@ -72,7 +76,7 @@ $this->title = '账号管理';
                                     <input type="radio" value="1" checked="checked" name="gender"> 男
                                 </label>
                                 <label>
-                                    <input type="radio" value="2" name="gemder"> 女
+                                    <input type="radio" value="2" name="gender"> 女
                                 </label>
                             </div>
                         </div>
@@ -81,17 +85,18 @@ $this->title = '账号管理';
                     <div class="form-group p-t-5">
                         <label for="phone" class="col-xs-3 control-label color-8b">手机号</label>
                         <div class="col-xs-9 p-l-5">
-                            <input type="text" class="form-control" name="phone" placeholder="手机号">
+                            <?= $form->field($addUserForm, "phone")->textInput(['class'=>'form-control','placeholder' => "手机号", 'style'=>["margin-left"=>"15px", "width"=>"203.5px"]])->label(false); ?>
+<!--                            <input type="text" class="form-control" name="phone" placeholder="手机号">-->
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="wechat" class="col-xs-3 control-label color-8b">邮箱</label>
                         <div class="col-xs-9 p-l-5">
-                            <input type="text" class="form-control" name="email" placeholder="邮箱地址">
+                            <?= $form->field($addUserForm, "email")->textInput(['class'=>'form-control','placeholder' => '邮箱地址', 'style'=>["margin-left"=>"15px", "width"=>"203.5px"]])->label(false); ?>
                         </div>
                     </div>
-
-                </form>
+                <?php ActiveForm::end(); ?>
+<!--                </form>-->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-blue add">完成</button>
@@ -171,10 +176,12 @@ $js = <<<JS
         url = url + "/admin/add";
         var nickname = $(this).parents(".modal").find("input[name='nickname']").val();
         var gender = $(this).parents(".modal").find("input[type='radio']:checked").val();
-        var phone = $(this).parents(".modal").find("input[name='phone']").val();
-        var email = $(this).parents(".modal").find("input[name='email']").val();
+        var phone = $(this).parents(".modal").find("input[name='AddUserForm[phone]']").val();
+        var email = $(this).parents(".modal").find("input[name='AddUserForm[email]']").val();
         window.location.href = url+"?nickname="+nickname+"&gender="+gender+"&phone="+phone+"&email="+email;
     });
+
+
 JS;
 
 $this->registerJs($js);
