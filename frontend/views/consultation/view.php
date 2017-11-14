@@ -42,7 +42,7 @@ $this->title = "我的咨询";
 						<?php if($value['status'] == 3): ?>
 							<a href="/consultation/comment?id=<?= $value['consultation_id']; ?>">点击评价</a>
 						<?php elseif($value['status'] == 4): ?>
-							<a href="" data-toggle="modal" data-target="#chakanpingjia_<?= $value['consultation_id']; ?>">查看评价</a>
+							<a href="#" data-toggle="modal" data-target="#chakanpingjia_<?= $value['consultation_id']; ?>">查看评价</a>
 						<?php endif; ?>
 					</td>
 				</tr>
@@ -78,7 +78,7 @@ $this->title = "我的咨询";
 
 
 <?php foreach($data as $k2 => $v2): ?>
-	<div class="modal" tabindex="-1" role="dialog" id="chakanpingjia_<?= $value['consultation_id']; ?>">
+	<div class="modal" tabindex="-1" role="dialog" id="chakanpingjia_<?= $v2['consultation_id']; ?>">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -93,13 +93,13 @@ $this->title = "我的咨询";
 						<div class="col-xs-10 p-l-0">
 							<div id="space-demo" class="target-demo">
 								<?php for($i=1; $i<=5; $i++): ?>
-									<?php if($i<= $value['starts']): ?>
+									<?php if($i<= $v2['starts']): ?>
 										<img src="/lib/img/star-on.png">
 									<?php else: ?>
 										<img src="/lib/img/star-off.png">
 									<?php endif; ?>
 								<?php endfor; ?>
-								<input type="hidden" name="score" value="<?= $value['starts']; ?>">
+								<input type="hidden" name="score" value="<?= $v2['starts']; ?>">
 							</div>
 						</div>
 					</div>
@@ -108,7 +108,7 @@ $this->title = "我的咨询";
 							相关建议
 						</div>
 						<div class="col-xs-10 p-l-0">
-							<p><?= !is_null($value['advic']) ? $value['advic'] : ""; ?></p>
+							<p><?= !is_null($v2['advic']) ? $v2['advic'] : ""; ?></p>
 						</div>
 					</div>
 				</div>
