@@ -110,7 +110,7 @@ $js = <<<JS
 		var amount = "99";
 		var body = "";
 		var payment = "4";
-		var consultation_id = '<?= $consultation_id; ?>';
+		var consultation_id = $consultation_id;
 		if(payType == "alipay"){
 			//支付宝
 			window.location.href = url + "/alipay/index?subject=" + subject + "&amount=" + amount + "&body=" + body + "&payment=" + payment + "&consultation_id=" + consultation_id;
