@@ -9,6 +9,7 @@
 namespace frontend\controllers;
 
 use common\models\Payment;
+use common\models\Plan;
 use yii;
 use common\alipay\AlipayTradePagePayContentBuilder;
 use common\alipay\AlipayTradeService;
@@ -118,6 +119,11 @@ class AlipayController extends BaseController
             $model = Payment::find()->where(['order_id'=>$out_trade_no])->one();
             $model->status = 1;
             $model->save();
+            if($model->payment == 5){
+                $planModel = Plan::find()->where(['user_id' => $model->user_id])->one();
+                $planModel->pay_type = 2;
+                $planModel->save();
+            }
             echo "success";
         }else{
             //交易失败
