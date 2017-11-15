@@ -62,22 +62,23 @@ class StudyPlan extends \yii\db\ActiveRecord
 
     public function creates($data, $plan_id)
     {
-        $model = new self();
-        $model-> plan_id = $plan_id;
-        $model->user_id = Yii::$app->user->getId();
-        $model->strategy = $data['sqcl'];
-        $ylsfx = implode("-*-", $data['ylsfx']);
-        $model->analysis = $ylsfx;
-        $model->advice = $data['ztjy'];
-        $tjly = implode("-*-", $data['tjly']);
-        $model->recommendation = $tjly;
-        $model->schoolStrategy = $data['xxcl'];
-        $model->created_at = date("Y-m-d H:i:s");
-        if($model->save()){
-            return true;
-        }else{
-//            var_dump($model->getErrors());
-            return false;
+        if(is_array($data)){
+            $model = new self();
+            $model-> plan_id = $plan_id;
+            $model->user_id = Yii::$app->user->getId();
+            $model->strategy = isset($data['sqcl']) ? $data['sqcl'] : "";
+            $ylsfx = isset($data['ylsfx']) ? implode("-*-", $data['ylsfx']) : "";
+            $model->analysis = $ylsfx;
+            $model->advice = isset($data['ztjy']) ? $data['ztjy'] : "";
+            $tjly = isset($data['tjly']) ? implode("-*-", $data['tjly']) : "";
+            $model->recommendation = $tjly;
+            $model->schoolStrategy = isset($data['xxcl']) ? $data['xxcl'] : "";
+            $model->created_at = date("Y-m-d H:i:s");
+            if($model->save()){
+                return true;
+            }else{
+                return false;
+            }
         }
     }
 }

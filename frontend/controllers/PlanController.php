@@ -129,8 +129,10 @@ class PlanController extends BaseController
 				$studyPlanModel = new StudyPlan();
 				$studyPlanModel->creates($data, $plan_id);
 				//时间规划
-				$timePlanModel = new TimePlan();
-				$timePlanModel->creates($data['process'], $plan_id);
+				if(isset($data['process'])){
+					$timePlanModel = new TimePlan();
+					$timePlanModel->creates($data['process'], $plan_id);
+				}
 
 				return $this->redirect(['plan/pay']);
 			}else{
