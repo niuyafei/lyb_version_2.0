@@ -10,6 +10,9 @@ namespace common\models;
 
 use yii;
 use yii\base\Model;
+use common\models\Schools;
+use common\models\TimePlan;
+use common\models\StudyPlan;
 
 class MeibenForm extends Model
 {
@@ -103,10 +106,12 @@ class MeibenForm extends Model
 	{
 		$user_id = Yii::$app->user->getId();
 		if(Plan::find()->where(['user_id' => $user_id])->exists()){
-			$model = Plan::find()->where(['user_id' => $user_id])->one();
-		}else{
-			$model = new Plan();
+			Plan::deleteAll(['user_id' => $user_id]);
+			Schools::deleteAll(['user_id' => $user_id]);
+			StudyPlan::deleteAll(['user_id' => $user_id]);
+			TimePlan::deleteAll(['user_id' => $user_id]);
 		}
+		$model = new Plan();
 
 		foreach($this as $key => $value){
 			if($key == "plan_id") continue;
