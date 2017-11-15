@@ -159,7 +159,14 @@ class PlanController extends BaseController
             }
 
             for($i=0; $i<count($data['schools']['id']); $i++){
-                $array = array_column($data['schools'], $i);
+                $array = [
+                    $data['schools']['id'][$i],
+                    $data['schools']['rank'][$i],
+                    $data['schools']['sat'][$i],
+                    $data['schools']['schoolName'][$i],
+                    $data['schools']['applyType'][$i],
+                ];
+//                $array = array_column($data['schools'], $i);
                 $school = Schools::findOne($array[0]);
                 $school->schoolName = $array[3];
                 $school->rank = $array[1];
@@ -172,7 +179,11 @@ class PlanController extends BaseController
             }
 
             for($j=0; $j<count($data['timePlan']['id']); $j++){
-                $array = array_column($data['timePlan'], $j);
+                $array = [
+                    $data['timePlan']['id'][$j],
+                    $data['timePlan']['content'][$j],
+                ];
+//                $array = array_column($data['timePlan'], $j);
                 $timePlanModel = TimePlan::findOne($array[0]);
                 $timePlanModel->content = str_replace("/r/n", "，", $array[1]);
                 if(!($timePlanModel->validate() && $timePlanModel->save())){
