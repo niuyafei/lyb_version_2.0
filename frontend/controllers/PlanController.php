@@ -51,7 +51,12 @@ class PlanController extends BaseController
 	public function actionPay()
 	{
 		$user_id = Yii::$app->user->getId();
-		if(Payment::find()->where(['user_id' => $user_id, 'payment'=>5, 'status'=>1])->exists()){
+//		if(Payment::find()->where(['user_id' => $user_id, 'payment'=>5, 'status'=>1])->exists()){
+//			return $this->redirect(['plan/view']);
+//		}else{
+//			return $this->render("pay");
+//		}
+		if(Plan::find()->where(['user_id' => $user_id, 'pay_type' => 5])->exists()){
 			return $this->redirect(['plan/view']);
 		}else{
 			return $this->render("pay");

@@ -7,6 +7,7 @@
  */
 namespace frontend\controllers;
 
+use common\models\Plan;
 use yii;
 use frontend\base\BaseController;
 use common\models\Payment;
@@ -86,6 +87,11 @@ class WxpayController extends BaseController
 		}else{
 			$model->status = 1;
 			if($model->save()){
+				if($model->payment == 5){
+					$planModel = Plan::find()->where(['user_id' => $model->user_id])->one();
+					$planModel->pay_type = 2;
+					$planModel->save();
+				}
 				echo "SUCCESS";
 			}else{
 				echo "FAIL";
