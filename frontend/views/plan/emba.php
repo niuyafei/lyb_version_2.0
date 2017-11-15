@@ -19,7 +19,7 @@ $this->title = "留学规划";
 	'action' => ['plan/emba'],
 	'method' => 'post',
 	'options' => [
-		'class' => "form-horizontal edit_label",
+		'class' => "form-horizontal",
 	],
 ]); ?>
 <div class="container">
