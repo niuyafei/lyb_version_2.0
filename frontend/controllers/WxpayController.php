@@ -39,7 +39,7 @@ class WxpayController extends BaseController
 		$paymentModel->case_id = $case_id;
 		$paymentModel->user_id = Yii::$app->user->getId();
 		$paymentModel->order_id = $trade_no;
-		$paymentModel->consultation_id = $gets['consultation_id'];
+		$paymentModel->consultation_id = isset($gets['consultation_id']) ? $gets['consultation_id'] : "" ;
 		$paymentModel->pay_from = 1;
 		$paymentModel->amount = $total_fee;
 		$paymentModel->payment = $payment;
