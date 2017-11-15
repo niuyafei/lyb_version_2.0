@@ -56,7 +56,7 @@ class PlanController extends BaseController
 //		}else{
 //			return $this->render("pay");
 //		}
-		if(Plan::find()->where(['user_id' => $user_id, 'pay_type' => 5])->exists()){
+		if(Plan::find()->where(['user_id' => $user_id, 'pay_type' => 2])->exists()){
 			return $this->redirect(['plan/view']);
 		}else{
 			return $this->render("pay");
