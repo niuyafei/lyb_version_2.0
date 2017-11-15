@@ -39,7 +39,7 @@ $this->title = "留学规划";
 			<h4 class="color-blue">查看方案</h4>
 		</div>
 	</div>
-	<div class="border-color p-20 m-t-50 p-b-0 small-box">
+	<div class="border-color p-20 m-t-50 p-b-0 p-t-40 p-b-10">
 		<div class="row m-b-20">
 			<div class="col-xs-2 color-gray text-right">
 				订单金额

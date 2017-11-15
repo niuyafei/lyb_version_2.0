@@ -625,3 +625,14 @@ ul {
 .p-t-20 {
 	padding-top: 20px;
 }
+
+/*2017-11-15 添加的css样式*/
+.border-darkline {
+	border-color: #CCCCCC;
+}
+.p-t-40 {
+	padding-top: 40px;
+}
+.p-b-10 {
+	padding-bottom: 10px;
+}
