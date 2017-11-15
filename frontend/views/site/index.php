@@ -21,7 +21,7 @@ $this->title = '留学案例';
                     <li><span class="color-gray">录取专业：</span><?= $value->admissionMajor; ?></li>
                 </ul>
                 <div class="case-list-line">
-                    <hr />
+                    <hr class="border-darkline"/>
                 </div>
                 <div class="case-list-btn">
                     <div class="col-xs-6">

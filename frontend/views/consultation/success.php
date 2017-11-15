@@ -48,7 +48,7 @@ $this->title = "预约咨询";
 			<h4 class="color-blue">评价建议</h4>
 		</div>
 	</div>
-	<div class="border-color p-20 m-t-50 small-box">
+	<div class="border-color p-20 m-t-50 p-t-40 p-b-10">
 		<div class="text-center">
 			<img src="/img/success.png" width="100" />
 			<h4 class="color-green m-t-15">恭喜您，预约成功！</h4>

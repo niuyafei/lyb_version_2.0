@@ -14,13 +14,6 @@ $this->title = "留学规划";
 <style>
 	.form-group{margin-bottom: 10px;}
 </style>
-<?php $form = ActiveForm::begin([
-	'action' => ['plan/meiyan'],
-	'method' => 'post',
-	'options' => [
-		'class' => "form-horizontal edit_label",
-	],
-]); ?>
 <div class="container">
 	<h2 class="text-center m-t-30">留学规划</h2>
 	<hr class="cont-tit-border" />
@@ -53,7 +46,13 @@ $this->title = "留学规划";
 	<div class="border-color p-20 m-t-50">
 		<p><span class="color-red">注</span>：为了确保规划方案更加精准，请您根据自己的真实情况填写下列信息。</p>
 		<div class="p-20">
-			<form class="form-horizontal edit_label">
+			<?php $form = ActiveForm::begin([
+				'action' => ['plan/meiyan'],
+				'method' => 'post',
+				'options' => [
+					'class' => "form-horizontal edit_label",
+				],
+			]); ?>
 				<div class="form-group m-b-20">
 					<div class="col-xs-6">
 						<label for="input3" class="col-xs-3 control-label"><b class="color-red">*</b> 申请类别</label>
@@ -215,14 +214,11 @@ $this->title = "留学规划";
 							</div>
 						</div>
 					</div>
-
 				</div>
-
-			</form>
+			<?php ActiveForm::end(); ?>
 		</div>
 	</div>
 	<div class="text-center m-t-50">
 		<?= Html::submitButton("提交信息", ['class' => 'btn btn-blue btn-big-size btn-lg']) ?>
 	</div>
 </div>
-<?php ActiveForm::end(); ?>

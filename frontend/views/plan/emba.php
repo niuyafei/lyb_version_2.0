@@ -67,7 +67,7 @@ $this->title = "留学规划";
 									<a href="<?= Url::to(['plan/meigao']); ?>" class="btn btn-sm btn-primary">美高</a>
 								</li>
 								<li>
-									<a href="<?= Url::to(['plan/emba']); ?>" class="btn btn-sm btn-primary">美研</a>
+									<a href="<?= Url::to(['plan/meiyan']); ?>" class="btn btn-sm btn-primary">美研</a>
 								</li>
 								<li class="active">
 									<a href="#" class="btn btn-sm btn-primary">MBA/EMBA</a>

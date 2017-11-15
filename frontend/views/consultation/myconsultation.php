@@ -18,7 +18,7 @@ $this->title = "预约咨询";
 <?php $form = ActiveForm::begin([
 	'action' => ['consultation/myconsultation'],
 	'method' => 'post',
-	'options' => ['class' => 'form-horizontal edit_label'],
+	'options' => ['class' => 'form-horizontal'],
 ]); ?>
 <div class="container">
 	<h2 class="text-center m-t-30">预约咨询</h2>
