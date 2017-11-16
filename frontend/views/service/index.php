@@ -208,7 +208,7 @@ $js = <<<JS
 		var csrf = $("input[name='_csrf-frontend']").val();
 		var type = 1;
 
-		if(!phone.match(/^(((13[0-9]{1})|159|153)+\d{8})$/)){
+		if(!phone.match(/^(1(3|5|7|8)+\d{9})$/)){
 			layer.open({
 				title:'警告信息',
 				content:'手机号码不正确',

@@ -12,14 +12,9 @@ use yii\helpers\Html;
 $this->title = "预约咨询";
 ?>
 <style>
-	h4{width:75px;}
+	/*h4{width:75px;}*/
 </style>
 
-<?php $form = ActiveForm::begin([
-	'action' => ['consultation/myconsultation'],
-	'method' => 'post',
-	'options' => ['class' => 'form-horizontal'],
-]); ?>
 <div class="container">
 	<h2 class="text-center m-t-30">预约咨询</h2>
 	<hr class="cont-tit-border" />
@@ -60,6 +55,11 @@ $this->title = "预约咨询";
 	</div>
 	<div class="border-color p-20 m-t-50">
 		<p><span class="color-red">注</span>：为了确保规划方案更加精准，请您根据自己的真实情况填写下列信息。</p>
+		<?php $form = ActiveForm::begin([
+			'action' => ['consultation/myconsultation'],
+			'method' => 'post',
+			'options' => ['class' => 'form-horizontal'],
+		]); ?>
 		<div class="p-20">
 			<div class="form-group m-b-20">
 				<label for="input1" class="col-xs-2 control-label"><b class="color-red">*</b> 姓名</label>
@@ -113,7 +113,7 @@ $this->title = "预约咨询";
 			<div class="form-group m-b-20">
 				<label for="input5" class="col-xs-2 control-label"><b class="color-red">*</b> 预约日期</label>
 				<div class="col-xs-10">
-					<?= $form->field($model, "dates")->textInput(['class'=>'calendar form-control pull-left', 'placeholder'=>'截止日期', 'id'=>'calendar', 'style'=>'width:200px;'])->label(false); ?>
+					<?= $form->field($model, "dates")->textInput(['class'=>'calendar form-control pull-left', 'placeholder'=>'截止日期', 'id'=>'datetimepicker', 'style'=>'width:200px;', "data-date-format" => "yyyy-mm-dd" ])->label(false); ?>
 <!--						<input type="text" id="calendar" placeholder="截止日期" class="calendar form-control pull-left" style="width: 200px;">-->
 					<div class="color-gray p-t-10">（注：只能选择24小时后的日期）</div>
 				</div>
@@ -209,3 +209,17 @@ $this->title = "预约咨询";
 	</div>
 </div>
 <?php ActiveForm::end(); ?>
+<?php
+$date = date("Y-m-d", strtotime("+1 day"));
+$js = <<<JS
+	var date = '{$date}';
+	$('#datetimepicker').datetimepicker({
+		todayBtn : true,
+		startDate : date,
+		minView : 2,
+		autoclose : true
+	});
+JS;
+
+$this->registerJs($js);
+?>

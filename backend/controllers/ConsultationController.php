@@ -81,6 +81,7 @@ class ConsultationController extends BaseController
 		$array = [
 			'expert_username' => $model->expert->username,
 			'communicationRecord' => $model->communicationRecord,
+			'status' => Consultation::dropDown("status", $model->status),
 		];
 
 		return json_encode($array);

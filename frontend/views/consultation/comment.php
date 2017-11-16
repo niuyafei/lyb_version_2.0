@@ -71,7 +71,7 @@ $this->title = "预约咨询";
 					<b>相关建议</b>
 				</div>
 				<div class="col-xs-10 color-red p-l-0 p-r-0">
-					<textarea class="form-control" rows="5" placeholder="点击填写评价建议，不少于10个字。"></textarea>
+					<textarea class="form-control" rows="5" placeholder="点击填写评价建议。"></textarea>
 				</div>
 			</div>
 		</div>

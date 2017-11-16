@@ -38,7 +38,7 @@ $this->title = "延伸服务";
 <!--							<a href="#" target="_blank">夏校项目</a>-->
 							<?= \common\models\Service::dropDown($value['type']); ?>
 						</td>
-						<td>2017-08-09 12:00</td>
+						<td><?= $value['created_at']; ?></td>
 						<td>
 							<?= $value['status'] == 1 ? "未沟通" : "已沟通"; ?>
 						</td>

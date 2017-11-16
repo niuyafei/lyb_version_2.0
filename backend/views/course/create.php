@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             </div>
                         </div>
                     </div>
-                    <p class="col-xs-12 text-right m-t-25 m-b-20"></p>
+                    <p class="col-xs-12 text-right m-t-25 m-b-20"><a  href="/course/del?id=<?= $value['course_id']; ?>" class="btn btn-primary">删除</a></p>
                 </div>
             </div>
             <hr />
@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <b>时间：</b>
                             </div>
                             <div class="col-xs-9">
-                                <?= $form->field($model, "dates")->textInput(['placeholder' => '申请时间 2017-10-01'])->label(false); ?>
+                                <?= $form->field($model, "dates")->textInput(['placeholder' => '申请时间 2017-10-01', "id" => "datetimepicker"])->label(false); ?>
                             </div>
                         </div>
                     </div>
@@ -120,3 +120,17 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php ActiveForm::end(); ?>
     </div>
 </div>
+<?php
+$js = <<<JS
+	var date = new Date();
+	$('#datetimepicker').datetimepicker({
+	    format : "yyyy-mm-dd H:i:s",
+		todayBtn : true,
+		startDate : date,
+		minView : 2,
+		autoclose : true
+	});
+JS;
+
+$this->registerJs($js);
+?>

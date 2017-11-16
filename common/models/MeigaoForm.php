@@ -103,10 +103,13 @@ class MeigaoForm extends Model
 	{
 		$user_id = Yii::$app->user->getId();
 		if(Plan::find()->where(['user_id' => $user_id])->exists()){
-			$model = Plan::find()->where(['user_id' => $user_id])->one();
-		}else{
-			$model = new Plan();
+			Plan::deleteAll(['user_id' => $user_id]);
+			Schools::deleteAll(['user_id' => $user_id]);
+			StudyPlan::deleteAll(['user_id' => $user_id]);
+			TimePlan::deleteAll(['user_id' => $user_id]);
 		}
+
+		$model = new Plan();
 
 		foreach($this as $key => $value){
 			$model->$key = $value;

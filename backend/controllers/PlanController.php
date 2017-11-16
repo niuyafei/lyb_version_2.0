@@ -144,8 +144,10 @@ class PlanController extends BaseController
     {
         $model = $this->findModel($id);
         if(!StudyPlan::find()->where(['plan_id' => $model->plan_id])->exists()){
-            Yii::$app->session->setFlash('error', "方案不存在，请先编辑方案");
-            $this->goFrom();
+            return $this->redirect(['plan/create', "id" => $id]);
+            exit;
+//            Yii::$app->session->setFlash('error', "方案不存在，请先编辑方案");
+//            $this->goFrom();
         }
         $studyPlan = StudyPlan::find()->where(['plan_id' => $model->plan_id])->one();
         $timePlan = TimePlan::find()->where(['plan_id' => $model->plan_id])->orderBy("grade asc")->all();
@@ -216,6 +218,7 @@ class PlanController extends BaseController
 
         return $this->redirect(['index']);
     }
+
 
     /**
      * Finds the Plan model based on its primary key value.

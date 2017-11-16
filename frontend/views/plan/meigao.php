@@ -125,20 +125,16 @@ $this->title = "留学规划";
 							</div>
 						</div>
 						<div class="form-group m-b-20">
-							<div class="col-xs-12 p-l-25">
-								<label for="input7" class="col-xs-2 control-label">
-									<b class="color-red">*</b> TOFEL
-								</label>
-								<div class="col-xs-4 p-0">
+							<div class="col-xs-6">
+								<label for="input7" class="col-xs-3 control-label"><b class="color-red">*</b> TOFEL</label>
+								<div class="col-xs-9">
 									<?= $form->field($model, 'toefl')->textInput(['class' => 'form-control', 'id' => 'input7', 'placeholder' => '点击填写您的TOEFL成绩'])->label(false); ?>
-<!--									<input type="text" class="form-control" id="input7" placeholder="点击填写您的TOFEL成绩">-->
 								</div>
-								<label for="input8" class="col-xs-2 control-label">
-									<b class="color-red m-r-10">或</b> 雅思
-								</label>
-								<div class="col-xs-4 p-0">
+							</div>
+							<div class="col-xs-6">
+								<label for="input8" class="col-xs-3 control-label">雅思</label>
+								<div class="col-xs-9">
 									<?= $form->field($model, 'ielts')->textInput(['class' => 'form-control', 'id' => 'input8', 'placeholder' => '点击填写您的雅思成绩'])->label(false); ?>
-<!--									<input type="text" class="form-control" id="input8" placeholder="点击填写您的雅思成绩">-->
 								</div>
 							</div>
 						</div>
@@ -199,10 +195,10 @@ $this->title = "留学规划";
 						</div>
 					</div>
 				</div>
-			<?php ActiveForm::end(); ?>
 		</div>
 	</div>
 	<div class="text-center m-t-50">
 		<?= Html::submitButton("提交信息", ['class' => 'btn btn-blue btn-big-size btn-lg']) ?>
 	</div>
+	<?php ActiveForm::end(); ?>
 </div>

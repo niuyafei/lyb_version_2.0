@@ -68,7 +68,7 @@ $this->title = "我的咨询";
 				<h4 class="modal-title color-blue">其他需求</h4>
 			</div>
 			<div class="modal-body p-40 p-t-20">
-				<p><?= $v['others']; ?></p>
+				<p><?= !empty($v['others']) ? $v['others'] : "无内容"; ?></p>
 			</div>
 
 		</div>
@@ -83,7 +83,7 @@ $this->title = "我的咨询";
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title color-blue">查看评级</h4>
+					<h4 class="modal-title color-blue">查看评价</h4>
 				</div>
 				<div class="modal-body p-40 p-t-20">
 					<div class="row">
@@ -108,7 +108,7 @@ $this->title = "我的咨询";
 							相关建议
 						</div>
 						<div class="col-xs-10 p-l-0">
-							<p><?= !is_null($v2['advic']) ? $v2['advic'] : ""; ?></p>
+							<p><?= !is_null($v2['advic']) ? $v2['advic'] : "无内容"; ?></p>
 						</div>
 					</div>
 				</div>

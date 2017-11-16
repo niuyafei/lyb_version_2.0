@@ -46,7 +46,6 @@ $this->title = "留学规划";
 	<div class="border-color p-20 m-t-50">
 		<p><span class="color-red">注</span>：为了确保规划方案更加精准，请您根据自己的真实情况填写下列信息。</p>
 		<div class="p-20">
-<!--			<form class="form-horizontal edit_label">-->
 			<?php $form = ActiveForm::begin([
 				'action' => ["plan/meiben"],
 				'method' => 'post',
@@ -126,38 +125,30 @@ $this->title = "留学规划";
 							</div>
 						</div>
 						<div class="form-group m-b-20">
-							<div class="col-xs-12 p-l-25">
-								<label for="input7" class="col-xs-2 control-label">
-									<b class="color-red">*</b> TOFEL
-								</label>
-								<div class="col-xs-4 p-0">
+							<div class="col-xs-6">
+								<label for="input7" class="col-xs-3 control-label"><b class="color-red">*</b> TOFEL</label>
+								<div class="col-xs-9">
 									<?= $form->field($model, 'toefl')->textInput(['class' => 'form-control', 'id' => 'input7', 'placeholder' => '点击填写您的TOEFL成绩'])->label(false); ?>
-<!--									<input type="text" class="form-control" id="input7" placeholder="点击填写您的TOFEL成绩">-->
 								</div>
-								<label for="input8" class="col-xs-2 control-label">
-									雅思
-								</label>
-								<div class="col-xs-4 p-0">
+							</div>
+							<div class="col-xs-6">
+								<label for="input8" class="col-xs-3 control-label">雅思</label>
+								<div class="col-xs-9">
 									<?= $form->field($model, 'ielts')->textInput(['class' => 'form-control', 'id' => 'input8', 'placeholder' => '点击填写您的雅思成绩'])->label(false); ?>
-<!--									<input type="text" class="form-control" id="input8" placeholder="点击填写您的雅思成绩">-->
 								</div>
 							</div>
 						</div>
 						<div class="form-group m-b-20">
-							<div class="col-xs-12 p-l-25">
-								<label for="input9" class="col-xs-2 control-label">
-									<b class="color-red">*</b> SAT
-								</label>
-								<div class="col-xs-4 p-0">
+							<div class="col-xs-6">
+								<label for="input7" class="col-xs-3 control-label"><b class="color-red">*</b> SAT</label>
+								<div class="col-xs-9">
 									<?= $form->field($model, 'sat')->textInput(['class' => 'form-control', 'id' => 'input9', 'placeholder' => '点击填写您的SAT成绩'])->label(false); ?>
-<!--									<input type="text" class="form-control" id="input9" placeholder="点击填写您的SAT成绩">-->
 								</div>
-								<label for="input10" class="col-xs-2 control-label">
-									ACT
-								</label>
-								<div class="col-xs-4 p-0">
+							</div>
+							<div class="col-xs-6">
+								<label for="input8" class="col-xs-3 control-label">ACT</label>
+								<div class="col-xs-9">
 									<?= $form->field($model, 'act')->textInput(['class' => 'form-control', 'id' => 'input10', 'placeholder' => '点击填写您的ACT成绩'])->label(false); ?>
-<!--									<input type="text" class="form-control" id="input10" placeholder="点击填写你的ACT成绩">-->
 								</div>
 							</div>
 						</div>
@@ -170,7 +161,7 @@ $this->title = "留学规划";
 								</div>
 							</div>
 							<div class="col-xs-6">
-								<label for="input12" class="col-xs-3 control-label">AP</label>
+								<label for="input12" class="col-xs-3 control-label">AP课程</label>
 								<div class="col-xs-9">
 									<?= $form->field($model, 'ap')->textInput(['class' => 'form-control', 'id' => 'input12', 'placeholder' => '点击填写您的AP课程数量'])->label(false); ?>
 <!--									<input type="text" class="form-control" id="input12" placeholder="点击填写您的AP课程数量">-->

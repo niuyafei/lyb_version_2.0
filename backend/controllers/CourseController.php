@@ -18,6 +18,8 @@ use backend\base\BaseController;
  */
 class CourseController extends BaseController
 {
+    public $enableCsrfToken = false;
+
     /**
      * @inheritdoc
      */
@@ -136,6 +138,22 @@ class CourseController extends BaseController
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionDel()
+    {
+        $id = Yii::$app->request->get("id", "");
+        if(!$id){
+            Yii::$app->session->setFlash("error", "参数错误");
+        }else{
+            if(Course::deleteAll(["course_id" => $id])){
+                Yii::$app->session->setFlash("success", "删除成功");
+            }else{
+                Yii::$app->session->setFlash("error", "删除失败");
+            }
+        }
+        $this->goFrom();
+
     }
 
     /**

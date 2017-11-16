@@ -69,8 +69,8 @@ class ExpertcommentsController extends Controller
         if($data = Yii::$app->request->post()){
             $model->load($data);
             $model->created_at = date("Y-m-d H:i:s");
-            $fileName = $_FILES['ExpertComments']['name']['video'];
-            $ext = mb_substr($fileName, mb_strrpos($fileName, '.', 'utf8'));
+            $name = $_FILES['ExpertComments']['name']['video'];
+            $ext = mb_substr($name, mb_strrpos($name, '.', 'utf-8'), mb_strlen($name, "utf-8"), "utf-8");
             $path = "/Uploads/videos/";
             $fileName = $path . "expert_comments_" . time();
 

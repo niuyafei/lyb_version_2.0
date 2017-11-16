@@ -20,10 +20,10 @@ $this->title = "预约咨询";
 					<th class="text-center">姓名</th>
 					<th class="text-center">性别</th>
 					<th class="text-center">联系电话</th>
-					<th class="text-center">预约内容</th>
+<!--					<th class="text-center">预约内容</th>-->
 					<th class="text-center">其他需求</th>
-					<th class="text-center">预约日期</th>
-					<th class="text-center">预约时间</th>
+<!--					<th class="text-center">预约日期</th>-->
+<!--					<th class="text-center">预约时间</th>-->
 					<th class="text-center">付款状态</th>
 					<th class="text-center">沟通状态</th>
 					<th class="text-center">管理</th>
@@ -36,12 +36,12 @@ $this->title = "预约咨询";
 						<td><?= $value['username']; ?></td>
 						<td><?= $value['gender'] == 1 ? "男" : "女"; ?></td>
 						<td><?= $value['phone']; ?></td>
-						<td><?= \common\models\Consultation::dropDown("type", $value['type']); ?></td>
+						<!-- <td><?//= \common\models\Consultation::dropDown("type", $value['type']); ?></td> -->
 						<td>
 							<a href="#" data-toggle="modal" data-target="#chakanneirong_<?= $value['consultation_id']; ?>">查看内容</a>
 						</td>
-						<td><?= $value['dates']; ?></td>
-						<td><?= $value['times']; ?></td>
+						<!-- <td><?//= $value['dates']; ?></td> -->
+						<!-- <td><?//= $value['times']; ?></td> -->
 						<td><?= $value['payment']['status'] == 1 ? "已支付" : "未支付"; ?></td>
 						<td>
 							<select name="status" class="form-control" consultation_id="<?= $value['consultation_id']; ?>">
@@ -52,12 +52,12 @@ $this->title = "预约咨询";
 						</td>
 						<td>
 							<?php if(!$value['admin_id']): ?>
-								<a href="#" data-toggle="modal" data-target="#xuanzhuanjia" consultation_id="<?= $value['consultation_id']; ?>">选专家</a>
+								<a class="btn <?= $value['payment']['status'] == 1 ? "" : "disabled"; ?>" href="#" data-toggle="modal" data-target="#xuanzhuanjia" consultation_id="<?= $value['consultation_id']; ?>">选专家</a>
 							<?php elseif(!$value['communicationRecord']): ?>
 								<a href="#" data-toggle="modal" data-target="#wanchenggoutong" consultation_id="<?= $value['consultation_id']; ?>">完成沟通</a>
 							<?php else: ?>
 								<a href="#" data-toggle="modal" data-target="#goutongjilu" consultation_id="<?= $value['consultation_id']; ?>">沟通记录</a><br/>
-								<a href="#" data-toggle="modal" data-target="#pingjiajianyi_<?= $value['consultation_id'] ?>" consultation_id="<?= $value['consultation_id']; ?>">评价建议</a>
+								<a class="btn <?= !empty($value['advic']) ? "" : "disabled"; ?>" href="#" data-toggle="modal" data-target="#pingjiajianyi_<?= $value['consultation_id'] ?>" consultation_id="<?= $value['consultation_id']; ?>">评价建议</a>
 							<?php endif; ?>
 						</td>
 					</tr>
@@ -83,7 +83,7 @@ $this->title = "预约咨询";
 				<h5 class="modal-title color-blue">其他需求</h5>
 			</div>
 			<div class="modal-body">
-				<p><?= $value['others']; ?></p>
+				<p><?= !empty($value['others']) ? $value['others'] : "无内容"; ?></p>
 			</div>
 		</div>
 	</div>
@@ -144,7 +144,7 @@ $this->title = "预约咨询";
 			<div class="modal-body">
 				<form action="">
 					<p><b>沟通状态</b></p>
-					<p>已完成</p>
+					<p name="gtzt">已完成</p>
 					<p><b>专家姓名</b></p>
 					<p name="admin_id">金正浩</p>
 					<p><b>沟通记录</b></p>
@@ -178,12 +178,11 @@ $this->title = "预约咨询";
 								<img src="/img/star-off-big.png"/>
 							<?php endif; ?>
 						<?php endfor; ?>
-<!--						<img src="/img/star-on-big.png"/> <img src="/img/star-on-big.png"/> <img src="/img/star-on-big.png"/> <img src="/img/star-on-big.png"/> <img src="/img/star-off-big.png"/>-->
 					</p>
 					<p>
 						<b>相关建议</b>
 					</p>
-					<p><?= $value['advic']; ?></p>
+					<p><?= !empty($value['advic']) ? $value['advic'] : "无内容"; ?></p>
 				</form>
 			</div>
 		</div>
@@ -246,6 +245,7 @@ $js = <<<JS
 			var data = eval("(" + re + ")");
 			$("p[name='admin_id']").text(data.expert_username);
 			$("p[name='communicationRecord']").text(data.communicationRecord);
+			$("p[name='gtzt']").text(data.status);
 		})
 	});
 

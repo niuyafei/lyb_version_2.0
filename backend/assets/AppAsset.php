@@ -23,6 +23,7 @@ class AppAsset extends AssetBundle
         'bootstrap/js/ie10-viewport-bug-workaround.js',
         '/js/modal-middle.js',
         '/layui/layui.all.js',
+        '/bootstrap/js/bootstrap-datetimepicker.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
