@@ -146,13 +146,11 @@ $this->title = "留学规划";
 <!--									<input type="text" class="form-control" id="input5" placeholder="点击填写您的SSAT成绩">-->
 								</div>
 							</div>
-						</div>
-						<div class="form-group m-b-20">
+
 							<div class="col-xs-6">
 								<label for="input5" class="col-xs-3 control-label"><b class="color-red">*</b> 初中GPA</label>
 								<div class="col-xs-9">
 									<?= $form->field($model, 'gpa_m')->textInput(['class' => 'form-control', 'id' => 'input10', 'placeholder' => '点击填写您的GPA成绩'])->label(false); ?>
-<!--									<input type="text" class="form-control" id="input5" placeholder="点击填写您的GPA">-->
 								</div>
 							</div>
 						</div>

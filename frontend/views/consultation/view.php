@@ -108,7 +108,7 @@ $this->title = "我的咨询";
 							相关建议
 						</div>
 						<div class="col-xs-10 p-l-0">
-							<p><?= !is_null($v2['advic']) ? $v2['advic'] : "无内容"; ?></p>
+							<p><?= !empty($v2['advic']) ? $v2['advic'] : "无内容"; ?></p>
 						</div>
 					</div>
 				</div>
