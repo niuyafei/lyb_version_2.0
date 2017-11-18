@@ -61,10 +61,11 @@ class ServiceController extends BaseController
 			return $this->redirect(["index"]);
 		}
 		$user_id = Yii::$app->user->getId();
-		$model = Service::find()->where(['user_id' => $user_id])->one();
-		if(!$model){
-			$model = new Service();
-		}
+//		$model = Service::find()->where(['user_id' => $user_id])->one();
+//		if(!$model){
+//			$model = new Service();
+//		}
+		$model = new Service();
 		if($model->load(Yii::$app->request->post())){
 			$model->user_id = Yii::$app->user->getId();
 			$model->created_at = date("Y-m-d H:i:s");

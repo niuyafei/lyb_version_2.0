@@ -41,10 +41,40 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="col-xs-9">
                         <div class="row">
                             <div class="col-xs-3 text-right p-t-5 p-r-0">
+                                <b>性别：</b>
+                            </div>
+                            <div class="col-xs-9">
+                                <?= $form->field($model, "gender")->dropDownList(['1' => '男', '2' => '女'])->label(false); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-9">
+                        <div class="row">
+                            <div class="col-xs-3 text-right p-t-5 p-r-0">
                                 <b>头像：</b>
                             </div>
                             <div class="col-xs-9">
                                 <?= $form->field($model, "headimgurl")->fileInput()->label(false); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-9">
+                        <div class="row">
+                            <div class="col-xs-3 text-right p-t-5 p-r-0">
+                                <b>手机号：</b>
+                            </div>
+                            <div class="col-xs-9">
+                                <?= $form->field($model, "phone")->textInput()->label(false); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-9">
+                        <div class="row">
+                            <div class="col-xs-3 text-right p-t-5 p-r-0">
+                                <b>邮箱：</b>
+                            </div>
+                            <div class="col-xs-9">
+                                <?= $form->field($model, "email")->textInput()->label(false); ?>
                             </div>
                         </div>
                     </div>

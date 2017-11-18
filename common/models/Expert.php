@@ -31,12 +31,14 @@ class Expert extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'desc', 'created_at'], 'required'],
-            [['desc'], 'string'],
-            [['status'], 'integer'],
+            [['username', 'desc', 'created_at', 'gender', 'phone', 'email'], 'required', 'message' => '{attribute}不能为空'],
+            [['desc', 'email', 'phone'], 'string'],
+            [['status', 'gender'], 'integer'],
             [['created_at'], 'safe'],
             [['username'], 'string', 'max' => 50],
             [['headimgurl'], 'string', 'max' => 255],
+            ['email', 'email', 'message' => '邮箱格式不正确'],
+            ['phone', 'match', 'pattern' => '/^1[3|5|7|8]\d{9}$/', 'message' => '手机格式不正确'],
         ];
     }
 
@@ -48,6 +50,9 @@ class Expert extends \yii\db\ActiveRecord
         return [
             'expert_id' => 'ID',
             'username' => '专家名称',
+            'gender' => '性别',
+            'phone' => '手机号',
+            'email' => '邮箱',
             'headimgurl' => '头像',
             'desc' => '介绍',
             'status' => '状态',

@@ -24,13 +24,23 @@ $this->title = '专家管理';
         <div class="case-edit-cont">
             <h4 class="text-center m-b-20">专家信息</h4>
             <div class="row case-edit-formwidth">
-                <div class="col-xs-6">
+                <div class="col-xs-9">
                     <div class="row">
                         <div class="col-xs-3 text-right p-t-5 p-r-0">
                             <b><span class="color-red">*</span> 姓名：</b>
                         </div>
                         <div class="col-xs-9">
                             <?= $form->field($model, "username")->textInput()->label(false); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-9">
+                    <div class="row">
+                        <div class="col-xs-3 text-right p-t-5 p-r-0">
+                            <b><span class="color-red">*</span> 性别：</b>
+                        </div>
+                        <div class="col-xs-9">
+                            <?= $form->field($model, "gender")->dropDownList(['1' => '男', '2' => '女'])->label(false); ?>
                         </div>
                     </div>
                 </div>
@@ -47,7 +57,27 @@ $this->title = '专家管理';
                 <div class="col-xs-9">
                     <div class="row">
                         <div class="col-xs-3 text-right p-t-5 p-r-0">
-                            <b><span class="color-red">*</span> 头像：</b>
+                            <b><span class="color-red">*</span> 手机号：</b>
+                        </div>
+                        <div class="col-xs-9">
+                            <?= $form->field($model, "phone")->textInput()->label(false); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-9">
+                    <div class="row">
+                        <div class="col-xs-3 text-right p-t-5 p-r-0">
+                            <b><span class="color-red">*</span> 邮箱：</b>
+                        </div>
+                        <div class="col-xs-9">
+                            <?= $form->field($model, "email")->textInput()->label(false); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-9">
+                    <div class="row">
+                        <div class="col-xs-3 text-right p-t-5 p-r-0">
+                            <b><span class="color-red">*</span> 审核状态：</b>
                         </div>
                         <div class="col-xs-9">
                             <?= $form->field($model, "status")->dropDownList(\common\models\Expert::dropDown())->label(false); ?>
