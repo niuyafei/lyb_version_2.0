@@ -57,6 +57,7 @@ class ServiceController extends BaseController
 
 	public function actionCreate()
 	{
+		date_default_timezone_set("PRC");
 		if(!$this->isLogin()){
 			return $this->redirect(["index"]);
 		}
