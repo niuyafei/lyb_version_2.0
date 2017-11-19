@@ -11,6 +11,9 @@ use common\models\AbordCase;
 
 $this->title = "留学案例";
 ?>
+<style>
+	.datetimepicker{cursor:pointer}
+</style>
 <?php $form = ActiveForm::begin([
 	'method' => "post",
 	'action' => ['abordcase/update2?case_id=' . $caseModel->case_id]
@@ -204,7 +207,7 @@ $this->title = "留学案例";
 							<b>时间：</b>
 						</div>
 						<div class="col-xs-9">
-							<input type="text" data="time" placeholder="选择时间" class="calendar form-control">
+							<input type="text" data="time" placeholder="选择时间" class="calendar form-control datetimepicker">
 						</div>
 					</div>
 				</div>
@@ -244,7 +247,7 @@ $this->title = "留学案例";
 							<b>时间：</b>
 						</div>
 						<div class="col-xs-9">
-							<input type="text" data="time" placeholder="选择时间" class="calendar form-control">
+							<input type="text" data="time" placeholder="选择时间" class="calendar form-control datetimepicker">
 						</div>
 					</div>
 				</div>
@@ -284,7 +287,7 @@ $this->title = "留学案例";
 							<b>时间：</b>
 						</div>
 						<div class="col-xs-9">
-							<input type="text" data="time" placeholder="选择时间" class="calendar form-control">
+							<input type="text" data="time" placeholder="选择时间" class="calendar form-control datetimepicker">
 						</div>
 					</div>
 				</div>
@@ -324,7 +327,7 @@ $this->title = "留学案例";
 							<b>时间：</b>
 						</div>
 						<div class="col-xs-9">
-							<input type="text" data="time" placeholder="选择时间" class="calendar form-control">
+							<input type="text" data="time" placeholder="选择时间" class="calendar form-control datetimepicker">
 						</div>
 					</div>
 				</div>
@@ -364,7 +367,7 @@ $this->title = "留学案例";
 							<b>时间：</b>
 						</div>
 						<div class="col-xs-9">
-							<input type="text" data="time" placeholder="选择时间" class="calendar form-control">
+							<input type="text" data="time" placeholder="选择时间" class="calendar form-control datetimepicker">
 						</div>
 					</div>
 				</div>
@@ -445,6 +448,7 @@ $js = <<<JS
 		$.get(url, function(re){
 			var data = eval("(" + re + ")");
 			if(data.code == 200){
+				time = time.substring(0, 10);
 				obj.append('<div class="row"> <div class="col-xs-3 text-right p-r-0"> ' + time + ' </div> <div class="col-xs-9"> ' + content +' </div> </div>');
 				layer.open({
 					title:'提示信息',
@@ -457,6 +461,14 @@ $js = <<<JS
 				});
 			}
 		});
+	});
+
+	var date = new Date();
+	$('.datetimepicker').datetimepicker({
+		todayBtn : true,
+		startDate : date,
+		minView : 2,
+		autoclose : true
 	});
 JS;
 
