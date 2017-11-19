@@ -45,11 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             </select>
                         </td>
                         <td>
-                            <a href="<?= url::to(['abordcase/update?id='.$value['case_id']]); ?>">基本信息</a>
-                            <span class="p-l-5 p-r-5 color-lightgray"> | </span>
-                            <?= Html::a("申请历程", ['course/create?case_id='.$value['case_id']."&user_id=".$value['user_id']]); ?>
-                            <span class="p-l-5 p-r-5 color-lightgray"> | </span>
-                            <?= Html::a("专家点评", ['expertcomments/create?case_id='.$value['case_id']."&user_id=".$value['user_id']]); ?>
+                            <?= Html::a("编辑", ['abordcase/update2?case_id='.$value['case_id']]); ?>
                             <span class="p-l-5 p-r-5 color-lightgray"> | </span>
                             <a href="<?= Url::to(['abordcase/changestatus?case_id='.$value['case_id']."&status=3"]); ?>" class="color-red">删除</a>
                         </td>
