@@ -156,6 +156,29 @@ class CourseController extends BaseController
 
     }
 
+    public function actionAdd()
+    {
+        date_default_timezone_set("PRC");
+        $gets = Yii::$app->request->get();
+        $model = new Course();
+        $model->user_id = $gets['user_id'];
+        $model->case_id = $gets['case_id'];
+        $model->dates = $gets['dates'];
+        $model->content = $gets['content'];
+        $model->type = $gets['type'];
+        $model->created_at = date("Y-m-d H:i:s");
+        if($model->validate() && $model->save()){
+            return json_encode([
+                'code' => 200
+            ]);
+        }else{
+            return json_encode([
+                'code' => 20,
+                'error' => $model->getErrors()[0]
+            ]);
+        }
+    }
+
     /**
      * Finds the Course model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

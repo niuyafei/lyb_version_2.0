@@ -126,7 +126,7 @@ $this->title = "留学案例";
 				<div class="col-xs-6">
 					<div class="row">
 						<div class="col-xs-3 text-right p-t-5 p-r-0">
-							<b><span class="color-red">*</span> SAT：</b>
+							<b>SAT：</b>
 						</div>
 						<div class="col-xs-9">
 							<?= $form->field($caseModel, "sat")->textInput()->label(false); ?>
@@ -136,7 +136,7 @@ $this->title = "留学案例";
 				<div class="col-xs-6">
 					<div class="row">
 						<div class="col-xs-3 text-right p-t-5 p-r-0">
-							<b><span class="color-red">*</span> TOEFL：</b>
+							<b>TOEFL：</b>
 						</div>
 						<div class="col-xs-9">
 							<?= $form->field($caseModel, "toefl")->textInput()->label(false); ?>
@@ -148,7 +148,7 @@ $this->title = "留学案例";
 				<div class="col-xs-6">
 					<div class="row">
 						<div class="col-xs-3 text-right p-t-5 p-r-0">
-							<b><span class="color-red">*</span> 雅思：</b>
+							<b>雅思：</b>
 						</div>
 						<div class="col-xs-9">
 							<?= $form->field($caseModel, "ielts")->textInput()->label(false); ?>
@@ -158,7 +158,7 @@ $this->title = "留学案例";
 				<div class="col-xs-6">
 					<div class="row">
 						<div class="col-xs-3 text-right p-t-5 p-r-0">
-							<b><span class="color-red">*</span> ACT：</b>
+							<b> ACT：</b>
 						</div>
 						<div class="col-xs-9">
 							<?= $form->field($caseModel, "act")->textInput()->label(false); ?>
@@ -170,7 +170,7 @@ $this->title = "留学案例";
 				<div class="col-xs-6">
 					<div class="row">
 						<div class="col-xs-3 text-right p-t-5 p-r-0">
-							<b><span class="color-red">*</span> GPA：</b>
+							<b> GPA：</b>
 						</div>
 						<div class="col-xs-9">
 							<?= $form->field($caseModel, "gpa")->textInput()->label(false); ?>
@@ -184,7 +184,7 @@ $this->title = "留学案例";
 			<h4 class="text-center m-b-20">申请历程</h4>
 			<div class="row case-edit-formwidth p-l-0 p-r-0 case-edit-licheng">
 				<h5 class="color-blue">1. 规划方案</h5>
-				<div class="col-xs-12 color-gray m-b-20">
+				<div class="col-xs-12 color-gray m-b-20 ghfa">
 					<?php foreach($courseArr as $key => $value): ?>
 						<?php if($value['type'] == 1): ?>
 							<div class="row">
@@ -204,7 +204,7 @@ $this->title = "留学案例";
 							<b>时间：</b>
 						</div>
 						<div class="col-xs-9">
-							<input type="text" id="calendar1" placeholder="选择时间" class="calendar form-control">
+							<input type="text" data="time" placeholder="选择时间" class="calendar form-control">
 						</div>
 					</div>
 				</div>
@@ -214,23 +214,37 @@ $this->title = "留学案例";
 							<b>内容：</b>
 						</div>
 						<div class="col-xs-10">
-							<textarea name="" rows="" cols="" class="form-control"></textarea>
+							<textarea data="content" rows="" cols="" class="form-control"></textarea>
 						</div>
 					</div>
 				</div>
 				<p class="col-xs-12 text-right m-t-25 m-b-20">
-					<a href="" class="btn btn-blue m-r-30">+ 新增</a>
+					<button type="button" course_type="1" tag="sqlc" class="btn btn-blue m-r-30">+ 新增</button>
 				</p>
 			</div>
 			<div class="row case-edit-formwidth p-l-0 p-r-0 case-edit-licheng">
 				<h5 class="color-blue">2. 签订协议</h5>
+				<div class="col-xs-12 color-gray m-b-20 ghfa">
+					<?php foreach($courseArr as $key => $value): ?>
+						<?php if($value['type'] == 2): ?>
+							<div class="row">
+								<div class="col-xs-3 text-right p-r-0">
+									<?= date("Y-m-d", strtotime($value['dates'])); ?>
+								</div>
+								<div class="col-xs-9">
+									<?= $value['content'] ?>
+								</div>
+							</div>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				</div>
 				<div class="col-xs-6">
 					<div class="row">
 						<div class="col-xs-3 text-right p-t-5 p-r-0">
 							<b>时间：</b>
 						</div>
 						<div class="col-xs-9">
-							<input type="text" id="calendar2" placeholder="选择时间" class="calendar form-control">
+							<input type="text" data="time" placeholder="选择时间" class="calendar form-control">
 						</div>
 					</div>
 				</div>
@@ -240,23 +254,37 @@ $this->title = "留学案例";
 							<b>内容：</b>
 						</div>
 						<div class="col-xs-10">
-							<textarea name="" rows="" cols="" class="form-control"></textarea>
+							<textarea data="content" rows="" cols="" class="form-control"></textarea>
 						</div>
 					</div>
 				</div>
 				<p class="col-xs-12 text-right m-t-25 m-b-20">
-					<a href="" class="btn btn-blue m-r-30">+ 新增</a>
+					<button type="button" course_type="2" tag="sqlc" class="btn btn-blue m-r-30">+ 新增</button>
 				</p>
 			</div>
 			<div class="row case-edit-formwidth p-l-0 p-r-0 case-edit-licheng">
 				<h5 class="color-blue">3. 申校名单</h5>
+				<div class="col-xs-12 color-gray m-b-20 ghfa">
+					<?php foreach($courseArr as $key => $value): ?>
+						<?php if($value['type'] == 3): ?>
+							<div class="row">
+								<div class="col-xs-3 text-right p-r-0">
+									<?= date("Y-m-d", strtotime($value['dates'])); ?>
+								</div>
+								<div class="col-xs-9">
+									<?= $value['content'] ?>
+								</div>
+							</div>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				</div>
 				<div class="col-xs-6">
 					<div class="row">
 						<div class="col-xs-3 text-right p-t-5 p-r-0">
 							<b>时间：</b>
 						</div>
 						<div class="col-xs-9">
-							<input type="text" id="calendar3" placeholder="选择时间" class="calendar form-control">
+							<input type="text" data="time" placeholder="选择时间" class="calendar form-control">
 						</div>
 					</div>
 				</div>
@@ -266,23 +294,37 @@ $this->title = "留学案例";
 							<b>内容：</b>
 						</div>
 						<div class="col-xs-10">
-							<textarea name="" rows="" cols="" class="form-control"></textarea>
+							<textarea  rows="" cols="" class="form-control"></textarea>
 						</div>
 					</div>
 				</div>
 				<p class="col-xs-12 text-right m-t-25 m-b-20">
-					<a href="" class="btn btn-blue m-r-30">+ 新增</a>
+					<button type="button" course_type="3" tag="sqlc" class="btn btn-blue m-r-30">+ 新增</button>
 				</p>
 			</div>
 			<div class="row case-edit-formwidth p-l-0 p-r-0 case-edit-licheng">
 				<h5 class="color-blue">4. 关键支持</h5>
+				<div class="col-xs-12 color-gray m-b-20 ghfa">
+					<?php foreach($courseArr as $key => $value): ?>
+						<?php if($value['type'] == 4): ?>
+							<div class="row">
+								<div class="col-xs-3 text-right p-r-0">
+									<?= date("Y-m-d", strtotime($value['dates'])); ?>
+								</div>
+								<div class="col-xs-9">
+									<?= $value['content'] ?>
+								</div>
+							</div>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				</div>
 				<div class="col-xs-6">
 					<div class="row">
 						<div class="col-xs-3 text-right p-t-5 p-r-0">
 							<b>时间：</b>
 						</div>
 						<div class="col-xs-9">
-							<input type="text" id="calendar4" placeholder="选择时间" class="calendar form-control">
+							<input type="text" data="time" placeholder="选择时间" class="calendar form-control">
 						</div>
 					</div>
 				</div>
@@ -297,18 +339,32 @@ $this->title = "留学案例";
 					</div>
 				</div>
 				<p class="col-xs-12 text-right m-t-25 m-b-20">
-					<a href="" class="btn btn-blue m-r-30">+ 新增</a>
+					<button type="button" course_type="4" tag="sqlc" class="btn btn-blue m-r-30">+ 新增</button>
 				</p>
 			</div>
 			<div class="row case-edit-formwidth p-l-0 p-r-0 case-edit-licheng">
 				<h5 class="color-blue">5. 网申结果</h5>
+				<div class="col-xs-12 color-gray m-b-20 ghfa">
+					<?php foreach($courseArr as $key => $value): ?>
+						<?php if($value['type'] == 5): ?>
+							<div class="row">
+								<div class="col-xs-3 text-right p-r-0">
+									<?= date("Y-m-d", strtotime($value['dates'])); ?>
+								</div>
+								<div class="col-xs-9">
+									<?= $value['content'] ?>
+								</div>
+							</div>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				</div>
 				<div class="col-xs-6">
 					<div class="row">
 						<div class="col-xs-3 text-right p-t-5 p-r-0">
 							<b>时间：</b>
 						</div>
 						<div class="col-xs-9">
-							<input type="text" id="calendar5" placeholder="选择时间" class="calendar form-control">
+							<input type="text" data="time" placeholder="选择时间" class="calendar form-control">
 						</div>
 					</div>
 				</div>
@@ -323,7 +379,7 @@ $this->title = "留学案例";
 					</div>
 				</div>
 				<p class="col-xs-12 text-right m-t-25 m-b-20">
-					<a href="" class="btn btn-blue m-r-30">+ 新增</a>
+					<button type="button" course_type="5" tag="sqlc" class="btn btn-blue m-r-30">+ 新增</button>
 				</p>
 			</div>
 			<hr />
@@ -337,7 +393,8 @@ $this->title = "留学案例";
 							<b>选择专家：</b>
 						</div>
 						<div class="col-xs-9">
-							<input type="text" name="" id="" value="" class="form-control" />
+<!--							<input type="text" name="" id="" value="" class="form-control" />-->
+							<?= $form->field($expertCommentModel, "expert_id")->dropDownList(\common\models\Expert::getExperts())->label(false); ?>
 						</div>
 					</div>
 				</div>
@@ -349,7 +406,7 @@ $this->title = "留学案例";
 							<b>音频文件：</b>
 						</div>
 						<div class="col-xs-9">
-							<input type="file" name="" id="" value="" class="form-control" />
+							<?= $form->field($expertCommentModel, 'video')->fileInput()->label(false); ?>
 							<p class="p-t-5 m-b-0"><small class="color-red">文件大小不超过10G，支持mp3.mp4.m4a格式</small></p>
 						</div>
 					</div>
@@ -362,25 +419,46 @@ $this->title = "留学案例";
 							<b>音频语言：</b>
 						</div>
 						<div class="col-xs-9">
-							<select class="form-control">
-								<option>英文</option>
-								<option>中文</option>
-
-							</select>
+							<?= $form->field($expertCommentModel, 'language')->dropDownList([ 1 => '中文', 2 => '英文', ], ['prompt' => '英文'])->label(false); ?>
 						</div>
 					</div>
 				</div>
 			</div>
 			<hr />
-			<div class="row">
-				<div class="col-xs-6 text-right">
-					<a href="#" class="btn btn-blue btn-lg p-l-20 p-r-20">本地保存</a>
-				</div>
-				<div class="col-xs-6">
-					<a href="#" class="btn btn-blue btn-lg p-l-20 p-r-20">生成案例</a>
-				</div>
+			<div class="row text-center">
+				<button class="btn btn-blue btn-lg p-l-20 p-r-20" type="submit">生成案例</button>
 			</div>
 		</div>
 	</div>
 </div>
 <?php ActiveForm::end(); ?>
+<?php
+$js = <<<JS
+	var user_id = '{$caseModel['user_id']}';
+	var case_id = '{$caseModel['case_id']}';
+	$("button[tag='sqlc']").click(function(){
+		var time = $(this).parents(".case-edit-formwidth").find("input[data='time']").val();
+		var content = $(this).parents(".case-edit-formwidth").find("textarea[data='content']").val();
+		var type = $(this).attr("course_type");
+		var url = "/course/add?user_id=" + user_id + "&case_id=" + case_id + "&type=" + type + "&dates=" + time + "&content=" + content;
+		var obj = $(this).parents(".case-edit-formwidth").find(".ghfa");
+		$.get(url, function(re){
+			var data = eval("(" + re + ")");
+			if(data.code == 200){
+				obj.append('<div class="row"> <div class="col-xs-3 text-right p-r-0"> ' + time + ' </div> <div class="col-xs-9"> ' + content +' </div> </div>');
+				layer.open({
+					title:'提示信息',
+					content:'添加成功'
+				});
+			}else{
+				layer.open({
+					title:'警告信息',
+					content:data.error
+				});
+			}
+		});
+	});
+JS;
+
+$this->registerJs($js);
+?>
