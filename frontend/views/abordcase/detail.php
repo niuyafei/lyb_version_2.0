@@ -199,7 +199,7 @@ $this->title = "案例详情";
 					</div>
 					<hr class="border-dashed" />
 				</div>
-				<div class="col-xs-12 p-l-35 p-r-35" data-toggle="modal" data-target="#pay">
+				<div class="col-xs-12 p-l-35 p-r-35">
 					<span class="color-gray">案例分析音频</span>
 					<audio id="expert_comment" src="<?= Url::to($audio); ?>" controls="controls" preload="auto" class="audio-style m-l-10"> </audio> <span class="m-l-10 color-lightgray">（此音频语言为<?= isset($model->expertComments->language) ? ($model->expertComments->language == 1 ? "中文" : "英文") : ""; ?>）</span>
 				</div>

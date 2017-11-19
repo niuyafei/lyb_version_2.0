@@ -294,7 +294,7 @@ $this->title = "留学案例";
 							<b>内容：</b>
 						</div>
 						<div class="col-xs-10">
-							<textarea  rows="" cols="" class="form-control"></textarea>
+							<textarea data="content"  rows="" cols="" class="form-control"></textarea>
 						</div>
 					</div>
 				</div>
@@ -334,7 +334,7 @@ $this->title = "留学案例";
 							<b>内容：</b>
 						</div>
 						<div class="col-xs-10">
-							<textarea name="" rows="" cols="" class="form-control"></textarea>
+							<textarea data="content" rows="" cols="" class="form-control"></textarea>
 						</div>
 					</div>
 				</div>
@@ -374,7 +374,7 @@ $this->title = "留学案例";
 							<b>内容：</b>
 						</div>
 						<div class="col-xs-10">
-							<textarea name="" rows="" cols="" class="form-control"></textarea>
+							<textarea data="content" rows="" cols="" class="form-control"></textarea>
 						</div>
 					</div>
 				</div>
