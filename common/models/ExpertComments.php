@@ -33,7 +33,7 @@ class ExpertComments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'case_id', 'expert_id', 'content', 'created_at'], 'required'],
+            [['user_id', 'case_id', 'expert_id', 'created_at'], 'required'],
             [['user_id', 'case_id', 'expert_id', 'status'], 'integer'],
             [['content', 'language'], 'string'],
             [['created_at'], 'safe'],

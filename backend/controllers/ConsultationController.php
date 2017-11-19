@@ -78,6 +78,7 @@ class ConsultationController extends BaseController
 		$gets = Yii::$app->request->get();
 		$consultation_id = $gets['consultation_id'];
 		$model = Consultation::findOne($consultation_id);
+
 		$array = [
 			'expert_username' => $model->expert->username,
 			'communicationRecord' => $model->communicationRecord,

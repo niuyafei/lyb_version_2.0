@@ -13,6 +13,7 @@ $this->title = "预约咨询";
 ?>
 <style>
 	/*h4{width:75px;}*/
+	.datetimepicker{cursor:pointer}
 </style>
 
 <div class="container">

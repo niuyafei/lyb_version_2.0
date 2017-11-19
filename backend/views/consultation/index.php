@@ -52,12 +52,12 @@ $this->title = "预约咨询";
 						</td>
 						<td>
 							<?php if(!$value['admin_id']): ?>
-								<a class="btn <?= $value['payment']['status'] == 1 ? "" : "disabled"; ?>" href="#" data-toggle="modal" data-target="#xuanzhuanjia" consultation_id="<?= $value['consultation_id']; ?>">选专家</a>
+								<a class="btn <?= $value['payment']['status'] == 1 ? "" : "disabled color-gray"; ?>" href="#" data-toggle="modal" data-target="#xuanzhuanjia" consultation_id="<?= $value['consultation_id']; ?>">选专家</a>
 							<?php elseif(!$value['communicationRecord']): ?>
 								<a href="#" data-toggle="modal" data-target="#wanchenggoutong" consultation_id="<?= $value['consultation_id']; ?>">完成沟通</a>
 							<?php else: ?>
 								<a href="#" data-toggle="modal" data-target="#goutongjilu" consultation_id="<?= $value['consultation_id']; ?>">沟通记录</a><br/>
-								<a class="btn <?= !empty($value['advic']) ? "" : "disabled"; ?>" href="#" data-toggle="modal" data-target="#pingjiajianyi_<?= $value['consultation_id'] ?>" consultation_id="<?= $value['consultation_id']; ?>">评价建议</a>
+								<a class="btn <?= !empty($value['advic']) ? "" : "disabled color-gray"; ?>" href="#" data-toggle="modal" data-target="#pingjiajianyi_<?= $value['consultation_id'] ?>" consultation_id="<?= $value['consultation_id']; ?>">评价建议</a>
 							<?php endif; ?>
 						</td>
 					</tr>
@@ -243,6 +243,7 @@ $js = <<<JS
 	$("#goutongjilu").on("show.bs.modal", function(e){
 		$.get(url+"/consultation/getmodelbyid?consultation_id="+consultation_id, function(re){
 			var data = eval("(" + re + ")");
+			console.log(data.status);
 			$("p[name='admin_id']").text(data.expert_username);
 			$("p[name='communicationRecord']").text(data.communicationRecord);
 			$("p[name='gtzt']").text(data.status);

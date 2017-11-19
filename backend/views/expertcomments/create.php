@@ -38,18 +38,18 @@ $this->title = '留学案例';
                         </div>
                     </div>
                 </div>
-                <div class="row case-edit-formwidth">
+                <!-- <div class="row case-edit-formwidth">
                     <div class="col-xs-12">
                         <div class="row">
                             <div class="col-xs-3 text-right p-t-5 p-r-0">
                                 <b>专家点评：</b>
                             </div>
                             <div class="col-xs-10">
-                                <?= $form->field($model, "content")->textarea()->label(false); ?>
+                                <?//= $form->field($model, "content")->textarea()->label(false); ?>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="row case-edit-formwidth">
                     <div class="col-xs-6">
                         <div class="row">
@@ -58,7 +58,7 @@ $this->title = '留学案例';
                             </div>
                             <div class="col-xs-9">
                                 <?= $form->field($model, 'video')->fileInput()->label(false); ?>
-                                <p class="p-t-5 m-b-0"><small class="color-red">文件大小不超过10G，支持mp3.mp4.ma格式</small></p>
+                                <p class="p-t-5 m-b-0"><small class="color-red">文件大小不超过10G，支持mp3.mp4.m4a格式</small></p>
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@ $this->title = '留学案例';
                                 <b>音频语言：</b>
                             </div>
                             <div class="col-xs-9">
-                                <?= $form->field($model, 'language')->dropDownList([ 1 => '中文', 2 => '英文', ], ['prompt' => '']) ?>
+                                <?= $form->field($model, 'language')->dropDownList([ 1 => '中文', 2 => '英文', ], ['prompt' => '英文'])->label(false); ?>
                             </div>
                         </div>
                     </div>

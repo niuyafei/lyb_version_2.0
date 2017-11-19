@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use common\models\Course;
+use common\models\ExpertComments;
 use Yii;
 use common\models\AbordCase;
 use common\models\search\AbordCaseSearch;
@@ -104,6 +106,28 @@ class AbordcaseController extends BaseController
 
         return $this->render("update", [
             'model' => $model
+        ]);
+    }
+
+    public function actionUpdate2($case_id)
+    {
+        $caseModel = $this->findModel($case_id);
+
+        if($data = Yii::$app->request->post()){
+
+        }
+
+        //申请历程
+        $courseArr = Course::find()->where(['user_id'=>$caseModel->user_id, 'case_id'=>$case_id])->asArray()->all();
+        $courseModel = new Course();
+        //专家点评
+        $expertCommentModel = new ExpertComments();
+
+        return $this->render("update2", [
+            'caseModel' => $caseModel,
+            'courseArr' => $courseArr,
+            'courseModel' => $courseModel,
+            'expertCommentModel' => $expertCommentModel
         ]);
     }
 

@@ -13,6 +13,8 @@ use yii\widgets\Breadcrumbs;
 use yii\bootstrap\Alert;
 
 AppAsset::register($this);
+$role = \backend\models\Admin::findIdentity(\Yii::$app->user->getId())->role;
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -73,12 +75,14 @@ AppAsset::register($this);
                     <li class="list-group-item text-center">
                         <a href="<?= Url::to(['service/index']); ?>" class="<?= $this->title == "延伸服务" ? "focus" : "";?>">延伸服务</a>
                     </li>
-                    <li class="list-group-item text-center">
-                        <a href="<?= Url::to(['site/index']); ?>" class="<?= $this->title == "账号管理" ? "focus" : "";?>">账号管理</a>
-                    </li>
-                    <li class="list-group-item text-center">
-                        <a href="<?= Url::to(['expert/index']); ?>" class="<?= $this->title == "专家管理" ? "focus" : "";?>">专家管理</a>
-                    </li>
+                    <?php if($role == 4): ?>
+                        <li class="list-group-item text-center">
+                            <a href="<?= Url::to(['site/index']); ?>" class="<?= $this->title == "账号管理" ? "focus" : "";?>">账号管理</a>
+                        </li>
+                        <li class="list-group-item text-center">
+                            <a href="<?= Url::to(['expert/index']); ?>" class="<?= $this->title == "专家管理" ? "focus" : "";?>">专家管理</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
             <?= $content; ?>

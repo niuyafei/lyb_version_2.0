@@ -20,6 +20,8 @@ class PlanController extends BaseController
 {
     public $pageSize = 10;
 
+    public $enableCsrfToken = false;
+
     /**
      * @inheritdoc
      */
@@ -217,6 +219,33 @@ class PlanController extends BaseController
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionAddschools()
+    {
+        date_default_timezone_set("PRC");
+
+        $data = Yii::$app->request->get();
+        $model = new Schools();
+        $model->user_id = $data['user_id'];
+        $model->plan_id = $data['plan_id'];
+        $model->schoolName = $data['schoolName'];
+        $model->sat = $data['sat'];
+        $model->rank = $data["schoolRank"];
+        $model->type = $data['type'];
+        $model->applyType = $data['applyType'];
+        $model->created_at = date("Y-m-d H:i:s");
+        if($model->save()){
+            return json_encode([
+                'code' => 200
+            ]);
+        }else{
+            return json_encode([
+                'code' => 20,
+                'message' => '保存失败'
+            ]);
+        }
+
     }
 
 

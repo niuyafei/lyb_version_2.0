@@ -81,4 +81,10 @@ class Expert extends \yii\db\ActiveRecord
 
         return is_null($column) ? $data : $data[$column];
     }
+
+    public static function getExpertsById($id)
+    {
+        $data = self::find()->where(['expert_id' => $id])->asArray()->one();
+        return $data['desc'] == "" ? "无内容" : $data['desc'];
+    }
 }

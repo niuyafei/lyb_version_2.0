@@ -195,7 +195,7 @@ $this->title = "案例详情";
 					</div>
 					<div class="media-body p-l-10">
 						<h5 class="media-heading"><b><?= isset($model->expertComments->expert->username) ?  $model->expertComments->expert->username : ""; ?>老师</b></h5>
-						<p class="m-0"><?= isset($model->expertComments->content) ? $model->expertComments->content : ""; ?></p>
+						<p class="m-0"><?= \common\models\Expert::getExpertsById($model->expertComments->expert_id); ?></p>
 					</div>
 					<hr class="border-dashed" />
 				</div>
