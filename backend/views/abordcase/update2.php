@@ -8,6 +8,7 @@
 
 use yii\widgets\ActiveForm;
 use common\models\AbordCase;
+use yii\helpers\Url;
 
 $this->title = "留学案例";
 ?>
@@ -402,6 +403,22 @@ $this->title = "留学案例";
 					</div>
 				</div>
 			</div>
+
+			<?php if($expertCommentModel->video): ?>
+			<div class="row case-edit-formwidth">
+				<div class="col-xs-6">
+					<div class="row">
+						<div class="col-xs-3 text-right p-t-5 p-r-0">
+							<b>案例讲解：</b>
+						</div>
+						<div class="col-xs-9">
+							<audio id="expert_comment" src="<?= Url::to($expertCommentModel->video); ?>" controls="controls" preload="auto" class="audio-style m-l-10"> </audio>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php endif; ?>
+
 			<div class="row case-edit-formwidth">
 				<div class="col-xs-6">
 					<div class="row">
@@ -422,7 +439,7 @@ $this->title = "留学案例";
 							<b>音频语言：</b>
 						</div>
 						<div class="col-xs-9">
-							<?= $form->field($expertCommentModel, 'language')->dropDownList([ 1 => '中文', 2 => '英文', ], ['prompt' => '英文'])->label(false); ?>
+							<?= $form->field($expertCommentModel, 'language')->dropDownList([ 2 => '英文', 1 => '中文', ])->label(false); ?>
 						</div>
 					</div>
 				</div>
@@ -444,12 +461,14 @@ $js = <<<JS
 		var content = $(this).parents(".case-edit-formwidth").find("textarea[data='content']").val();
 		var type = $(this).attr("course_type");
 		var url = "/course/add?user_id=" + user_id + "&case_id=" + case_id + "&type=" + type + "&dates=" + time + "&content=" + content;
-		var obj = $(this).parents(".case-edit-formwidth").find(".ghfa");
+		var obj = $(this).parents(".case-edit-formwidth");
 		$.get(url, function(re){
 			var data = eval("(" + re + ")");
 			if(data.code == 200){
 				time = time.substring(0, 10);
-				obj.append('<div class="row"> <div class="col-xs-3 text-right p-r-0"> ' + time + ' </div> <div class="col-xs-9"> ' + content +' </div> </div>');
+				obj.find(".ghfa").append('<div class="row"> <div class="col-xs-3 text-right p-r-0"> ' + time + ' </div> <div class="col-xs-9"> ' + content +' </div> </div>');
+				obj.find("input[data='time']").val('');
+				obj.find("textarea[data='content']").val('');
 				layer.open({
 					title:'提示信息',
 					content:'添加成功'
@@ -463,10 +482,8 @@ $js = <<<JS
 		});
 	});
 
-	var date = new Date();
 	$('.datetimepicker').datetimepicker({
 		todayBtn : true,
-		startDate : date,
 		minView : 2,
 		autoclose : true
 	});
