@@ -62,10 +62,12 @@ $this->title = '留学规划';
                     <a href="#" data-toggle="modal" data-target="#schools" school-type="1" plan_id="<?= $model->plan_id; ?>" class="btn btn-blue">+ 新增</a>
                 </p>
                 <div class="row case-edit-formwidth p-l-0 p-r-0 case-edit-licheng">
+                <?php $i=0; ?>
                 <?php foreach($schools as $key => $value): ?>
                     <?php if($value['type'] == 1): ?>
+                        <?php $i++; ?>
                         <input type="hidden" name="schools[id][]" value="<?= $value['id']; ?>" >
-                            <h5 class="color-blue">梦想学校</h5>
+                            <h5 class="color-blue"><?= $i==1 ? "梦想学校" : ""; ?></h5>
                             <div class="row case-edit-formwidth">
                                 <div class="col-xs-6">
                                     <div class="row">
@@ -114,7 +116,6 @@ $this->title = '留学规划';
                                     </div>
                                 </div>
                             </div>
-                        <hr/>
                     <?php endif; ?>
                 <?php endforeach; ?>
                 </div>
@@ -122,10 +123,12 @@ $this->title = '留学规划';
                     <a href="#" data-toggle="modal" data-target="#schools" school-type="2" plan_id="<?= $model->plan_id; ?>" class="btn btn-blue">+ 新增</a>
                 </p>
                 <div class="row case-edit-formwidth p-l-0 p-r-0 case-edit-licheng">
+                    <?php $i=0; ?>
                     <?php foreach($schools as $key => $value): ?>
                         <?php if($value['type'] == 2): ?>
+                            <?php $i++; ?>
                             <input type="hidden" name="schools[id][]" value="<?= $value['id']; ?>" >
-                            <h5 class="color-blue">目标学校</h5>
+                            <h5 class="color-blue"><?= $i == 1 ? "目标学校" : ""; ?></h5>
                             <div class="row case-edit-formwidth">
                                 <div class="col-xs-6">
                                     <div class="row">
@@ -181,10 +184,12 @@ $this->title = '留学规划';
                     <a href="#" data-toggle="modal" data-target="#schools" school-type="3" plan_id="<?= $model->plan_id; ?>" class="btn btn-blue">+ 新增</a>
                 </p>
                 <div class="row case-edit-formwidth p-l-0 p-r-0 case-edit-licheng">
+                    <?php $i=0; ?>
                     <?php foreach($schools as $key => $value): ?>
                         <?php if($value['type'] == 3): ?>
+                            <?php $i++; ?>
                             <input type="hidden" name="schools[id][]" value="<?= $value['id']; ?>" >
-                            <h5 class="color-blue">保底学校</h5>
+                            <h5 class="color-blue"><?= $i == 1 ? "保底学校" : ""; ?></h5>
                             <div class="row case-edit-formwidth">
                                 <div class="col-xs-6">
                                     <div class="row">
