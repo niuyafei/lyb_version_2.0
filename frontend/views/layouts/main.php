@@ -130,7 +130,7 @@ AppAsset::register($this);
                             <p class="m-t-10">微信登录</p>
                         </div>
                     </a>
-                    <a href="" class="color-black">
+                    <a href="#" onclick="toQzoneLogin();" class="color-black">
                         <div class="col-xs-6 text-center p-r-35">
                             <img src="<?= Url::to("/img/qq.jpg"); ?>" width="70" />
                             <p class="m-t-10">QQ登录</p>
@@ -159,5 +159,11 @@ AppAsset::register($this);
             title:'警告信息',
             'content':message
         });
+    }
+</script>
+<script>
+    function toQzoneLogin()
+    {
+        var A=window.open("qq_connect/oauth/redirect_to_login.php","TencentLogin","width=450,height=320,menubar=0,scrollbars=1, resizable=1,status=1,titlebar=0,toolbar=0,location=1");
     }
 </script>
