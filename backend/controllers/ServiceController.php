@@ -38,7 +38,7 @@ class ServiceController extends BaseController
 		$gets = Yii::$app->request->get();
 		$service_id = $gets['service_id'];
 		$expert_id = $gets['expert_id'];
-		if(!($service_id && $expert_id)){
+		if(!$service_id || !$expert_id){
 			return json_encode([
 				'code' => 20,
 				'message' => '参数错误'

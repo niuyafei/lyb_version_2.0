@@ -46,11 +46,11 @@ $this->title = "延伸服务";
 							<select class="form-control" name="expert" service_id="<?= $value['service_id']; ?>">
 								<?= is_null($value['expert_id']) ? "<option>暂无</option>" : ""; ?>
 								<?php foreach($experts as $k => $v): ?>
-									<option value="<?= $v['expert_id'] ?>"><?= $v['username']; ?></option>
+									<option value="<?= $v['expert_id'] ?>" <?= $value['expert_id'] == $v['expert_id'] ? "selected" : ""; ?> ><?= $v['username']; ?></option>
 								<?php endforeach; ?>
 							</select>
 						</td>
-						<td id="updated">
+						<td>
 							<?= $value['updated_at']; ?>
 						</td>
 					</tr>
@@ -81,7 +81,9 @@ $js = <<<JS
 						title:'成功信息',
 						content:'沟通完成'
 					});
-					$("#updated").text(data.updated);
+					setTimeout(function(){
+						window.location.reload();
+					},1000);
 				}else{
 					layer.open({
 						title:'失败信息',

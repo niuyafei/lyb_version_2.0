@@ -45,7 +45,9 @@ $this->title = '留学规划';
                         <td>
                             <a href="<?= Url::to(["plan/view?id=" . $value['plan_id']]); ?>">查看信息</a>
                             <br/>
-                            <span class="color-gray"><a href="<?= Url::to(['plan/update?id=' . $value['plan_id']]); ?>">编辑方案</a></span>
+                            <span class="color-gray">
+                                <a href="<?= Url::to(['plan/update?id=' . $value['plan_id']]); ?>" class="<?= $value['pay_type'] ==1 ? "btn disabled color-gray" : "" ;?>" >编辑方案</a>
+                            </span>
                         </td>
                     </tr>
                 <?php endforeach; ?>

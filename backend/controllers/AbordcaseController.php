@@ -114,7 +114,10 @@ class AbordcaseController extends BaseController
         date_default_timezone_set("PRC");
         $caseModel = $this->findModel($case_id);
         //专家点评
-        $expertCommentModel = new ExpertComments();
+        $expertCommentModel = ExpertComments::find()->where(['case_id' => $case_id])->one();
+        if(!$expertCommentModel){
+            $expertCommentModel = new ExpertComments();
+        }
 
         if($data = Yii::$app->request->post()){
             $caseModel->load($data['AbordCase']);

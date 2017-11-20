@@ -21,7 +21,7 @@ $this->title = "预约咨询";
 					<th class="text-center">性别</th>
 					<th class="text-center">联系电话</th>
 <!--					<th class="text-center">预约内容</th>-->
-					<th class="text-center">其他需求</th>
+					<th class="text-center">预约信息</th>
 <!--					<th class="text-center">预约日期</th>-->
 <!--					<th class="text-center">预约时间</th>-->
 					<th class="text-center">付款状态</th>
@@ -57,7 +57,7 @@ $this->title = "预约咨询";
 								<a href="#" data-toggle="modal" data-target="#wanchenggoutong" consultation_id="<?= $value['consultation_id']; ?>">完成沟通</a>
 							<?php else: ?>
 								<a href="#" data-toggle="modal" data-target="#goutongjilu" consultation_id="<?= $value['consultation_id']; ?>">沟通记录</a><br/>
-								<a class="btn <?= !empty($value['advic']) ? "" : "disabled color-gray"; ?>" href="#" data-toggle="modal" data-target="#pingjiajianyi_<?= $value['consultation_id'] ?>" consultation_id="<?= $value['consultation_id']; ?>">评价建议</a>
+								<a class="btn <?= !empty($value['starts']) ? "" : "disabled color-gray"; ?>" href="#" data-toggle="modal" data-target="#pingjiajianyi_<?= $value['consultation_id'] ?>" consultation_id="<?= $value['consultation_id']; ?>">评价建议</a>
 							<?php endif; ?>
 						</td>
 					</tr>
@@ -80,10 +80,29 @@ $this->title = "预约咨询";
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h5 class="modal-title color-blue">其他需求</h5>
+				<h5 class="modal-title color-blue">预约信息</h5>
 			</div>
 			<div class="modal-body">
-				<p><?= !empty($value['others']) ? $value['others'] : "无内容"; ?></p>
+				<tr>
+					<td>预约内容：</td>
+					<td><?= \common\models\Consultation::dropDown("type", $value['type']); ?></td>
+				</tr>
+				<br/>
+				<tr>
+					<td>其他需求：</td>
+					<td><?= !empty($value['others']) ? $value['others'] : "无内容"; ?></td>
+				</tr>
+				<br/>
+				<tr>
+					<td>预约日期：</td>
+					<td><?= $value['dates']; ?></td>
+				</tr>
+				<br/>
+				<tr>
+					<td>预约时间：</td>
+					<td><?= $value['times']; ?></td>
+				</tr>
+				<p></p>
 			</div>
 		</div>
 	</div>
