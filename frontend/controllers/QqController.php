@@ -72,7 +72,7 @@ class QqController extends BaseController
 			$model->openId = $_SESSION['openid'];
 			$model->auth_key = Yii::$app->security->generateRandomString();
 			$model->password_hash = Yii::$app->security->generatePasswordHash('123456');
-			$model->headImgUrl = $userInfo['figureurl'];
+			$model->headImgUrl = $userInfo['figureurl_1'];
 			$model->gender = ($userInfo['gender'] == '男' ? 1 : 2);
 			$model->save();
 		}
