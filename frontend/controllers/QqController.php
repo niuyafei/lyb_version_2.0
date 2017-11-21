@@ -10,6 +10,7 @@ namespace frontend\controllers;
 use common\models\User;
 use yii;
 use frontend\base\BaseController;
+use common\models\LoginForm;
 
 class QqController extends BaseController
 {
