@@ -153,17 +153,18 @@ AppAsset::register($this);
         url = "https://open.weixin.qq.com/connect/qrconnect?appid=wxd66fddd82cb463cb&redirect_uri=http%3a%2f%2fhelper.liuyangbang.cn%2fwx%2fget-code&response_type=code&scope=snsapi_login&state="+request_url+"#wechat_redirect";
         window.location.href = url;
     });
+
+    function toQzoneLogin()
+    {
+        request_url = encodeURI(request_url);
+        window.location.href = "http://" + document.domain + "/qq/login?state=" + request_url;
+    }
+
     var message = "<?= Yii::$app->session->hasFlash('success') ? Yii::$app->session->getFlash('success') : (Yii::$app->session->hasFlash('error') ? Yii::$app->session->getFlash('error') : ""); ?>";
     if(message.length > 0){
         layer.open({
             title:'警告信息',
             'content':message
         });
-    }
-</script>
-<script>
-    function toQzoneLogin()
-    {
-        var A=window.open("./qq_connect/oauth/qq_login.php","TencentLogin","width=450,height=320,menubar=0,scrollbars=1, resizable=1,status=1,titlebar=0,toolbar=0,location=1");
     }
 </script>

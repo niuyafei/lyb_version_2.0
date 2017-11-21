@@ -14,10 +14,24 @@ use common\models\LoginForm;
 
 class QqController extends BaseController
 {
+
+	public function actionLogin()
+	{
+		require_once(dirname(dirname(__FILE__)) . "/web/qq_connect/comm/config.php");
+//		$_SESSION['state'] = md5(uniqid(rand(), TRUE));
+		$state = Yii::$app->request->get("state", "site/index");
+		$login_url = "https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id="
+			. $_SESSION['appid'] . "&redirect_uri=" . urlencode($_SESSION['callback'])
+			. "&state=" . $state
+			. "&scope=".$_SESSION["scope"];
+		header("Location:$login_url");
+	}
+
 	public function actionReturnurl()
 	{
 		require_once(dirname(dirname(__FILE__)) . "/web/qq_connect/comm/config.php");
 //		if($_REQUEST['state'] == $_SESSION['state']) {
+			$state = $_REQUEST['state'];
 			$token_url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&"
 				. "client_id=" . $_SESSION["appid"]. "&redirect_uri=" . urlencode($_SESSION["callback"])
 				. "&client_secret=" . $_SESSION["appkey"]. "&code=" . $_REQUEST["code"];
@@ -65,7 +79,11 @@ class QqController extends BaseController
 			$loginForm->username = $_SESSION['openid'];
 			$loginForm->password = "123456";
 			$loginForm->rememberMe = true;
-			return $this->redirect(['site/index']);
+			if($state){
+				return $this->redirect([$state]);
+			}else{
+				return $this->redirect(['site/index']);
+			}
 //		}
 	}
 
