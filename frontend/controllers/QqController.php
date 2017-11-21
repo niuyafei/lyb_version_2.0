@@ -127,4 +127,9 @@ class QqController extends BaseController
 
 		return $arr;
 	}
+
+	public function actionTest()
+	{
+		var_dump($this->getUserInfo());
+	}
 }
