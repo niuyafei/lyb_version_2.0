@@ -7,6 +7,7 @@
  */
 namespace frontend\controllers;
 
+use common\models\User;
 use yii;
 use frontend\base\BaseController;
 
@@ -15,8 +16,7 @@ class QqController extends BaseController
 	public function actionReturnurl()
 	{
 		require_once(dirname(dirname(__FILE__)) . "/web/qq_connect/comm/config.php");
-		if($_REQUEST['state'] == $_SESSION['state'])
-		{
+//		if($_REQUEST['state'] == $_SESSION['state']) {
 			$token_url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&"
 				. "client_id=" . $_SESSION["appid"]. "&redirect_uri=" . urlencode($_SESSION["callback"])
 				. "&client_secret=" . $_SESSION["appkey"]. "&code=" . $_REQUEST["code"];
@@ -46,7 +46,26 @@ class QqController extends BaseController
 			$_SESSION["access_token"] = $params["access_token"];
 
 			$this->getOpenId();
-		}
+			if(User::find()->where(['openid' => $_SESSION['openid']])->exists()){
+				$model = User::find()->where(['openid' => $_SESSION['openid']])->one();
+			}else{
+				$userInfo = $this->getUserInfo();
+				$model = new User();
+				$model->username = $_SESSION['openid'];
+				$model->nickname = $userInfo['nickname'];
+				$model->openId = $_SESSION['openid'];
+				$model->auth_key = Yii::$app->security->generateRandomString();
+				$model->password_hash = Yii::$app->security->generatePasswordHash('123456');
+				$model->headImgUrl = $userInfo['figureurl'];
+				$model->gender = ($userInfo['gender'] == '男' ? 1 : 2);
+				$model->save();
+			}
+			$loginForm = new LoginForm();
+			$loginForm->username = $_SESSION['openid'];
+			$loginForm->password = "123456";
+			$loginForm->rememberMe = true;
+			return $this->redirect(['site/index']);
+//		}
 	}
 
 	public function getOpenId()
@@ -63,7 +82,6 @@ class QqController extends BaseController
 		}
 
 		$user = json_decode($str);
-		var_dump($user);
 		if (isset($user->error))
 		{
 			echo "<h3>error:</h3>" . $user->error;
@@ -72,5 +90,19 @@ class QqController extends BaseController
 		}
 		//set openid to session
 		$_SESSION["openid"] = $user->openid;
+	}
+
+	public function getUserInfo(){
+		require_once(dirname(dirname(__FILE__)) . "/web/qq_connect/comm/config.php");
+		$get_user_info = "https://graph.qq.com/user/get_user_info?"
+			. "access_token=" . $_SESSION['access_token']
+			. "&oauth_consumer_key=" . $_SESSION["appid"]
+			. "&openid=" . $_SESSION["openid"]
+			. "&format=json";
+
+		$info = file_get_contents($get_user_info);
+		$arr = json_decode($info, true);
+
+		return $arr;
 	}
 }
