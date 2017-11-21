@@ -20,11 +20,13 @@ class QqController extends BaseController
 		require_once(dirname(dirname(__FILE__)) . "/web/qq_connect/comm/config.php");
 //		$_SESSION['state'] = md5(uniqid(rand(), TRUE));
 		$state = Yii::$app->request->get("state", "site/index");
+		$state = ($state ==  "/" ? "site/index" : $state);
 		$login_url = "https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id="
 			. $_SESSION['appid'] . "&redirect_uri=" . urlencode($_SESSION['callback'])
 			. "&state=" . $state
 			. "&scope=".$_SESSION["scope"];
-		header("Location:$login_url");
+		$this->goFrom($login_url);
+//		header("Location:$login_url");
 	}
 
 	public function actionReturnurl()
