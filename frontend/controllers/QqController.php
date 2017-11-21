@@ -66,6 +66,8 @@ class QqController extends BaseController
 			$model = User::find()->where(['openid' => $_SESSION['openid']])->one();
 		}else{
 			$userInfo = $this->getUserInfo();
+			var_dump($userInfo);
+			exit;
 			$model = new User();
 			$model->username = $_SESSION['openid'];
 			$model->nickname = $userInfo['nickname'];
