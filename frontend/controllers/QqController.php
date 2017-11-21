@@ -32,61 +32,62 @@ class QqController extends BaseController
 	public function actionReturnurl()
 	{
 		require_once(dirname(dirname(__FILE__)) . "/web/qq_connect/comm/config.php");
-//		if($_REQUEST['state'] == $_SESSION['state']) {
-			$state = $_REQUEST['state'];
-			$token_url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&"
-				. "client_id=" . $_SESSION["appid"]. "&redirect_uri=" . urlencode($_SESSION["callback"])
-				. "&client_secret=" . $_SESSION["appkey"]. "&code=" . $_REQUEST["code"];
+		$state = $_REQUEST['state'];
+		$token_url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&"
+			. "client_id=" . $_SESSION["appid"]. "&redirect_uri=" . urlencode($_SESSION["callback"])
+			. "&client_secret=" . $_SESSION["appkey"]. "&code=" . $_REQUEST["code"];
 
-			$response = file_get_contents($token_url);
-			if (strpos($response, "callback") !== false)
+		$response = file_get_contents($token_url);
+		if (strpos($response, "callback") !== false)
+		{
+			$lpos = strpos($response, "(");
+			$rpos = strrpos($response, ")");
+			$response  = substr($response, $lpos + 1, $rpos - $lpos -1);
+			$msg = json_decode($response);
+			if (isset($msg->error))
 			{
-				$lpos = strpos($response, "(");
-				$rpos = strrpos($response, ")");
-				$response  = substr($response, $lpos + 1, $rpos - $lpos -1);
-				$msg = json_decode($response);
-				if (isset($msg->error))
-				{
-					echo "<h3>error:</h3>" . $msg->error;
-					echo "<h3>msg  :</h3>" . $msg->error_description;
-					exit;
-				}
+				echo "<h3>error:</h3>" . $msg->error;
+				echo "<h3>msg  :</h3>" . $msg->error_description;
+				exit;
 			}
+		}
 
-			$params = array();
-			parse_str($response, $params);
+		$params = array();
+		parse_str($response, $params);
 
-			//debug
-			//print_r($params);
+		//debug
+		//print_r($params);
 
-			//set access token to session
-			$_SESSION["access_token"] = $params["access_token"];
+		//set access token to session
+		$_SESSION["access_token"] = $params["access_token"];
 
-			$this->getOpenId();
-			if(User::find()->where(['openid' => $_SESSION['openid']])->exists()){
-				$model = User::find()->where(['openid' => $_SESSION['openid']])->one();
-			}else{
-				$userInfo = $this->getUserInfo();
-				$model = new User();
-				$model->username = $_SESSION['openid'];
-				$model->nickname = $userInfo['nickname'];
-				$model->openId = $_SESSION['openid'];
-				$model->auth_key = Yii::$app->security->generateRandomString();
-				$model->password_hash = Yii::$app->security->generatePasswordHash('123456');
-				$model->headImgUrl = $userInfo['figureurl'];
-				$model->gender = ($userInfo['gender'] == '男' ? 1 : 2);
-				$model->save();
-			}
-			$loginForm = new LoginForm();
-			$loginForm->username = $_SESSION['openid'];
-			$loginForm->password = "123456";
-			$loginForm->rememberMe = true;
+		$this->getOpenId();
+		if(User::find()->where(['openid' => $_SESSION['openid']])->exists()){
+			$model = User::find()->where(['openid' => $_SESSION['openid']])->one();
+		}else{
+			$userInfo = $this->getUserInfo();
+			$model = new User();
+			$model->username = $_SESSION['openid'];
+			$model->nickname = $userInfo['nickname'];
+			$model->openId = $_SESSION['openid'];
+			$model->auth_key = Yii::$app->security->generateRandomString();
+			$model->password_hash = Yii::$app->security->generatePasswordHash('123456');
+			$model->headImgUrl = $userInfo['figureurl'];
+			$model->gender = ($userInfo['gender'] == '男' ? 1 : 2);
+			$model->save();
+		}
+		$loginForm = new LoginForm();
+		$loginForm->username = $_SESSION['openid'];
+		$loginForm->password = "123456";
+		$loginForm->rememberMe = true;
+		if($loginForm->login()){
 			if($state){
 				return $this->redirect([$state]);
-			}else{
-				return $this->redirect(['site/index']);
 			}
-//		}
+		}else{
+			Yii::$app->session->setFlash('error', "调用QQ登陆失败，请联系管理员");
+			return $this->redirect(['site/index']);
+		}
 	}
 
 	public function getOpenId()
