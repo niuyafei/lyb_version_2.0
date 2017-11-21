@@ -42,7 +42,7 @@ $_SESSION["appid"]    = 101437927;
 $_SESSION["appkey"]   = "45573b5965450813a9a85483f0dc97f2"; 
 
 //QQ登录成功后跳转的地址,请确保地址真实可用，否则会导致登录失败。
-$_SESSION["callback"] = "http://helper.liuyangbang.cn/qq/returnurl"; 
+$_SESSION["callback"] = "http://helper.liuyangbang.cn/qq/returnurl";
 
 //QQ授权api接口.按需调用
 $_SESSION["scope"] = "get_user_info,add_share,list_album,add_album,upload_pic,add_topic,add_one_blog,add_weibo";

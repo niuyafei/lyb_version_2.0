@@ -164,6 +164,6 @@ AppAsset::register($this);
 <script>
     function toQzoneLogin()
     {
-        var A=window.open("qq_connect/oauth/redirect_to_login.php","TencentLogin","width=450,height=320,menubar=0,scrollbars=1, resizable=1,status=1,titlebar=0,toolbar=0,location=1");
+        var A=window.open("./qq_connect/oauth/qq_login.php","TencentLogin","width=450,height=320,menubar=0,scrollbars=1, resizable=1,status=1,titlebar=0,toolbar=0,location=1");
     }
 </script>
