@@ -66,15 +66,13 @@ class QqController extends BaseController
 			$model = User::find()->where(['openid' => $_SESSION['openid']])->one();
 		}else{
 			$userInfo = $this->getUserInfo();
-			var_dump($userInfo);
-			exit;
 			$model = new User();
 			$model->username = $_SESSION['openid'];
 			$model->nickname = $userInfo['nickname'];
 			$model->openId = $_SESSION['openid'];
 			$model->auth_key = Yii::$app->security->generateRandomString();
 			$model->password_hash = Yii::$app->security->generatePasswordHash('123456');
-			$model->headImgUrl = $userInfo['figureurl_1'];
+			$model->headImgUrl = $userInfo['figureurl_qq_2'];
 			$model->gender = ($userInfo['gender'] == '男' ? 1 : 2);
 			$model->save();
 		}
