@@ -45,7 +45,7 @@ class AbordcaseController extends BaseController
             'totalCount' => $query->count(),
             'pageSize' => $this->pageSize,
         ]);
-        $data = $query->offset($pages->offset)->limit($pages->limit)->all();
+        $data = $query->offset($pages->offset)->limit($pages->limit)->orderBy("case_id desc")->all();
 
         return $this->render('index', [
             'data' => $data,

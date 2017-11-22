@@ -16,12 +16,12 @@ class ConsultationController extends BaseController
 {
 	public function actionIndex()
 	{
-		$query = Consultation::find();
+		$query = Consultation::find()->with("payment");
 		$pages = new Pagination([
 			'totalCount' => $query->count(),
 			'pageSize' => $this->pageSize,
 		]);
-		$data = $query->offset($pages->offset)->limit($pages->limit)->all();
+		$data = $query->offset($pages->offset)->limit($pages->limit)->orderBy("consultation_id desc")->all();
 
 		return $this->render("index", [
 			'data' => $data,
