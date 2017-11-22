@@ -44,11 +44,7 @@ $this->title = "预约咨询";
 						<!-- <td><?//= $value['times']; ?></td> -->
 						<td><?= $value['payment']['status'] == 1 ? "已支付" : "未支付"; ?></td>
 						<td>
-							<select name="status" class="form-control" consultation_id="<?= $value['consultation_id']; ?>">
-								<?php foreach(\common\models\Consultation::dropDown("status") as $k => $v): ?>
-									<option value="<?= $k; ?>" <?= $value['status'] == $k ? "selected" : ""; ?>  ><?= $v; ?></option>
-								<?php endforeach; ?>
-							</select>
+							<?= \common\models\Consultation::dropDown("status", $value['status']); ?>
 						</td>
 						<td>
 							<?php if(!$value['admin_id']): ?>
