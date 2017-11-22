@@ -120,7 +120,7 @@ class AbordcaseController extends BaseController
         }
 
         if($data = Yii::$app->request->post()){
-            $caseModel->load($data['AbordCase']);
+            $caseModel->load($data);
             if($caseModel->validate()){
                 $caseModel->save();
             }else{
@@ -138,15 +138,18 @@ class AbordcaseController extends BaseController
 
 
             $name = $_FILES['ExpertComments']['name']['video'];
-            $ext = mb_substr($name, mb_strrpos($name, '.', 'utf-8'), mb_strlen($name, "utf-8"), "utf-8");
-            $path = "/Uploads/videos/";
-            $fileName = $path . "expert_comments_" . time();
+            if($name){
+                $ext = mb_substr($name, mb_strrpos($name, '.', 'utf-8'), mb_strlen($name, "utf-8"), "utf-8");
+                $path = "/Uploads/videos/";
+                $fileName = $path . "expert_comments_" . time();
 
-            $expertCommentModel->video = $fileName . $ext;
-            $command = "/usr/bin/ffmpeg -i " . dirname(__DIR__) ."/web{$fileName}{$ext} -ss 00:00:00 -t 00:00:10 -acodec copy ".dirname(__DIR__)."/web{$fileName}_10s{$ext}";
-
-            if (move_uploaded_file($_FILES['ExpertComments']['tmp_name']['video'], dirname(__DIR__).'/web'.$fileName.$ext) && $expertCommentModel->save()) {
+                $expertCommentModel->video = $fileName . $ext;
+                $command = "/usr/bin/ffmpeg -i " . dirname(__DIR__) ."/web{$fileName}{$ext} -ss 00:00:00 -t 00:00:10 -acodec copy ".dirname(__DIR__)."/web{$fileName}_10s{$ext}";
+                move_uploaded_file($_FILES['ExpertComments']['tmp_name']['video'], dirname(__DIR__).'/web'.$fileName.$ext);
                 exec($command);
+            }
+
+            if ($expertCommentModel->save()) {
                 Yii::$app->session->setFlash('success', "保存成功");
                 return $this->redirect(['abordcase/index']);
             }else{
