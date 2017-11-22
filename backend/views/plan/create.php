@@ -111,7 +111,7 @@ $this->title = '留学规划';
                     </div>
                 </div>
                 <p class="col-xs-12 text-right m-b-20">
-                    <a href="" class="btn btn-blue">+ 新增</a>
+<!--                    <button type="button" class="btn btn-blue add">+ 新增</button>-->
                 </p>
             </div>
             <div class="row case-edit-formwidth p-l-0 p-r-0 case-edit-licheng">
@@ -166,7 +166,7 @@ $this->title = '留学规划';
                     </div>
                 </div>
                 <p class="col-xs-12 text-right m-b-20">
-                    <a href="" class="btn btn-blue">+ 新增</a>
+<!--                    <button type="button" class="btn btn-blue add">+ 新增</button>-->
                 </p>
             </div>
             <div class="row case-edit-formwidth p-l-0 p-r-0 case-edit-licheng">
@@ -221,7 +221,7 @@ $this->title = '留学规划';
                     </div>
                 </div>
                 <p class="col-xs-12 text-right m-b-20">
-                    <a href="" class="btn btn-blue">+ 新增</a>
+<!--                    <button type="button" class="btn btn-blue add">+ 新增</button>-->
                 </p>
             </div>
             <div class="row case-edit-formwidth">

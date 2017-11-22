@@ -58,9 +58,9 @@ $this->title = '留学规划';
             </div>
             <div class="case-edit-cont">
                 <h4 class="text-center m-b-20">选校列表</h4>
-                <p class="col-xs-12 text-right m-b-20">
-                    <a href="#" data-toggle="modal" data-target="#schools" school-type="1" plan_id="<?= $model->plan_id; ?>" class="btn btn-blue">+ 新增</a>
-                </p>
+<!--                <p class="col-xs-12 text-right m-b-20">-->
+<!--                    <a href="#" data-toggle="modal" data-target="#schools" school-type="1" plan_id="--><?//= $model->plan_id; ?><!--" class="btn btn-blue">+ 新增</a>-->
+<!--                </p>-->
                 <div class="row case-edit-formwidth p-l-0 p-r-0 case-edit-licheng">
                 <?php $i=0; ?>
                 <?php foreach($schools as $key => $value): ?>
@@ -118,10 +118,13 @@ $this->title = '留学规划';
                             </div>
                     <?php endif; ?>
                 <?php endforeach; ?>
+                    <p class="col-xs-12 text-right m-b-20">
+                        <a href="#" data-toggle="modal" data-target="#schools" school-type="1" plan_id="<?= $model->plan_id; ?>" class="btn btn-blue">+ 新增</a>
+                    </p>
                 </div>
-                <p class="col-xs-12 text-right m-b-20">
-                    <a href="#" data-toggle="modal" data-target="#schools" school-type="2" plan_id="<?= $model->plan_id; ?>" class="btn btn-blue">+ 新增</a>
-                </p>
+<!--                <p class="col-xs-12 text-right m-b-20">-->
+<!--                    <a href="#" data-toggle="modal" data-target="#schools" school-type="2" plan_id="--><?//= $model->plan_id; ?><!--" class="btn btn-blue">+ 新增</a>-->
+<!--                </p>-->
                 <div class="row case-edit-formwidth p-l-0 p-r-0 case-edit-licheng">
                     <?php $i=0; ?>
                     <?php foreach($schools as $key => $value): ?>
@@ -179,10 +182,13 @@ $this->title = '留学规划';
                             </div>
                         <?php endif; ?>
                     <?php endforeach; ?>
+                    <p class="col-xs-12 text-right m-b-20">
+                        <a href="#" data-toggle="modal" data-target="#schools" school-type="2" plan_id="<?= $model->plan_id; ?>" class="btn btn-blue">+ 新增</a>
+                    </p>
                 </div>
-                <p class="col-xs-12 text-right m-b-20">
-                    <a href="#" data-toggle="modal" data-target="#schools" school-type="3" plan_id="<?= $model->plan_id; ?>" class="btn btn-blue">+ 新增</a>
-                </p>
+<!--                <p class="col-xs-12 text-right m-b-20">-->
+<!--                    <a href="#" data-toggle="modal" data-target="#schools" school-type="3" plan_id="--><?//= $model->plan_id; ?><!--" class="btn btn-blue">+ 新增</a>-->
+<!--                </p>-->
                 <div class="row case-edit-formwidth p-l-0 p-r-0 case-edit-licheng">
                     <?php $i=0; ?>
                     <?php foreach($schools as $key => $value): ?>
@@ -240,6 +246,9 @@ $this->title = '留学规划';
                             </div>
                         <?php endif; ?>
                     <?php endforeach; ?>
+                    <p class="col-xs-12 text-right m-b-20">
+                        <a href="#" data-toggle="modal" data-target="#schools" school-type="3" plan_id="<?= $model->plan_id; ?>" class="btn btn-blue">+ 新增</a>
+                    </p>
                 </div>
                 <div class="row case-edit-formwidth">
                     <div class="col-xs-12">

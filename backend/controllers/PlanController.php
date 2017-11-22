@@ -139,6 +139,10 @@ class PlanController extends BaseController
                     Yii::$app->session->setFlash('error', "留学规划-时间规划保存失败");
                 }
             }
+            if($model->status == 1){
+                $model->status = 2;
+                $model->save();
+            }
             Yii::$app->session->setFlash('success', "留学规划方案生成成功");
             return $this->redirect(['plan/index']);
         } else {
@@ -210,6 +214,7 @@ class PlanController extends BaseController
                 }
             }
 
+            Plan::updateAll(["status" => 2], ["plan_id" => $model->plan_id]);
             Yii::$app->session->setFlash('success', '方案更新成功');
             return $this->redirect(['plan/view?id='.$model->plan_id]);
         } else {
