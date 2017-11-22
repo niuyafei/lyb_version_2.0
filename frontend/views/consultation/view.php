@@ -42,7 +42,7 @@ $this->title = "我的咨询";
 						<span class="color-red"><?= \common\models\Consultation::dropDown("status", $value['status']) ?></span>
 					</td>
 					<td class="text-center">
-						<?php if(isset($value->payment->status) && $value->payment->status == 1): ?>
+						<?php if(!isset($value->payment->status) || $value->payment->status != 1): ?>
 							<a href="/consultation/pay?consultation_id=<?= $value['consultation_id']; ?>" >支付</a>
 						<?php endif; ?>
 						<?php if($value['status'] == 3): ?>
