@@ -33,7 +33,7 @@ class TimePlan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'plan_id', 'grade', 'type', 'dates', 'content'], 'required'],
+            [['user_id', 'plan_id', 'grade', 'type', 'dates'], 'required'],
             [['user_id', 'plan_id', 'grade', 'type', 'status'], 'integer'],
             [['created_at'], 'safe'],
             [['content'], 'string'],

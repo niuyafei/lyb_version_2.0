@@ -12,6 +12,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use backend\base\BaseController;
 use yii\data\Pagination;
+use yii\helpers\ArrayHelper;
 
 /**
  * PlanController implements the CRUD actions for Plan model.
@@ -94,7 +95,14 @@ class PlanController extends BaseController
             }
 
             for($i=0; $i<count($data['schools']['rank']); $i++){
-                $array = array_column($data['schools'], $i);
+//                $array = ArrayHelper::getColumn($data['schools'], $i);
+                $array = [
+                    $data['schools']['type'][$i],
+                    $data['schools']['rank'][$i],
+                    $data['schools']['sat'][$i],
+                    $data['schools']['schoolName'][$i],
+                    $data['schools']['applyType'][$i],
+                ];
                 $schoolModel = new Schools();
                 $schoolModel->plan_id = $model->plan_id;
                 $schoolModel->user_id = $model->user_id;
@@ -111,7 +119,14 @@ class PlanController extends BaseController
             }
 
             for($j=0; $j<count($data['timePlan']['grade']); $j++){
-                $array = array_column($data['timePlan'], $j);
+//                $array = ArrayHelper::getColumn($data['timePlan'], $j);
+                $array = [
+                    $data['timePlan']['grade'][$j],
+                    $data['timePlan']['type'][$j],
+                    $data['timePlan']['dates'][$j],
+                    $data['timePlan']['content'][$j],
+                ];
+
                 $timePlanModel = new TimePlan();
                 $timePlanModel->plan_id = $model->plan_id;
                 $timePlanModel->user_id = $model->user_id;
@@ -187,7 +202,6 @@ class PlanController extends BaseController
                     $data['timePlan']['id'][$j],
                     $data['timePlan']['content'][$j],
                 ];
-//                $array = array_column($data['timePlan'], $j);
                 $timePlanModel = TimePlan::findOne($array[0]);
                 $timePlanModel->content = str_replace("/r/n", "，", $array[1]);
                 if(!($timePlanModel->validate() && $timePlanModel->save())){
@@ -263,5 +277,10 @@ class PlanController extends BaseController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionTest()
+    {
+        var_dump(function_exists("array_column"));
     }
 }
