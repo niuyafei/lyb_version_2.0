@@ -404,21 +404,6 @@ $this->title = "留学案例";
 				</div>
 			</div>
 
-			<?php if($expertCommentModel->video): ?>
-<!--			<div class="row case-edit-formwidth">-->
-<!--				<div class="col-xs-6">-->
-<!--					<div class="row">-->
-<!--						<div class="col-xs-3 text-right p-t-5 p-r-0">-->
-<!--							<b>案例讲解：</b>-->
-<!--						</div>-->
-<!--						<div class="col-xs-9">-->
-<!--							<audio id="expert_comment" src="--><?//= Url::to($expertCommentModel->video); ?><!--" controls="controls" preload="auto" class="audio-style m-l-10"> </audio>-->
-<!--						</div>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--			</div>-->
-			<?php endif; ?>
-
 			<div class="row case-edit-formwidth">
 				<div class="col-xs-6">
 					<div class="row">
