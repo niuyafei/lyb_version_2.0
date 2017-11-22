@@ -14,6 +14,16 @@ class BaseController extends Controller
 {
 	public $pageSize = 10;
 
+	public function beforeAction($action)
+	{
+		parent::beforeAction($action);
+		if(Yii::$app->user->isGuest){
+			return false;
+		}
+		return true;
+
+	}
+
 	public function goFrom($url=null)
 	{
 		if(is_null($url)){

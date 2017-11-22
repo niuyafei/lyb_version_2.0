@@ -22,7 +22,7 @@ class ServiceController extends BaseController
 			'totalCount' => $query->count(),
 			'pageSize' => $this->pageSize
 		]);
-		$data = $query->offset($pages->offset)->limit($pages->limit)->all();
+		$data = $query->offset($pages->offset)->limit($pages->limit)->orderBy("service_id desc")->all();
 		$experts = Expert::find()->where(['status' => 2])->all();
 
 		return $this->render("index", [
