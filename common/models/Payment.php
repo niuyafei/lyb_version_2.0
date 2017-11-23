@@ -56,4 +56,13 @@ class Payment extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
         ];
     }
+
+    public static function isPayment($column, $id, $user_id)
+    {
+        if(self::find()->where([$column => $id, 'user_id' => $user_id, 'status' => 2])->exists()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

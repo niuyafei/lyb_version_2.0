@@ -29,6 +29,7 @@ $this->title = "我的咨询";
 			</thead>
 			<tbody>
 				<?php foreach($data as $key => $value): ?>
+					<?php var_dump(\common\models\Payment::isPayment("consultation_id", $value['consultation_id'], $value['user_id'])); ?>
 				<tr>
 					<td class="text-center"><?= $key+1; ?></td>
 					<td class="text-center"><?= \common\models\Consultation::dropDown("type", $value['type']); ?></td>
