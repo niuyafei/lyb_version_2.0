@@ -59,7 +59,7 @@ class Payment extends \yii\db\ActiveRecord
 
     public static function isPayment($column, $id, $user_id)
     {
-        if(self::find()->where([$column => $id, 'user_id' => $user_id, 'status' => 2])->exists()){
+        if(self::find()->where([$column => $id, 'user_id' => $user_id, 'status' => 1])->exists()){
             return true;
         }else{
             return false;
