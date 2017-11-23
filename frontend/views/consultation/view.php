@@ -37,7 +37,7 @@ $this->title = "我的咨询";
 					<td class="text-center">
 						<a href="" data-toggle="modal" data-target="#qitaxuqiu_<?= $value['consultation_id'] ?>">查看</a>
 					</td class="text-center">
-					<td class="text-center"><?= $value['pay_type'] == 1 ? "未支付" : "已支付"; ?></td>
+					<td class="text-center"><?= \common\models\Payment::isPayment("consultation_id", $value['consultation_id'], $value['user_id']) == true ? "已支付" : "未支付"; ?></td>
 					<td class="text-center">
 						<span class="color-red"><?= \common\models\Consultation::dropDown("status", $value['status']) ?></span>
 					</td>
