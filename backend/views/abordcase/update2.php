@@ -59,7 +59,7 @@ $this->title = "留学案例";
 									<input type="radio" checked="<?= $caseModel->gender == 1 ? "checked" : ""; ?>" name="gender"> 男
 								</label>
 								<label class="p-r-15">
-									<input type="radio" checked="<?= $caseModel->gender == 1 ? "checked" : ""; ?>" name="gender"> 女
+									<input type="radio" checked="<?= $caseModel->gender == 2 ? "checked" : ""; ?>" name="gender"> 女
 								</label>
 							</div>
 						</div>
