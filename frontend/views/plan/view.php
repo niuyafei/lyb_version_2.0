@@ -112,7 +112,7 @@ $this->title = "留学规划";
 					<table class="table table-bordered school-list">
 						<tbody>
 						<tr>
-							<td rowspan="5" class="text-center school-list-tit color-blue" width="110"> <b>梦想学校</b></td>
+							<td rowspan="<?= count($dreamSchoolList)+1; ?>" class="text-center school-list-tit color-blue" width="110"> <b>梦想学校</b></td>
 							<td class="text-center"><b>学校排名</b></td>
 							<td class="text-center"><b>学校名称</b></td>
 							<td class="text-center"><b>SAT要求</b></td>
@@ -131,7 +131,7 @@ $this->title = "留学规划";
 					<table class="table table-bordered school-list">
 						<tbody>
 						<tr>
-							<td rowspan="8" class="text-center school-list-tit color-green" width="110"> <b>目标学校</b></td>
+							<td rowspan="<?= count($goalSchoolList)+1; ?>" class="text-center school-list-tit color-green" width="110"> <b>目标学校</b></td>
 							<td class="text-center"><b>学校排名</b></td>
 							<td class="text-center"><b>学校名称</b></td>
 							<td class="text-center"><b>SAT要求</b></td>
@@ -151,7 +151,7 @@ $this->title = "留学规划";
 					<table class="table table-bordered school-list">
 						<tbody>
 						<tr>
-							<td rowspan="5" class="text-center school-list-tit color-orange" width="110"> <b>保底学校</b></td>
+							<td rowspan="<?= count($endSchoolList)+1; ?>" class="text-center school-list-tit color-orange" width="110"> <b>保底学校</b></td>
 							<td class="text-center"><b>学校排名</b></td>
 							<td class="text-center"><b>学校名称</b></td>
 							<td class="text-center"><b>SAT要求</b></td>
@@ -187,6 +187,7 @@ $this->title = "留学规划";
 			</div>
 			<div role="tabpanel" class="tab-pane" id="shijian">
 				<?php foreach($grade as $key => $value): ?>
+					<?php if($value[0]['content'] == "") continue; ?>
 					<div class="view-tab-contdetail">
 						<h3 class="text-center m-t-30"><?= \common\models\TimePlan::dropDown($key, "grade"); ?></h3>
 						<hr class="cont-tit-border-sm" />
@@ -205,7 +206,12 @@ $this->title = "留学规划";
 									</div>
 									<div class="panel-body">
 										<ul class="list-group">
-											<?php foreach(explode("，", $v['content']) as $itemKey => $itemValue): ?>
+											<?php
+												$content = explode("，", $v['content']);
+												if(count($content == 1)){
+													$content = explode("\r\n", $v['content']);
+												}
+											foreach($content as $itemKey => $itemValue): ?>
 												<?php if($itemKey == 3): ?>
 													<?php $i=3; break; ?>
 												<?php endif; ?>
@@ -233,7 +239,13 @@ $this->title = "留学规划";
 <!-- 模态框开始 -->
 <?php foreach($grade as $key => $value): ?>
 	<?php foreach($value as $k => $v): ?>
-		<?php if(count(explode("，", $v['content'])) > 2): ?>
+		<?php
+			$content = explode("，", $v['content']);
+			if(count($content) == 1){
+				$content = explode("\r\n", $v['content']);
+			}
+		?>
+		<?php if(count($content) > 2): ?>
 			<div class="modal" id="time-plan-detail_<?= $v['id']; ?>">
 				<div class="modal-dialog modal-sm" role="document">
 					<div class="modal-content">
@@ -246,7 +258,7 @@ $this->title = "留学规划";
 							<ul class="list-group">
 								<?php array_map(function($item) use($v){
 									echo "<li class=\"m-t-10\">".$item." <small class=\"color-gray pull-right\">".substr($v['dates'], (strpos($v['dates'], "-")+1))."</small></li>";
-								}, explode("，", $v['content'])); ?>
+								}, $content); ?>
 							</ul>
 						</div>
 						<div class="modal-footer">

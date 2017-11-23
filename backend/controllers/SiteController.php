@@ -57,6 +57,19 @@ class SiteController extends Controller
 //        ];
 //    }
 
+    public function beforeAction($action)
+    {
+        if(Yii::$app->user->isGuest){
+            $controller = $this->action->controller->id;
+            $action = $this->action->id;
+            if($controller == "site" && ($action == "login" || $action == "repassword")){
+                return true;
+            }
+            return $this->redirect(['site/login']);
+        }
+        return true;
+    }
+
     /**
      * Displays homepage.
      *

@@ -422,9 +422,13 @@ $this->title = "留学案例";
 				<div class="col-xs-6">
 					<div class="row">
 						<div class="col-xs-3 text-right p-t-5 p-r-0">
-							<b><?= $expertCommentModel->video != "" ? "重新上传" : "音频文件"; ?>：</b>
+							<b>音频文件</b>
 						</div>
+
 						<div class="col-xs-9">
+							<?php if($expertCommentModel->video != ""): ?>
+								<audio id="expert_comment" src="<?= Url::to($expertCommentModel->video); ?>" controls="controls" preload="auto" class="audio-style m-l-10"> </audio>
+							<?php endif; ?>
 							<?= $form->field($expertCommentModel, 'video')->fileInput()->label(false); ?>
 							<p class="p-t-5 m-b-0"><small class="color-red">文件大小不超过10G，支持mp3.mp4.m4a格式</small></p>
 						</div>
