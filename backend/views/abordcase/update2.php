@@ -98,6 +98,20 @@ $this->title = "留学案例";
 					</div>
 				</div>
 			</div>
+
+			<div class="row case-edit-formwidth">
+				<div class="col-xs-6">
+					<div class="row">
+						<div class="col-xs-3 text-right p-t-5 p-r-0">
+							<b><span class="color-red">*</span> 录取专业：</b>
+						</div>
+						<div class="col-xs-9">
+							<?= $form->field($caseModel, "admissionMajor")->textInput()->label(false); ?>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<div class="row case-edit-formwidth">
 				<div class="col-xs-12">
 					<div class="row">
