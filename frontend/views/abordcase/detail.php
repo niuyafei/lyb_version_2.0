@@ -22,8 +22,8 @@ $this->title = "案例详情";
 				<hr class="cont-tit-border-sm">
 				<div class="col-xs-6 case-info-left">
 					<ul class="list-group">
-						<li class="m-b-20">姓名：<?= $model->user->nickname; ?></li>
-						<li class="m-b-20">性别：<?= $model->user->gender == 1 ? "男" : "女"; ?></li>
+						<li class="m-b-20">姓名：<?= $model->username; ?></li>
+						<li class="m-b-20">性别：<?= $model->gender == 1 ? "男" : "女"; ?></li>
 						<li class="m-b-20">申请项目：<?= AbordCase::dropDown("applicationProject", $model->applicationProject); ?></li>
 						<li class="m-b-20">所在年级：<?= $model->grade; ?></li>
 					</ul>
