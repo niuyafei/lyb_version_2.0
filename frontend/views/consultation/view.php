@@ -29,7 +29,6 @@ $this->title = "我的咨询";
 			</thead>
 			<tbody>
 				<?php foreach($data as $key => $value): ?>
-					<?php var_dump(\common\models\Payment::isPayment("consultation_id", $value['consultation_id'], $value['user_id'])); ?>
 				<tr>
 					<td class="text-center"><?= $key+1; ?></td>
 					<td class="text-center"><?= \common\models\Consultation::dropDown("type", $value['type']); ?></td>
@@ -43,7 +42,7 @@ $this->title = "我的咨询";
 						<span class="color-red"><?= \common\models\Consultation::dropDown("status", $value['status']) ?></span>
 					</td>
 					<td class="text-center">
-						<?php if(!isset($value->payment->status) || $value->payment->status != 1): ?>
+						<?php if(!\common\models\Payment::isPayment("consultation_id", $value['consultation_id'], $value['user_id'])): ?>
 							<a href="/consultation/pay?consultation_id=<?= $value['consultation_id']; ?>" >支付</a>
 						<?php endif; ?>
 						<?php if($value['status'] == 3): ?>

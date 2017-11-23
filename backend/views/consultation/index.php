@@ -36,13 +36,10 @@ $this->title = "预约咨询";
 						<td><?= $value['username']; ?></td>
 						<td><?= $value['gender'] == 1 ? "男" : "女"; ?></td>
 						<td><?= $value['phone']; ?></td>
-						<!-- <td><?//= \common\models\Consultation::dropDown("type", $value['type']); ?></td> -->
 						<td>
 							<a href="#" data-toggle="modal" data-target="#chakanneirong_<?= $value['consultation_id']; ?>">查看内容</a>
 						</td>
-						<!-- <td><?//= $value['dates']; ?></td> -->
-						<!-- <td><?//= $value['times']; ?></td> -->
-						<td><?= $value['payment']['status'] == 1 ? "已支付" : "未支付"; ?></td>
+						<td><?= \common\models\Payment::isPayment("consultation_id", $value['consultation_id'], $value['user_id']) == true ? "已支付" : "未支付"; ?></td>
 						<td>
 							<?= \common\models\Consultation::dropDown("status", $value['status']); ?>
 						</td>
