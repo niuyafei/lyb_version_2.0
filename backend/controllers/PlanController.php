@@ -172,6 +172,9 @@ class PlanController extends BaseController
         }
         $studyPlan = StudyPlan::find()->where(['plan_id' => $model->plan_id])->one();
         $timePlan = TimePlan::find()->where(['plan_id' => $model->plan_id])->orderBy("grade asc")->all();
+        if(empty($timePlan)){
+            $timePlan = new TimePlan();
+        }
         $schools = Schools::find()->where(['plan_id' => $model->plan_id])->orderBy("type ASC,rank ASC")->all();
 
         if ($data = Yii::$app->request->post()) {
@@ -201,16 +204,33 @@ class PlanController extends BaseController
                 }
             }
 
-            for($j=0; $j<count($data['timePlan']['id']); $j++){
-                $array = [
-                    $data['timePlan']['id'][$j],
-                    $data['timePlan']['content'][$j],
-                ];
-                $timePlanModel = TimePlan::findOne($array[0]);
-                $timePlanModel->content = str_replace("/r/n", "，", $array[1]);
-                if(!($timePlanModel->validate() && $timePlanModel->save())){
-                    Yii::$app->session->setFlash('error', "时间规划更新失败");
-                    return $this->redirect(['plan/index']);
+            if(isset($data['timePlan']['id'])){
+                for($j=0; $j<count($data['timePlan']['id']); $j++){
+                    $array = [
+                        $data['timePlan']['id'][$j],
+                        $data['timePlan']['content'][$j],
+                    ];
+                    $timePlanModel = TimePlan::findOne($array[0]);
+                    $timePlanModel->content = str_replace("/r/n", "，", $array[1]);
+                    if(!($timePlanModel->validate() && $timePlanModel->save())){
+                        Yii::$app->session->setFlash('error', "时间规划更新失败");
+                        return $this->redirect(['plan/index']);
+                    }
+                }
+            }else{
+                for($j=0; $j<count($data['timePlan']['content']); $j++){
+                    $timePlanModel = new TimePlan();
+                    $timePlanModel->user_id = $studyPlan['user_id'];
+                    $timePlanModel->plan_id = $id;
+                    $timePlanModel->grade = $data['timePlan']['grade'][$j];
+                    $timePlanModel->type = 1;
+                    $timePlanModel->dates = $data['timePlan']['dates'][$j];
+                    $timePlanModel->content = $data['timePlan']['content'][$j];
+                    $timePlanModel->created_at = date("Y-m-d H:i:s");
+                    if(!$timePlanModel->save()){
+                        Yii::$app->session->setFlash('error', "时间规划更新失败");
+                        return $this->redirect(['plan/index']);
+                    }
                 }
             }
 

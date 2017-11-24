@@ -269,26 +269,66 @@ $this->title = '留学规划';
             </div>
             <div class="case-edit-cont">
                 <h4 class="text-center m-b-20">时间规划</h4>
-                <?php foreach($timePlan as $key2 => $value2): ?>
-                    <input type="hidden" name="timePlan[id][]" value="<?= $value2['id'] ?>" >
-                    <div class="row case-edit-formwidth">
-                        <div class="col-xs-12">
-                            <div class="row">
-                                <div class="col-xs-3 text-right p-t-5 p-r-0">
-                                    <b><?= $value2['grade'] == 1 ? "高一" : ($value2['grade'] == 2 ? "高二" : "高三"); ?>(<?php
-                                        if($value2['type'] == 1) echo "上学期";
-                                        if($value2['type'] == 2) echo "暑假";
-                                        if($value2['type'] == 3) echo "下学期";
-                                        if($value2['type'] == 4) echo "寒假";
-                                        ?>)：</b>
-                                </div>
-                                <div class="col-xs-10">
-                                    <textarea name="timePlan[content][]" rows="" cols="" class="form-control"><?= str_replace("，", "\r\n", $value2['content']); ?></textarea>
+                <?php if(!empty($timePlan)): ?>
+                    <?php foreach($timePlan as $key2 => $value2): ?>
+                        <input type="hidden" name="timePlan[id][]" value="<?= $value2['id'] ?>" >
+                        <div class="row case-edit-formwidth">
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-3 text-right p-t-5 p-r-0">
+                                        <b><?= $value2['grade'] == 1 ? "高一" : ($value2['grade'] == 2 ? "高二" : "高三"); ?>(<?php
+                                            if($value2['type'] == 1) echo "上学期";
+                                            if($value2['type'] == 2) echo "暑假";
+                                            if($value2['type'] == 3) echo "下学期";
+                                            if($value2['type'] == 4) echo "寒假";
+                                            ?>)：</b>
+                                    </div>
+                                    <div class="col-xs-10">
+                                        <textarea name="timePlan[content][]" rows="" cols="" class="form-control"><?= str_replace("，", "\r\n", $value2['content']); ?></textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <?php
+                        if($model->grade == "高一"){
+                            $grade = 1;
+                        }else if($model->grade == "高二"){
+                            $grade = 2;
+                        }else if($model->grade == "高三"){
+                            $grade = 3;
+                        }else{
+                            $grade = 1;
+                        }
+                    ?>
+                    <?php for($i=1; $i<=3; $i++): ?>
+                        <?php if($grade > $i) continue; ?>
+                        <input type="hidden" name="timePlan[grade][]" value="<?= $i; ?>">
+                        <div class="row case-edit-formwidth">
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-3 text-right p-t-5 p-r-0">
+                                        <b>时间：</b>
+                                    </div>
+                                    <div class="col-xs-10">
+                                        <input type="text" name="timePlan[dates][]" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-3 text-right p-t-5 p-r-0">
+                                        <b><?= $i == 1 ? "高一" : ($i == 2 ? "高二" : "高三"); ?>：</b>
+                                    </div>
+                                    <div class="col-xs-10">
+                                        <textarea name="timePlan[content][]" rows="" cols="" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endfor; ?>
+                <?php endif; ?>
                 <hr />
             </div>
             <div class="row">
