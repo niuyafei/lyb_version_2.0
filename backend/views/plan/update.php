@@ -306,7 +306,7 @@ $this->title = '留学规划';
                         <?php if($grade > $t) continue; ?>
                         <input type="hidden" name="timePlan[grade][]" value="<?= $t; ?>">
                         <div class="row case-edit-formwidth">
-                            <div class="col-xs-12 m-b-20" style="padding-left: 0px;">
+                            <div class="col-xs-12 m-b-20" style="padding-left: 0px; margin-bottom: 0px;">
                                 <div class="row case-edit-formwidth">
                                     <div class="col-xs-3 text-right p-t-5 p-r-0">
                                         <b>时间：</b>
