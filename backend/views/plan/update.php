@@ -312,7 +312,7 @@ $this->title = '留学规划';
                                         <b>时间：</b>
                                     </div>
                                     <div class="col-xs-10">
-                                        <input type="text" name="timePlan[dates][]" value="">
+                                        <input type="text" name="timePlan[dates][]" value="" style="width: 300px;">
                                     </div>
                                 </div>
                             </div>
