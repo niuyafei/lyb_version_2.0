@@ -99,7 +99,8 @@ $this->title = '专家管理';
                 <div class="form-group">
                     <label for="name" class="col-xs-3 control-label color-8b">姓名</label>
                     <div class="col-xs-9 p-l-5">
-                        <input type="text" class="form-control" name="Expert[username]" placeholder="姓名">
+<!--                        <input type="text" class="form-control" name="Expert[username]" placeholder="姓名">-->
+                        <?= $form->field($model, "username")->textInput(['class' => 'form-control', 'placeholder' => "姓名", 'style'=>["margin-left"=>"15px", "width"=>"203.5px"]])->label(false); ?>
                     </div>
                 </div>
                 <div class="form-group">
