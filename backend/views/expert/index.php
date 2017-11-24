@@ -146,7 +146,7 @@ $this->title = '专家管理';
                 <!--                </form>-->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-blue add">完成</button>
+                <button type="submit" class="btn btn-blue add">完成</button>
             </div>
             <?php ActiveForm::end(); ?>
         </div>
