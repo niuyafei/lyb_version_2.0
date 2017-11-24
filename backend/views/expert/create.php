@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
         <div class="case-edit-cont">
             <div class="case-edit-cont">
-                <h4 class="text-center m-b-20">添加留洋专家</h4>
+                <h4 class="text-center m-b-20">添加账号</h4>
                 <div class="row case-edit-formwidth p-l-0 p-r-0 case-edit-licheng">
                     <p></p>
                     <div class="col-xs-9">

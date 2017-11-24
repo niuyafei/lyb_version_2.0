@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use PHPUnit\Framework\Exception;
 use Yii;
 use common\models\Expert;
 use yii\data\ActiveDataProvider;
@@ -46,10 +47,12 @@ class ExpertController extends BaseController
             'pageSize' => $this->pageSize,
         ]);
         $data = $query->offset($pages->offset)->limit($pages->limit)->all();
+        $model = new Expert();
 
         return $this->render('index', [
             'data' => $data,
             'pages' => $pages,
+            'model' => $model
         ]);
     }
 
@@ -84,6 +87,7 @@ class ExpertController extends BaseController
             $model->headimgurl = $path . $name;
 
             if(move_uploaded_file($_FILES['Expert']['tmp_name']['headimgurl'], dirname(__DIR__) . '/web' . $path . $name) && $model->save()){
+                Yii::$app->session->setFlash("success", "保存成功");
                 return $this->redirect(['index']);
 //                return $this->redirect(['view', 'id' => $model->expert_id]);
             }
