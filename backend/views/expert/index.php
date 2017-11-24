@@ -84,7 +84,7 @@ $this->title = '专家管理';
 <!-- 新增 -->
 <div class="modal" tabindex="-1" role="dialog" id="tianjiazhuanjia">
     <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
+        <div class="modal-content" style="width:500px;">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h5 class="modal-title color-blue">账号添加</h5>
