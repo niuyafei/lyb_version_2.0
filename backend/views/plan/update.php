@@ -269,7 +269,7 @@ $this->title = '留学规划';
             </div>
             <div class="case-edit-cont">
                 <h4 class="text-center m-b-20">时间规划</h4>
-                <?php if(!empty($timePlan)): ?>
+                <?php if(is_array($timePlan)): ?>
                     <?php foreach($timePlan as $key2 => $value2): ?>
                         <input type="hidden" name="timePlan[id][]" value="<?= $value2['id'] ?>" >
                         <div class="row case-edit-formwidth">
@@ -302,9 +302,9 @@ $this->title = '留学规划';
                             $grade = 1;
                         }
                     ?>
-                    <?php for($i=1; $i<=3; $i++): ?>
-                        <?php if($grade > $i) continue; ?>
-                        <input type="hidden" name="timePlan[grade][]" value="<?= $i; ?>">
+                    <?php for($t=1; $t<=3; $t++): ?>
+                        <?php if($grade > $t) continue; ?>
+                        <input type="hidden" name="timePlan[grade][]" value="<?= $t; ?>">
                         <div class="row case-edit-formwidth">
                             <div class="col-xs-12">
                                 <div class="row">
@@ -319,7 +319,7 @@ $this->title = '留学规划';
                             <div class="col-xs-12">
                                 <div class="row">
                                     <div class="col-xs-3 text-right p-t-5 p-r-0">
-                                        <b><?= $i == 1 ? "高一" : ($i == 2 ? "高二" : "高三"); ?>：</b>
+                                        <b><?= $t == 1 ? "高一" : ($t == 2 ? "高二" : "高三"); ?>：</b>
                                     </div>
                                     <div class="col-xs-10">
                                         <textarea name="timePlan[content][]" rows="" cols="" class="form-control"></textarea>
