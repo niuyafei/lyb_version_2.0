@@ -312,7 +312,7 @@ $this->title = '留学规划';
                                         <b>时间：</b>
                                     </div>
                                     <div class="col-xs-10">
-                                        <input type="text" name="timePlan[dates][]" value="" style="width: 300px;">
+                                        <input type="text" name="timePlan[dates][]" value="" style="width: 200px;"><span class="color-gray">（如：2017/11/24-2018/12/24）</span>
                                     </div>
                                 </div>
                             </div>
