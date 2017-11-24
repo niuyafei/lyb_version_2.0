@@ -32,8 +32,8 @@ $this->title = "案例详情";
 					<ul class="list-group">
 						<li class="m-b-20">所在学校：<?= $model->currentSchool; ?></li>
 						<li class="m-b-20">录取学校：<?= $model->admissionSchool; ?></li>
-						<li class="m-b-20">特长：<?= $model->specialty; ?></li>
-						<li class="m-b-20">所获奖项：<?= $model->winning; ?></li>
+						<li class="m-b-20">特长：<?= $model->specialty == "" ? "无内容" : $model->specialty; ?></li>
+						<li class="m-b-20">所获奖项：<?= $model->winning == "" ? "无内容" : $model->winning; ?></li>
 					</ul>
 				</div>
 			</div>

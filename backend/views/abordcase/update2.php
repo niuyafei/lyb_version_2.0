@@ -15,13 +15,13 @@ $this->title = "留学案例";
 <style>
 	.datetimepicker{cursor:pointer}
 </style>
-<?php $form = ActiveForm::begin([
-	'method' => "post",
-	'action' => ['abordcase/update2?case_id=' . $caseModel->case_id]
-]); ?>
 <div class="col-xs-10">
 	<h4 class="color-blue">留学案例 - 编辑</h4>
 	<hr class="m-t-5" />
+	<?php $form = ActiveForm::begin([
+		'method' => "post",
+		'action' => ['abordcase/update2?case_id=' . $caseModel->case_id]
+	]); ?>
 	<div class="p-20 p-t-0">
 		<div class="case-edit-cont">
 			<h4 class="text-center m-b-20">学生信息</h4>
@@ -116,7 +116,7 @@ $this->title = "留学案例";
 				<div class="col-xs-12">
 					<div class="row">
 						<div class="col-xs-3 text-right p-t-5 p-r-0">
-							<b><span class="color-red">*</span> 特长：</b>
+							<b>特长：</b>
 						</div>
 						<div class="col-xs-10">
 							<?= $form->field($caseModel, "specialty")->textarea()->label(false); ?>
@@ -128,7 +128,7 @@ $this->title = "留学案例";
 				<div class="col-xs-12">
 					<div class="row">
 						<div class="col-xs-3 text-right p-t-5 p-r-0">
-							<b><span class="color-red">*</span> 所获奖项：</b>
+							<b>所获奖项：</b>
 						</div>
 						<div class="col-xs-10">
 							<?= $form->field($caseModel, "winning")->textarea()->label(false); ?>
@@ -411,7 +411,6 @@ $this->title = "留学案例";
 							<b>选择专家：</b>
 						</div>
 						<div class="col-xs-9">
-<!--							<input type="text" name="" id="" value="" class="form-control" />-->
 							<?= $form->field($expertCommentModel, "expert_id")->dropDownList(\common\models\Expert::getExperts())->label(false); ?>
 						</div>
 					</div>
