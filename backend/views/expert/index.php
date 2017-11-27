@@ -32,7 +32,6 @@ $this->title = '专家管理';
                 <th class="text-center">性别</th>
                 <th class="text-center">头像</th>
                 <th class="text-center">介绍</th>
-                <th class="text-center">状态</th>
                 <th class="text-center">手机号</th>
                 <th class="text-center">邮箱</th>
                 <th class="text-center">操作</th>
@@ -52,7 +51,6 @@ $this->title = '专家管理';
                             无内容
                         <?php endif; ?>
                     </td>
-                    <td><?= \common\models\Expert::dropDown($value['status']); ?></td>
                     <td><?= !empty($value['phone']) ? $value['phone'] : "无"; ?></td>
                     <td><?= !empty($value['email']) ? $value['email'] : "无"; ?></td>
                     <td>
