@@ -114,16 +114,23 @@ class CourseController extends BaseController
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate()
     {
+        $id = Yii::$app->request->post("id");
         $model = $this->findModel($id);
+        $dates = Yii::$app->request->post("dates", "");
+        $content = Yii::$app->request->post("content", "");
+        $model->dates = $dates;
+        $model->content = $content;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->course_id]);
+        if ($model->validate() && $model->save()) {
+            return json_encode(['code' => 200]);
+//            return $this->redirect(['view', 'id' => $model->course_id]);
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            return json_encode(['code' => 20]);
+//            return $this->render('update', [
+//                'model' => $model,
+//            ]);
         }
     }
 
@@ -133,11 +140,17 @@ class CourseController extends BaseController
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete()
     {
-        $this->findModel($id)->delete();
+        $id = Yii::$app->request->post("id");
+        if($this->findModel($id)->delete()){
+            return json_encode(['code' => 200]);
+        }else{
+            return json_encode(['code' => 20]);
+        }
 
-        return $this->redirect(['index']);
+//        return $this->redirect(['index']);
+
     }
 
     public function actionDel()
@@ -169,7 +182,8 @@ class CourseController extends BaseController
         $model->created_at = date("Y-m-d H:i:s");
         if($model->validate() && $model->save()){
             return json_encode([
-                'code' => 200
+                'code' => 200,
+                'course_id' => $model->course_id
             ]);
         }else{
             return json_encode([

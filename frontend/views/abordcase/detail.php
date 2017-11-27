@@ -10,6 +10,14 @@ use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 
 $this->title = "案例详情";
+
+$result['toefl'] = $model->toefl;
+$result['sat'] = $model->sat;
+$result['gpa'] = $model->gpa;
+$result['act'] = $model->act;
+$result['ielts'] = $model->ielts;
+
+$result = array_filter($result);
 ?>
 <a id="expert_payment" href="#" class="m-l-20" data-toggle="modal" data-target="#pay" case_id="<?= $model->case_id; ?>" payment="2" ></a>
 <div class="container">
@@ -38,27 +46,17 @@ $this->title = "案例详情";
 				</div>
 			</div>
 			<hr class="border-solid" />
-			<div class="row case-info-detail case-info-result">
+			<div class="row case-info-detail case-info-result <?= count($result) == 3 ? "" : (count($result) == 4 ? "four-width" : "five-width") ?>">
 				<h3 class="text-center m-t-10">成绩信息</h3>
 				<hr class="cont-tit-border-sm">
-				<div class="col-xs-4 text-center">
-					<div class="case-info-result-detail">
-						<h4>SAT</h4>
-						<big><?= $model->sat; ?></big>
+				<?php foreach($result as $key => $value): ?>
+					<div class="col-xs-<?= count($result) == 3 ? "4" : "3"; ?> text-center">
+						<div class="case-info-result-detail">
+							<h4><?= $key == 'ielts' ? "雅思" : strtoupper($key); ?></h4>
+							<big><?= $value; ?></big>
+						</div>
 					</div>
-				</div>
-				<div class="col-xs-4 text-center">
-					<div class="case-info-result-detail">
-						<h4>TOFEL</h4>
-						<big><?= $model->toefl; ?></big>
-					</div>
-				</div>
-				<div class="col-xs-4 text-center">
-					<div class="case-info-result-detail">
-						<h4>GPA</h4>
-						<big><?= $model->gpa; ?></big>
-					</div>
-				</div>
+				<?php endforeach; ?>
 			</div>
 			<hr class="border-solid" />
 			<div class="row case-info-detail case-detail-licheng">

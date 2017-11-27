@@ -12,6 +12,14 @@ use yii\widgets\ActiveForm;
 
 $this->title = '专家管理';
 ?>
+<style>
+    .helper-block{
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    .col-xs-9{
+        height: 40px;}
+</style>
 <div class="col-xs-10">
     <h4 class="color-blue"><?= $this->title; ?> <small class="pull-right p-t-5 p-r-15"><a href="#" data-toggle="modal" data-target="#tianjiazhuanjia">+ 增加</a></small></h4>
     <hr class="m-t-5" />
@@ -84,13 +92,12 @@ $this->title = '专家管理';
 <!-- 新增 -->
 <div class="modal" tabindex="-1" role="dialog" id="tianjiazhuanjia">
     <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content" style="width:500px;">
+        <div class="modal-content" style="width:480px; height:500px;">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h5 class="modal-title color-blue">添加专家</h5>
             </div>
-            <div class="modal-body">
-                <!--                <form class="form-horizontal">-->
+            <div class="modal-body" style="height:380px;">
                 <?php $form = ActiveForm::begin([
                     'options' => ['class' => 'form-horizontal'],
                     "method" => "post",
@@ -99,7 +106,6 @@ $this->title = '专家管理';
                 <div class="form-group">
                     <label for="name" class="col-xs-3 control-label color-8b">姓名</label>
                     <div class="col-xs-9 p-l-5">
-<!--                        <input type="text" class="form-control" name="Expert[username]" placeholder="姓名">-->
                         <?= $form->field($model, "username")->textInput(['class' => 'form-control', 'placeholder' => "姓名", 'style'=>["margin-left"=>"15px", "width"=>"203.5px"]])->label(false); ?>
                     </div>
                 </div>
@@ -140,10 +146,9 @@ $this->title = '专家管理';
                 <div class="form-group">
                     <label for="wechat" class="col-xs-3 control-label color-8b">专家介绍</label>
                     <div class="col-xs-9 p-l-5">
-                        <?= $form->field($model, "desc")->textarea(['class'=>'form-control','placeholder' => '专家介绍', 'style'=>["margin-left"=>"15px", "width"=>"203.5px"]])->label(false); ?>
+                        <?= $form->field($model, "desc")->textarea(['class'=>'form-control', 'rows' => 3, 'cols' => 5, 'placeholder' => '专家介绍', 'style'=>["margin-left"=>"15px", "width"=>"203.5px"]])->label(false); ?>
                     </div>
                 </div>
-                <!--                </form>-->
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-blue add">完成</button>

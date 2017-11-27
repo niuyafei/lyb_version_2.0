@@ -198,7 +198,7 @@ $this->title = "留学规划";
 						</div>
 						<div class="form-group m-b-20 plan-edit-textarea-label">
 							<div class="col-xs-12">
-								<label for="input15" class="col-xs-3 control-label"> 直系亲属是否<br />美国大学毕业</label>
+								<label for="input15" class="col-xs-3 control-label"> 直系亲属是否美国大学毕业</label>
 								<div class="col-xs-9 p-t-5">
 									<?= $form->field($model, "relatives")->textarea(['class' => 'form-control', 'rows' => 5, 'placeholder' => '如有，写明入学时间、学校名称和所学专业'])->label(false); ?>
 <!--									<textarea class="form-control" rows="5" placeholder="如有，写明入学时间、学校名称和所学专业"></textarea>-->

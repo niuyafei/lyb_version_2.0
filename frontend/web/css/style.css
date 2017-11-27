@@ -636,3 +636,14 @@ ul {
 .p-b-10 {
 	padding-bottom: 10px;
 }
+
+.four-width{
+	width: 800px;
+}
+.five-width{
+	width: 100%;
+	margin: 0 auto;
+}
+.five-width .col-xs-3{
+	width: 20%;
+}

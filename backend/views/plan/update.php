@@ -319,7 +319,31 @@ $this->title = '留学规划';
                             <div class="col-xs-12">
                                 <div class="row">
                                     <div class="col-xs-3 text-right p-t-5 p-r-0">
-                                        <b><?= $t == 1 ? "高一" : ($t == 2 ? "高二" : "高三"); ?>：</b>
+                                        <b><?= $t == 1 ? "高一" : ($t == 2 ? "高二" : "高三"); ?>(上学期)：</b>
+                                    </div>
+                                    <div class="col-xs-10">
+                                        <textarea name="timePlan[content][]" rows="" cols="" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="timePlan[grade][]" value="<?= $t; ?>">
+                        <div class="row case-edit-formwidth">
+                            <div class="col-xs-12 m-b-20" style="padding-left: 0px; margin-bottom: 0px;">
+                                <div class="row case-edit-formwidth">
+                                    <div class="col-xs-3 text-right p-t-5 p-r-0">
+                                        <b>时间：</b>
+                                    </div>
+                                    <div class="col-xs-10">
+                                        <input type="text" name="timePlan[dates][]" value="" style="width: 200px;"><span class="color-gray">（如：2017/11/24-2018/12/24）</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-3 text-right p-t-5 p-r-0">
+                                        <b><?= $t == 1 ? "高一" : ($t == 2 ? "高二" : "高三"); ?>(下学期)：</b>
                                     </div>
                                     <div class="col-xs-10">
                                         <textarea name="timePlan[content][]" rows="" cols="" class="form-control"></textarea>

@@ -8,6 +8,9 @@ use yii\widgets\ActiveForm;
 
 $this->title = '账号管理';
 ?>
+<style>
+    .col-xs-9{height: 45px;}
+</style>
 <div class="col-xs-10">
     <h4 class="color-blue"><?= $this->title; ?> <small class="pull-right p-t-5 p-r-15"><a href="#" data-toggle="modal" data-target="#tianjiazhanghao">+ 增加</a></small></h4>
     <hr class="m-t-5" />
@@ -55,10 +58,9 @@ $this->title = '账号管理';
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h5 class="modal-title color-blue">账号添加</h5>
+                <h5 class="modal-title color-blue">添加账号</h5>
             </div>
             <div class="modal-body">
-<!--                <form class="form-horizontal">-->
                 <?php $form = ActiveForm::begin([
                     'options' => ['class' => 'form-horizontal'],
                 ]); ?>
@@ -86,7 +88,6 @@ $this->title = '账号管理';
                         <label for="phone" class="col-xs-3 control-label color-8b">手机号</label>
                         <div class="col-xs-9 p-l-5">
                             <?= $form->field($addUserForm, "phone")->textInput(['class'=>'form-control','placeholder' => "手机号", 'style'=>["margin-left"=>"15px", "width"=>"203.5px"]])->label(false); ?>
-<!--                            <input type="text" class="form-control" name="phone" placeholder="手机号">-->
                         </div>
                     </div>
                     <div class="form-group">
@@ -96,7 +97,6 @@ $this->title = '账号管理';
                         </div>
                     </div>
                 <?php ActiveForm::end(); ?>
-<!--                </form>-->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-blue add">完成</button>
