@@ -485,14 +485,14 @@ $this->title = "留学案例";
 						<div class="form-group">
 							<label for="name" class="col-xs-3 control-label color-8b">时间</label>
 							<div class="col-xs-9 p-l-5">
-								<input type="text" name="Course[dates]" class="form-control" value="<?= $value['dates'] ?>">
+								<input type="text" name="Course[dates]" class="form-control datetimepicker" value="<?= $value['dates'] ?>">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="xingbie" class="col-xs-3 control-label color-8b">内容</label>
 							<div class="col-xs-9 p-l-5">
 								<div class="radio radio-style">
-									<textarea name="Course[content]" cols="26" rows="5"><?= $value['content']; ?></textarea>
+									<textarea class="form-control" name="Course[content]" cols="26" rows="5"><?= $value['content']; ?></textarea>
 								</div>
 							</div>
 						</div>
