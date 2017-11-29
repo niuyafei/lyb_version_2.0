@@ -436,7 +436,7 @@ $this->title = "留学案例";
 				<div class="col-xs-6">
 					<div class="row">
 						<div class="col-xs-3 text-right p-t-5 p-r-0">
-							<b>音频文件</b>
+							<b>音频文件：</b>
 						</div>
 
 						<div class="col-xs-9">
