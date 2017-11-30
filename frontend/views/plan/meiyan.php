@@ -44,7 +44,7 @@ $this->title = "留学规划";
 		</div>
 	</div>
 	<div class="border-color p-20 m-t-50">
-		<p><span class="color-red">注</span>：为了确保规划方案更加精准，请您根据自己的真实情况填写下列信息。</p>
+		<p style="margin-left: 20px;"><span class="color-red">注</span>：为了确保规划方案更加精准，请您根据自己的真实情况填写下列信息。</p>
 		<div class="p-20">
 			<?php $form = ActiveForm::begin([
 				'action' => ['plan/meiyan'],
@@ -124,9 +124,14 @@ $this->title = "留学规划";
 								</div>
 							</div>
 						</div>
+
+						<hr class="m-b-30 m-t-30" />
+						<p><span class="color-red">注</span>：若无相关成绩信息，可填写预估成绩。</p>
+						<hr class="m-b-30 m-t-30" />
+
 						<div class="form-group m-b-20">
 							<div class="col-xs-6">
-								<label for="input7" class="col-xs-3 control-label"><b class="color-red">*</b> TOFEL</label>
+								<label for="input7" class="col-xs-3 control-label">TOFEL</label>
 								<div class="col-xs-9">
 									<?= $form->field($model, 'toefl')->textInput(['class' => 'form-control', 'id' => 'input7', 'placeholder' => '点击填写您的TOEFL成绩'])->label(false); ?>
 								</div>
@@ -140,7 +145,7 @@ $this->title = "留学规划";
 						</div>
 						<div class="form-group m-b-20">
 							<div class="col-xs-6">
-								<label for="input9" class="col-xs-3 control-label"><b class="color-red">*</b> GRE</label>
+								<label for="input9" class="col-xs-3 control-label">GRE</label>
 								<div class="col-xs-9">
 									<?= $form->field($model, 'gre')->textInput(['class' => 'form-control', 'id' => 'input9', 'placeholder' => '点击填写您的GRE成绩'])->label(false); ?>
 								</div>
@@ -154,14 +159,14 @@ $this->title = "留学规划";
 						</div>
 						<div class="form-group m-b-20">
 							<div class="col-xs-6">
-								<label for="input11" class="col-xs-3 control-label"><b class="color-red">*</b> 大学GPA</label>
+								<label for="input11" class="col-xs-3 control-label"> 大学GPA</label>
 								<div class="col-xs-9">
 									<?= $form->field($model, 'gpa_u')->textInput(['class' => 'form-control', 'id' => 'input11', 'placeholder' => '点击填写您的大学gpa成绩'])->label(false); ?>
 <!--									<input type="text" class="form-control" id="input11" placeholder="点击填写您的大学GPA">-->
 								</div>
 							</div>
 							<div class="col-xs-6">
-								<label for="input11" class="col-xs-3 control-label p-l-10"><b class="color-red">*</b> 专业课GPA</label>
+								<label for="input11" class="col-xs-3 control-label p-l-10"> 专业课GPA</label>
 								<div class="col-xs-9">
 									<?= $form->field($model, 'gpa_major')->textInput(['class' => 'form-control', 'id' => 'input12', 'placeholder' => '点击填写您的专业课GPA成绩'])->label(false); ?>
 <!--									<input type="text" class="form-control" id="input11" placeholder="点击填写您的专业课GPA">-->

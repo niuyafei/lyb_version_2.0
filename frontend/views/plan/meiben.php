@@ -44,7 +44,7 @@ $this->title = "留学规划";
 		</div>
 	</div>
 	<div class="border-color p-20 m-t-50">
-		<p><span class="color-red">注</span>：为了确保规划方案更加精准，请您根据自己的真实情况填写下列信息。</p>
+		<p style="margin-left: 20px;"><span class="color-red">注</span>：为了确保规划方案更加精准，请您根据自己的真实情况填写下列信息。</p>
 		<div class="p-20">
 			<?php $form = ActiveForm::begin([
 				'action' => ["plan/meiben"],
@@ -120,13 +120,17 @@ $this->title = "留学规划";
 								<label for="input6" class="col-xs-3 control-label"><b class="color-red">*</b> 就读年级</label>
 								<div class="col-xs-9">
 									<?= $form->field($model, 'grade')->textInput(['class' => 'form-control', 'id' => 'input6', 'placeholder' => '点击填写您的就读年级'])->label(false); ?>
-<!--									<input type="text" class="form-control" id="input6" placeholder="点击填写您的就读年级">-->
 								</div>
 							</div>
 						</div>
+
+						<hr class="m-b-30 m-t-30" />
+						<p><span class="color-red">注</span>：若无相关成绩信息，可填写预估成绩。</p>
+						<hr class="m-b-30 m-t-30" />
+
 						<div class="form-group m-b-20">
 							<div class="col-xs-6">
-								<label for="input7" class="col-xs-3 control-label"><b class="color-red">*</b> TOFEL</label>
+								<label for="input7" class="col-xs-3 control-label"> TOFEL</label>
 								<div class="col-xs-9">
 									<?= $form->field($model, 'toefl')->textInput(['class' => 'form-control', 'id' => 'input7', 'placeholder' => '点击填写您的TOEFL成绩'])->label(false); ?>
 								</div>
@@ -140,7 +144,7 @@ $this->title = "留学规划";
 						</div>
 						<div class="form-group m-b-20">
 							<div class="col-xs-6">
-								<label for="input7" class="col-xs-3 control-label"><b class="color-red">*</b> SAT</label>
+								<label for="input7" class="col-xs-3 control-label"> SAT</label>
 								<div class="col-xs-9">
 									<?= $form->field($model, 'sat')->textInput(['class' => 'form-control', 'id' => 'input9', 'placeholder' => '点击填写您的SAT成绩'])->label(false); ?>
 								</div>
@@ -154,17 +158,15 @@ $this->title = "留学规划";
 						</div>
 						<div class="form-group m-b-20">
 							<div class="col-xs-6">
-								<label for="input11" class="col-xs-3 control-label"><b class="color-red">*</b>高中GPA</label>
+								<label for="input11" class="col-xs-3 control-label">高中GPA</label>
 								<div class="col-xs-9">
 									<?= $form->field($model, 'gpa_h')->textInput(['class' => 'form-control', 'id' => 'input11', 'placeholder' => '点击填写您的高中GPA'])->label(false); ?>
-<!--									<input type="text" class="form-control" id="input11" placeholder="点击填写您的高中GPA">-->
 								</div>
 							</div>
 							<div class="col-xs-6">
 								<label for="input12" class="col-xs-3 control-label">AP课程</label>
 								<div class="col-xs-9">
 									<?= $form->field($model, 'ap')->textInput(['class' => 'form-control', 'id' => 'input12', 'placeholder' => '点击填写您的AP课程数量'])->label(false); ?>
-<!--									<input type="text" class="form-control" id="input12" placeholder="点击填写您的AP课程数量">-->
 								</div>
 							</div>
 						</div>
@@ -174,7 +176,6 @@ $this->title = "留学规划";
 								<label for="input13" class="col-xs-3 control-label"> 获奖情况</label>
 								<div class="col-xs-9 p-t-5">
 									<?= $form->field($model, "winning")->textarea(['class' => 'form-control', 'rows' => 5, 'placeholder' => '写明您的获奖情况'])->label(false); ?>
-<!--									<textarea class="form-control" rows="5" placeholder="写明您的获奖情况"></textarea>-->
 								</div>
 							</div>
 						</div>
@@ -183,7 +184,6 @@ $this->title = "留学规划";
 								<label for="input14" class="col-xs-3 control-label"> 社团活动</label>
 								<div class="col-xs-9 p-t-5">
 									<?= $form->field($model, "communityActivities")->textarea(['class' => 'form-control', 'rows' => 5, 'placeholder' => '写明您参加过的社团活动'])->label(false); ?>
-<!--									<textarea class="form-control" rows="5" placeholder="写明您参加过得社团活动"></textarea>-->
 								</div>
 							</div>
 						</div>
@@ -192,7 +192,6 @@ $this->title = "留学规划";
 								<label for="input15" class="col-xs-3 control-label"> 公益活动</label>
 								<div class="col-xs-9 p-t-5">
 									<?= $form->field($model, "publicBenefitActivities")->textarea(['class' => 'form-control', 'rows' => 5, 'placeholder' => '写明您参加过得公益活动'])->label(false); ?>
-<!--									<textarea class="form-control" rows="5" placeholder="写明您参加过得公益活动"></textarea>-->
 								</div>
 							</div>
 						</div>
@@ -201,13 +200,11 @@ $this->title = "留学规划";
 								<label for="input15" class="col-xs-3 control-label"> 直系亲属是否美国大学毕业</label>
 								<div class="col-xs-9 p-t-5">
 									<?= $form->field($model, "relatives")->textarea(['class' => 'form-control', 'rows' => 5, 'placeholder' => '如有，写明入学时间、学校名称和所学专业'])->label(false); ?>
-<!--									<textarea class="form-control" rows="5" placeholder="如有，写明入学时间、学校名称和所学专业"></textarea>-->
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-<!--			</form>-->
 		</div>
 	</div>
 	<div class="text-center m-t-50">

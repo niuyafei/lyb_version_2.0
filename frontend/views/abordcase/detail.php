@@ -11,11 +11,33 @@ use yii\helpers\ArrayHelper;
 
 $this->title = "案例详情";
 
-$result['toefl'] = $model->toefl;
-$result['sat'] = $model->sat;
-$result['gpa'] = $model->gpa;
-$result['act'] = $model->act;
-$result['ielts'] = $model->ielts;
+if($model->applicationProject == 1){
+	//美高
+	$result['toefl'] = $model->toefl;
+	$result['ssat'] = $model->ssat;
+	$result['gpa'] = $model->gpa;
+}else if($model->applicationProject == 2){
+	//美本
+	$result['toefl'] = $model->toefl;
+	$result['sat'] = $model->sat;
+	$result['gpa'] = $model->gpa;
+	$result['act'] = $model->act;
+	$result['雅思'] = $model->ielts;
+}else if($model->applicationProject == 3){
+	//美研
+	$result['toefl'] = $model->toefl;
+	$result['大学GPA'] = $model->gpa_u;
+	$result['gre'] = $model->gre;
+	$result['gmat'] = $model->gmat;
+	$result['雅思'] = $model->ielts;
+	$result['专业课GPA'] = $model->gpa_major;
+}else if($model->applicationProject == 4){
+	//MBA
+	$result['toefl'] = $model->toefl;
+	$result['gre'] = $model->gre;
+	$result['gmat'] = $model->gmat;
+	$result['雅思'] = $model->ielts;
+}
 
 $result = array_filter($result);
 ?>
@@ -52,7 +74,7 @@ $result = array_filter($result);
 				<?php foreach($result as $key => $value): ?>
 					<div class="col-xs-<?= count($result) == 3 ? "4" : "3"; ?> text-center">
 						<div class="case-info-result-detail">
-							<h4><?= $key == 'ielts' ? "雅思" : strtoupper($key); ?></h4>
+							<h4><?= strtoupper($key); ?></h4>
 							<big><?= $value; ?></big>
 						</div>
 					</div>

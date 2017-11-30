@@ -135,23 +135,16 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <hr />
         </div>
-        <div class="case-edit-cont">
-            <h4 class="text-center m-b-20">成绩信息</h4>
+
+        <div class="case-edit-cont" id="score">
+            <h4 class="text-center">成绩信息</h4>
             <div class="row case-edit-formwidth">
+                <hr class="m-t-0 border-dashed"/>
+                <h5 class="color-gray m-b-20 p-l-20">语言成绩</h5>
                 <div class="col-xs-6">
                     <div class="row">
                         <div class="col-xs-3 text-right p-t-5 p-r-0">
-                            <b>SAT：</b>
-                        </div>
-                        <div class="col-xs-9">
-                            <?= $form->field($model, "sat")->textInput()->label(false); ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="row">
-                        <div class="col-xs-3 text-right p-t-5 p-r-0">
-                            <b>TOEFL：</b>
+                            <b>TOFEL：</b>
                         </div>
                         <div class="col-xs-9">
                             <?= $form->field($model, "toefl")->textInput()->label(false); ?>
@@ -160,28 +153,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
             <div class="row case-edit-formwidth">
+                <hr class="border-dashed"/>
+                <h5 class="m-b-20 p-l-20 color-gray">标化成绩</h5>
                 <div class="col-xs-6">
                     <div class="row">
                         <div class="col-xs-3 text-right p-t-5 p-r-0">
-                            <b>雅思：</b>
+                            <b>SSAT：</b>
                         </div>
                         <div class="col-xs-9">
-                            <?= $form->field($model, "ielts")->textInput()->label(false); ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="row">
-                        <div class="col-xs-3 text-right p-t-5 p-r-0">
-                            <b>ACT：</b>
-                        </div>
-                        <div class="col-xs-9">
-                            <?= $form->field($model, "act")->textInput()->label(false); ?>
+                            <?= $form->field($model, "ssat")->textInput()->label(false); ?>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row case-edit-formwidth">
+                <hr class="border-dashed"/>
+                <h5 class="m-b-20 p-l-20 color-gray">平时成绩</h5>
                 <div class="col-xs-6">
                     <div class="row">
                         <div class="col-xs-3 text-right p-t-5 p-r-0">
@@ -195,6 +182,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <hr />
         </div>
+
         <div class="row">
             <div class="col-xs-6 text-right">
                 <?= Html::submitButton("保存", ['class' => 'btn btn-blue btn-lg p-l-20 p-r-20']) ?>
@@ -203,3 +191,15 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php ActiveForm::end(); ?>
     </div>
 </div>
+<?php
+$js = <<<JS
+    $("select[name='AbordCase[applicationProject]']").change(function(){
+        var type = $(this).val();
+        $.get("/abordcase/getform?type=" + type + "&case_id=0", function(html){
+            $("#score").html(html);
+        })
+    });
+JS;
+
+$this->registerJs($js);
+?>

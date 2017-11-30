@@ -138,9 +138,36 @@ $this->title = "留学案例";
 			</div>
 			<hr />
 		</div>
-		<div class="case-edit-cont">
-			<h4 class="text-center m-b-20">成绩信息</h4>
+
+		<div class="case-edit-cont" id="score">
+			<h4 class="text-center">成绩信息</h4>
 			<div class="row case-edit-formwidth">
+				<hr class="m-t-0 border-dashed"/>
+				<h5 class="color-gray m-b-20 p-l-20">语言成绩</h5>
+				<div class="col-xs-6">
+					<div class="row">
+						<div class="col-xs-3 text-right p-t-5 p-r-0">
+							<b>TOFEL：</b>
+						</div>
+						<div class="col-xs-9">
+							<?= $form->field($caseModel, "toefl")->textInput()->label(false); ?>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="row">
+						<div class="col-xs-3 text-right p-t-5 p-r-0">
+							<b>雅思：</b>
+						</div>
+						<div class="col-xs-9">
+							<?= $form->field($caseModel, "ielts")->textInput()->label(false); ?>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row case-edit-formwidth">
+				<hr class="border-dashed"/>
+				<h5 class="m-b-20 p-l-20 color-gray">标化成绩</h5>
 				<div class="col-xs-6">
 					<div class="row">
 						<div class="col-xs-3 text-right p-t-5 p-r-0">
@@ -154,29 +181,7 @@ $this->title = "留学案例";
 				<div class="col-xs-6">
 					<div class="row">
 						<div class="col-xs-3 text-right p-t-5 p-r-0">
-							<b>TOEFL：</b>
-						</div>
-						<div class="col-xs-9">
-							<?= $form->field($caseModel, "toefl")->textInput()->label(false); ?>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row case-edit-formwidth">
-				<div class="col-xs-6">
-					<div class="row">
-						<div class="col-xs-3 text-right p-t-5 p-r-0">
-							<b>雅思：</b>
-						</div>
-						<div class="col-xs-9">
-							<?= $form->field($caseModel, "ielts")->textInput()->label(false); ?>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-6">
-					<div class="row">
-						<div class="col-xs-3 text-right p-t-5 p-r-0">
-							<b> ACT：</b>
+							<b>ACT：</b>
 						</div>
 						<div class="col-xs-9">
 							<?= $form->field($caseModel, "act")->textInput()->label(false); ?>
@@ -185,10 +190,12 @@ $this->title = "留学案例";
 				</div>
 			</div>
 			<div class="row case-edit-formwidth">
+				<hr class="border-dashed"/>
+				<h5 class="m-b-20 p-l-20 color-gray">平时成绩</h5>
 				<div class="col-xs-6">
 					<div class="row">
 						<div class="col-xs-3 text-right p-t-5 p-r-0">
-							<b> GPA：</b>
+							<b>GPA：</b>
 						</div>
 						<div class="col-xs-9">
 							<?= $form->field($caseModel, "gpa")->textInput()->label(false); ?>
@@ -198,6 +205,7 @@ $this->title = "留学案例";
 			</div>
 			<hr />
 		</div>
+
 		<div class="case-edit-cont">
 			<h4 class="text-center m-b-20">申请历程</h4>
 			<div class="row case-edit-formwidth p-l-0 p-r-0 case-edit-licheng">
@@ -512,6 +520,7 @@ $csrfToken = Yii::$app->request->csrfToken;
 $js = <<<JS
 	var user_id = '{$caseModel['user_id']}';
 	var case_id = '{$caseModel['case_id']}';
+
 	$("button[tag='sqlc']").click(function(){
 		var time = $(this).parents(".case-edit-formwidth").find("input[data='time']").val();
 		var content = $(this).parents(".case-edit-formwidth").find("textarea[data='content']").val();
@@ -590,6 +599,20 @@ $js = <<<JS
 		});
 		$("#edit_" + course_id).modal("toggle");
 	});
+
+	$("select[name='AbordCase[applicationProject]']").change(function(){
+        var type = $(this).val();
+        $.get("/abordcase/getform?type=" + type + "&case_id=" + case_id, function(html){
+            $("#score").html(html);
+        })
+    });
+
+    window.onload = function(){
+    	var type = $("select[name='AbordCase[applicationProject]']").val();
+    	$.get("/abordcase/getform?type=" + type + "&case_id=" + case_id, function(html){
+            $("#score").html(html);
+        })
+    }
 JS;
 
 $this->registerJs($js);

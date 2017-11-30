@@ -114,7 +114,20 @@ class PlanController extends BaseController
 			$act = ArrayHelper::getValue($model, 'act');
 			$gpa = ArrayHelper::getValue($model, "gpa_h");
 			$ap = ArrayHelper::getValue($model, "ap");
+			$ielts = ArrayHelper::getValue($model, "ielts");
 
+			if(!$toefl && $ielts){
+				//有雅思成绩没有toefl成绩
+				$toefl = ceil($ielts/9*120);
+			}
+			if(!$sat && $act){
+				$sat = ceil($act/36*2400);
+			}
+
+			//新SAT成绩换算
+			if($sat <= 1600){
+				$sat = ceil($sat/1600 * 2400);
+			}
 			$url = "http://fn.liuyangbang.cn/frontend/web/index.php?r=scheme/selectiontable&toefl={$toefl}&sat={$sat}&grade={$grade}&currentSchool={$currentSchool}&act={$act}&gpa={$gpa}&ap={$ap}";
 			$content = file_get_contents($url);
 			$data = json_decode($content, true);

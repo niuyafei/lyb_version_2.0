@@ -10,6 +10,11 @@ use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 
 $schools = $model->schools;
+$sort = [];
+foreach($schools as $key => $value){
+	$sort[$key] = $value['rank'];
+}
+array_multisort($sort, SORT_ASC, $schools);
 $dreamSchoolList = [];
 $goalSchoolList = [];
 $endmSchoolList = [];

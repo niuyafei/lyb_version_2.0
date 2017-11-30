@@ -52,9 +52,8 @@ class AbordCase extends \yii\db\ActiveRecord
             [['created_at'], 'safe'],
             [['username', 'grade', 'currentSchool'], 'string', 'max' => 50],
             [['admissionSchool', 'admissionMajor'], 'string', 'max' => 255],
-            [['sat', 'ielts'], 'string', 'max' => 5],
+            [['sat', 'ielts', 'gpa', 'ssat', 'gre', 'gmat', 'gpa_u', 'gpa_major'], 'string', 'max' => 5],
             [['act'], 'string', 'max' => 3],
-            [['gpa'], 'string', 'max' => 2],
             ['toefl', "integer", "max"=>'120', "message"=>"TOEFL成绩不能大于120分"],
         ];
     }
@@ -82,6 +81,11 @@ class AbordCase extends \yii\db\ActiveRecord
             'act' => 'ACT成绩',
             'gpa' => 'GPA成绩',
             'ielts' => '雅思成绩',
+            'ssat' => 'SSAT成绩',
+            'gpa_u' => '大学GPA成绩',
+            'gpa_major' => '专业课GPA成绩',
+            'gre' => 'GRE成绩',
+            'gmat' => 'GMAT成绩',
         ];
     }
 

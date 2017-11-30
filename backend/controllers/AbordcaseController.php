@@ -214,4 +214,35 @@ class AbordcaseController extends BaseController
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionGetform()
+    {
+        $type = Yii::$app->request->get("type", "1");
+        $case_id = Yii::$app->request->get("case_id", 0);
+        $view = 'meigao';
+        switch($type){
+            case 1:
+                $view = "meigao";
+                break;
+            case 2:
+                $view = "meiben";
+                break;
+            case 3:
+                $view = "meiyan";
+                break;
+            case 4:
+                $view = "mba";
+                break;
+        }
+        $model = new AbordCase();
+        if($case_id){
+            $model = $this->findModel($case_id);
+
+        }
+
+        $html = $this->renderPartial($view, [
+            'model' => $model
+        ]);
+        return $html;
+    }
 }

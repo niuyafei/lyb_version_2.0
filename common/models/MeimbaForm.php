@@ -50,7 +50,7 @@ class MeimbaForm extends Model
 	public function rules()
 	{
 		return [
-			[['username', 'phone', 'email', 'graduationSchool', 'major', 'toefl', 'gpa_u', 'gpa_major'], 'required', 'message' => '{attribute}不能为空'],
+			[['username', 'phone', 'email', 'graduationSchool', 'major'], 'required', 'message' => '{attribute}不能为空'],
 			['username', 'string', 'length' => [2,10], 'tooShort' => '姓名不能少于2个字符', 'tooLong' => '姓名不能多于10个字符'],
 			['phone', 'match', 'pattern' => '/^1[3|4|5|7|8]\d{9}$/', 'message' => '手机号格式不正确'],
 			['email', 'email', 'message' => '邮箱格式不正确'],
