@@ -68,18 +68,83 @@ $result = array_filter($result);
 				</div>
 			</div>
 			<hr class="border-solid" />
-			<div class="row case-info-detail case-info-result <?= count($result) == 3 ? "" : (count($result) == 4 ? "four-width" : "five-width") ?>">
-				<h3 class="text-center m-t-10">成绩信息</h3>
-				<hr class="cont-tit-border-sm">
-				<?php foreach($result as $key => $value): ?>
-					<div class="col-xs-<?= count($result) == 3 ? "4" : "3"; ?> text-center">
+			<?php if(count($result) == 1): ?>
+				<div class="row case-info-detail case-info-result one-width">
+					<h3 class="text-center m-t-10">成绩信息</h3>
+					<hr class="cont-tit-border-sm">
+					<div class="col-xs-12 text-center">
 						<div class="case-info-result-detail">
-							<h4><?= strtoupper($key); ?></h4>
+							<h4><?= current(array_keys($result)); ?></h4>
+							<big><?= current(array_values($result)); ?></big>
+						</div>
+					</div>
+				</div>
+			<?php elseif(count($result) == 2): ?>
+				<div class="row case-info-detail case-info-result two-width">
+					<h3 class="text-center m-t-10">成绩信息</h3>
+					<hr class="cont-tit-border-sm">
+					<?php foreach($result as $key => $value): ?>
+					<div class="col-xs-6 text-center">
+						<div class="case-info-result-detail">
+							<h4><?= $key; ?></h4>
 							<big><?= $value; ?></big>
 						</div>
 					</div>
-				<?php endforeach; ?>
-			</div>
+					<?php endforeach; ?>
+				</div>
+			<?php elseif(count($result) == 3): ?>
+				<div class="row case-info-detail case-info-result">
+					<h3 class="text-center m-t-10">成绩信息</h3>
+					<hr class="cont-tit-border-sm">
+					<?php foreach($result as $key => $value): ?>
+						<div class="col-xs-4 text-center">
+							<div class="case-info-result-detail">
+								<h4><?= $key; ?></h4>
+								<big><?= $value; ?></big>
+							</div>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			<?php elseif(count($result) == 4): ?>
+				<div class="row case-info-detail case-info-result four-width">
+					<h3 class="text-center m-t-10">成绩信息</h3>
+					<hr class="cont-tit-border-sm">
+					<?php foreach($result as $key => $value): ?>
+						<div class="col-xs-3 text-center">
+							<div class="case-info-result-detail">
+								<h4><?= $key; ?></h4>
+								<big><?= $value; ?></big>
+							</div>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			<?php elseif(count($result) == 5): ?>
+				<div class="row case-info-detail case-info-result five-width">
+					<h3 class="text-center m-t-10">成绩信息</h3>
+					<hr class="cont-tit-border-sm">
+					<?php foreach($result as $key => $value): ?>
+						<div class="col-xs-3 text-center">
+							<div class="case-info-result-detail">
+								<h4><?= $key; ?></h4>
+								<big><?= $value; ?></big>
+							</div>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			<?php elseif(count($result) == 6): ?>
+				<div class="row case-info-detail case-info-result six-width">
+					<h3 class="text-center m-t-10">成绩信息</h3>
+					<hr class="cont-tit-border-sm">
+					<?php foreach($result as $key => $value): ?>
+						<div class="col-xs-2 text-center">
+							<div class="case-info-result-detail">
+								<h4><?= $key; ?></h4>
+								<big><?= $value; ?></big>
+							</div>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			<?php endif; ?>
 			<hr class="border-solid" />
 			<div class="row case-info-detail case-detail-licheng">
 				<h3 class="text-center m-t-10">申请历程</h3>

@@ -647,3 +647,19 @@ ul {
 .five-width .col-xs-3{
 	width: 20%;
 }
+
+.six-width {
+	width: 100%;
+	margin: 0 auto;
+}
+.two-width {
+	width: 400px;
+	margin: 0 auto;
+}
+.one-width {
+	width: 200px;
+	margin: 0 auto;
+}
+.case-info-result-detail{
+	padding: 20px 10px;
+}
