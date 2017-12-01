@@ -70,7 +70,7 @@ class Plan extends \yii\db\ActiveRecord
             [['major', 'workExperience'], 'string', 'max' => 255],
             [['toefl', 'act', 'ielts'], 'string', 'max' => 3],
             [['sat', 'ssat', 'gre', 'gmat'], 'string', 'max' => 4],
-            [['gpa_h', 'gpa_m', 'gpa_u', 'gpa_major', 'ap'], 'string', 'max' => 2],
+            [['gpa_h', 'gpa_m', 'gpa_u', 'gpa_major', 'ap'], 'string', 'max' => 5],
             ['email', 'email', 'message' => '邮箱格式不正确'],
             ['pay_type', 'default', 'value' => 1],
             ['status', 'default', 'value' => 1],

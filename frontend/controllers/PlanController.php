@@ -123,6 +123,7 @@ class PlanController extends BaseController
 			if(!$sat && $act){
 				$sat = ceil($act/36*2400);
 			}
+			$gpa = ceil($gpa*100) / 100;
 
 			//新SAT成绩换算
 			if($sat <= 1600){
