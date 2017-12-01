@@ -663,3 +663,7 @@ ul {
 .case-info-result-detail{
 	padding: 20px 10px;
 }
+
+.text-indent{
+	text-indent: 2em;
+}
