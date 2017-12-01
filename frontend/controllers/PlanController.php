@@ -151,7 +151,8 @@ class PlanController extends BaseController
 				return $this->redirect(['plan/pay']);
 			}else{
 				Yii::$app->session->setFlash('error', "保存失败");
-				return $this->redirect(['meiben']);
+				var_dump($model->getErrors());
+//				return $this->redirect(['meiben']);
 			}
 		}
 		return $this->render("meiben", [
