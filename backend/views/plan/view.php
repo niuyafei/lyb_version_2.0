@@ -96,7 +96,7 @@ $this->title = "留学规划";
                             <b>TOEFL：</b>
                         </div>
                         <div class="col-xs-9">
-                            <div class="p-l-10"><?= $model->toefl; ?></div>
+                            <div class="p-l-10"><?= $model->toefl !='' ? $model->toefl : "无内容"; ?></div>
                             <hr class="m-t-5 m-b-0" />
                         </div>
                     </div>
@@ -107,7 +107,7 @@ $this->title = "留学规划";
                             <b>雅思：</b>
                         </div>
                         <div class="col-xs-9">
-                            <div class="p-l-10"><?= $model->ielts == "" ? "无内容" : $model->itlts; ?></div>
+                            <div class="p-l-10"><?= $model->ielts != "" ?  $model->ielts : "无内容"; ?></div>
                             <hr class="m-t-5 m-b-0" />
                         </div>
                     </div>
