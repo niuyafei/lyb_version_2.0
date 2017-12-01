@@ -121,7 +121,7 @@ class PlanController extends BaseController
 				$toefl = ceil($ielts/9*120);
 			}
 			if(!$sat && $act){
-				$sat = ceil($act/36*2400);
+				$sat = ceil($act/36*1600);
 			}
 			$gpa = ceil($gpa*100) / 100;
 

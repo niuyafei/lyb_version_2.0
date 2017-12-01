@@ -64,18 +64,20 @@ class Schools extends \yii\db\ActiveRecord
     }
 
     public function creates($data, $type=1, $plan_id){
-        foreach($data as $key => $value){
-            $model = new self();
-            $model->user_id = Yii::$app->user->getId();
-            $model->plan_id = $plan_id;
-            $model->schoolName = $value['schoolName'];
-            $model->schoolName_en = $value['schoolName_en'];
-            $model->rank = $value['schoolRanking'];
-            $model->type = $type;
-            $model->sat = $value['sat'];
-            $model->applyType = $value['admissionType'];
-            $model->created_at = date("Y-m-d H:i:s");
-            $model->save();
+        if(is_array($data) && count($data) > 0){
+            foreach($data as $key => $value){
+                $model = new self();
+                $model->user_id = Yii::$app->user->getId();
+                $model->plan_id = $plan_id;
+                $model->schoolName = $value['schoolName'];
+                $model->schoolName_en = $value['schoolName_en'];
+                $model->rank = $value['schoolRanking'];
+                $model->type = $type;
+                $model->sat = $value['sat'];
+                $model->applyType = $value['admissionType'];
+                $model->created_at = date("Y-m-d H:i:s");
+                $model->save();
+            }
         }
         return true;
     }
