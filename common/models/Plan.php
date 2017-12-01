@@ -61,7 +61,7 @@ class Plan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'applicationProject', 'user_id', 'phone', 'email', 'toefl'], 'required'],
+            [['username', 'applicationProject', 'user_id', 'phone', 'email'], 'required'],
             [['applicationProject', 'user_id', 'pay_type', 'status'], 'integer'],
             [['winning', 'communityActivities', 'publicBenefitActivities', 'relatives', 'academicActivities'], 'string'],
             [['created_at'], 'safe'],
