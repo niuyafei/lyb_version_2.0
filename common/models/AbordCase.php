@@ -129,4 +129,14 @@ class AbordCase extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Payment::className(), ['case_id' => 'case_id']);
     }
+
+    public function beforeSave($insert)
+    {
+        $sat = $this->sat;
+        if($sat && $sat < 1600){
+            $this->sat = (string)ceil($sat / 1600 * 2400);
+        }
+        parent::beforeSave($insert);
+        return true;
+    }
 }

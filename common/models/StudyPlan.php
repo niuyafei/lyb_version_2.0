@@ -63,6 +63,22 @@ class StudyPlan extends \yii\db\ActiveRecord
     public function creates($data, $plan_id)
     {
         if(is_array($data)){
+            $planModel = Plan::findOne($plan_id);
+            if($planModel->sat && $planModel->sat <= 1600){
+                $content = explode('；', $data['ylsfx'][0]);
+                $content2 = preg_replace("/[\x4e00-\x9fa5]+\d+/", $planModel->sat, $content[1]);
+                preg_match_all("/\d+/", $content[0], $pregArr);
+                $content3 = $content[0];
+                $content3 = str_replace($pregArr[0][0], ceil($pregArr[0][0] / 2400 * 1600), $content3);
+                $content3 = str_replace($pregArr[0][1], ceil($pregArr[0][1] / 2400 * 1600), $content3);
+                $data['ylsfx'][0] = $content3 . "；" . $content2;
+            }else if($planModel->act){
+                $content = explode('；', $data['ylsfx'][0]);
+                $content2 = preg_replace("/[\x4e00-\x9fa5]+\d+/", $planModel->act, $content[1]);
+                $content2 = str_replace("SAT", "ACT", $content2);
+                $data['ylsfx'][0] = $content2;
+            }
+
             $model = new self();
             $model-> plan_id = $plan_id;
             $model->user_id = Yii::$app->user->getId();
@@ -74,6 +90,7 @@ class StudyPlan extends \yii\db\ActiveRecord
             $model->recommendation = $tjly;
             $model->schoolStrategy = isset($data['xxcl']) ? $data['xxcl'] : "";
             $model->created_at = date("Y-m-d H:i:s");
+
             if($model->save()){
                 return true;
             }else{

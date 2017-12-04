@@ -78,9 +78,8 @@ class AbordcaseController extends BaseController
             if($model->save()){
                 Yii::$app->session->setFlash('success', "保存成功");
             }else{
-                Yii::$app->session->setFlash('error', "失败");
+                Yii::$app->session->setFlash('error', "保存失败");
             }
-
             return $this->redirect(['abordcase/index']);
         } else {
             return $this->render('create', [
