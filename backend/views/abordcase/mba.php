@@ -42,21 +42,6 @@
 <div class="row case-edit-formwidth">
 	<hr class="border-dashed"/>
 	<h5 class="m-b-20 p-l-20 color-gray">标化成绩</h5>
-<!--	<div class="col-xs-6">-->
-<!--		<div class="row">-->
-<!--			<div class="col-xs-3 text-right p-t-5 p-r-0">-->
-<!--				<b>GRE：</b>-->
-<!--			</div>-->
-<!--			<div class="col-xs-9">-->
-<!--				<div class="form-group field-abordcase-sat">-->
-<!---->
-<!--					<input type="text" id="abordcase-sat" class="form-control" name="AbordCase[gre]" value="--><?//= $model->gre; ?><!--">-->
-<!---->
-<!--					<div class="help-block"></div>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
 	<div class="col-xs-6">
 		<div class="row">
 			<div class="col-xs-3 text-right p-t-5 p-r-0">
