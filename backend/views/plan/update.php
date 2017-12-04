@@ -143,7 +143,7 @@ $this->title = '留学规划';
                                             <b>SAT要求：</b>
                                         </div>
                                         <div class="col-xs-9">
-                                            <input type="text" name="schools[sat][]" value="<?= $value['rank']; ?>" class="form-control" />
+                                            <input type="text" name="schools[sat][]" value="<?= $value['sat']; ?>" class="form-control" />
                                         </div>
                                     </div>
                                 </div>
