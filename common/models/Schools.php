@@ -81,4 +81,13 @@ class Schools extends \yii\db\ActiveRecord
         }
         return true;
     }
+
+    public function beforeSave($insert){
+        $sat = $this->sat;
+        if($sat > 1600){
+            $this->sat = (string)ceil($sat / 2400 * 1600);
+        }
+        parent::beforeSave($insert);
+        return true;
+    }
 }
