@@ -133,8 +133,8 @@ class AbordCase extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
         $sat = $this->sat;
-        if($sat && $sat < 1600){
-            $this->sat = (string)ceil($sat / 1600 * 2400);
+        if($sat && $sat > 1600){
+            $this->sat = (string)ceil($sat / 2400 * 1600);
         }
         parent::beforeSave($insert);
         return true;
