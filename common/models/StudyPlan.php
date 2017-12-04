@@ -73,7 +73,7 @@ class StudyPlan extends \yii\db\ActiveRecord
                 $content3 = str_replace($pregArr[0][1], ceil($pregArr[0][1] / 2400 * 1600), $content3);
                 $data['ylsfx'][0] = $content3 . "；" . $content2;
             }else{
-                if($planModel->act){
+                if(!$planModel->sat && $planModel->act){
                     $content = explode('；', $data['ylsfx'][0]);
                     $content2 = preg_replace("/[\x4e00-\x9fa5]+\d+/", $planModel->act, $content[1]);
                     $content2 = str_replace("SAT", "ACT", $content2);
