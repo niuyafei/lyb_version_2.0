@@ -138,6 +138,7 @@ $js = <<<JS
 			return false;
 		}
 		$.post("/service/create", {"_csrf-frontend":csrf,"Service[username]":username,"Service[phone]":phone,"Service[type]:":type}, function(re){
+			console.log(re);
 			if(re){
 				layer.open({
 		            title:'success',

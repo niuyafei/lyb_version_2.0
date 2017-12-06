@@ -33,7 +33,15 @@ class ConsultationController extends BaseController
 		if($model->load(Yii::$app->request->post())){
 			$model->user_id = Yii::$app->user->getId();
 			if($model->validate() && $model->save()){
-				return $this->redirect(['consultation/pay?consultation_id=' . Yii::$app->db->getLastInsertID()]);
+				//发送短信给超级管理员
+				$to = \common\models\Admin::find()->select("phone")->where(['role' => 4])->asArray()->all();
+				$to = \yii\helpers\ArrayHelper::getColumn($to, "phone");
+				$to = implode(",", $to);
+				$tempId = 221967;
+				$data = [$model->username, date('Y'), date('m'), date('d'), date('H'), date('i'), \common\models\Consultation::dropDown('type', $model->type), $model->phone];
+
+				$result = \common\SMS\SendSms::sendSms($to, $data, $tempId);
+				return $this->redirect(['consultation/pay?consultation_id=' . $model->consultation_id]);
 			}
 		}
 		return $this->render("myconsultation", [

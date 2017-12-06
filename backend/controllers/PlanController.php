@@ -235,6 +235,8 @@ class PlanController extends BaseController
             }
 
             Plan::updateAll(["status" => 2], ["plan_id" => $model->plan_id]);
+            $result = \common\SMS\SendSms::sendSms($model->phone, [], 221958);
+
             Yii::$app->session->setFlash('success', '方案更新成功');
             return $this->redirect(['plan/view?id='.$model->plan_id]);
         } else {

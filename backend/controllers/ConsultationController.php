@@ -38,6 +38,18 @@ class ConsultationController extends BaseController
 		$model = Consultation::findOne($consultation_id);
 		$model->admin_id = $expert_id;
 		if($model->save()){
+			//发短信给专家
+			$expert = \common\models\Expert::findOne($expert_id);
+			$to = $expert->phone;
+			$tempId = 221972;
+			$data = [$model->username, date('Y'), date('m'), date('d'), date('H'), date('i')];
+			$result = \common\SMS\SendSms::sendSms($to, $data, $tempId);
+			//发短信给用户
+			$tempId = 221960;
+			$data = [\common\models\Consultation::dropDown('type', $model->type),$expert->username];
+			$to = $model->phone;
+			$result = \common\SMS\SendSms::sendSms($to, $data, $tempId);
+
 			return json_encode([
 				'code' => 200,
 				'message' => '保存成功'
@@ -60,6 +72,10 @@ class ConsultationController extends BaseController
 		$model->communicationRecord = $record;
 		$model->status = 3;
 		if($model->save()){
+			//短信
+			$tempId = 221961;
+			$to = $model->phone;
+			$result = \common\SMS\SendSms::sendSms($to, [], $tempId);
 
 			return json_encode([
 				'code' => 200,

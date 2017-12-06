@@ -68,7 +68,9 @@ class ServiceController extends BaseController
 			$model->created_at = date("Y-m-d H:i:s");
 			if($model->validate() && $model->save()){
 				//发送短信给超级管理员
-				$to = \common\models\Admin::find()->where(['role' => 4])->asArray()->all();
+				$to = \common\models\Admin::find()->select("phone")->where(['role' => 4])->asArray()->all();
+				$to = \yii\helpers\ArrayHelper::getColumn($to, "phone");
+				$to = implode(",", $to);
 				$tempId = 221986;
 				$data = [$model->username, date('Y'), date('m'), date('d'), date('H'), date('i'), Service::dropDown($model->type), $model->phone];
 

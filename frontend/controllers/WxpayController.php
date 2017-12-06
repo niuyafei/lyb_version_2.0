@@ -92,6 +92,18 @@ class WxpayController extends BaseController
 					$planModel->pay_type = 2;
 					$planModel->save();
 				}
+
+				//交易发短信给用户
+				//预约咨询
+				if($model->payment == 4){
+					$consultationModel = \common\models\Consultation::findOne($model->consultation_id);
+					$result = \common\SMS\SendSms::sendSms($consultationModel->phone, [], 221959);
+				}
+				//留学规划
+				if($model->payment == 5){
+					$result = \common\SMS\SendSms::sendSms($planModel->phone, [], 221957);
+				}
+
 				echo "SUCCESS";
 			}else{
 				echo "FAIL";
