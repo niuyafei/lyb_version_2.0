@@ -88,6 +88,7 @@ class ExpertController extends BaseController
 
             if(move_uploaded_file($_FILES['Expert']['tmp_name']['headimgurl'], dirname(__DIR__) . '/web' . $path . $name) && $model->save()){
                 Yii::$app->session->setFlash("success", "保存成功");
+
                 return $this->redirect(['index']);
 //                return $this->redirect(['view', 'id' => $model->expert_id]);
             }

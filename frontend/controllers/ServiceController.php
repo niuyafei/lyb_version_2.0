@@ -61,16 +61,18 @@ class ServiceController extends BaseController
 		if(!$this->isLogin()){
 			return $this->redirect(["index"]);
 		}
-		$user_id = Yii::$app->user->getId();
-//		$model = Service::find()->where(['user_id' => $user_id])->one();
-//		if(!$model){
-//			$model = new Service();
-//		}
+
 		$model = new Service();
 		if($model->load(Yii::$app->request->post())){
 			$model->user_id = Yii::$app->user->getId();
 			$model->created_at = date("Y-m-d H:i:s");
 			if($model->validate() && $model->save()){
+				//发送短信给超级管理员
+				$to = \common\models\Admin::find()->where(['role' => 4])->asArray()->all();
+				$tempId = 221986;
+				$data = [$model->username, date('Y'), date('m'), date('d'), date('H'), date('i'), Service::dropDown($model->type), $model->phone];
+
+				$result = \common\SMS\SendSms::sendSms($to, $data, $tempId);
 				return true;
 			}
 		}

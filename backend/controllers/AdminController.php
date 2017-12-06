@@ -65,6 +65,12 @@ class AdminController extends BaseController
 		$model->created_at = date("Y-m-d H:i:s");
 
 		if($model->save()){
+			//短信提醒
+			$to = $model->phone;
+			$tempId = 222018;
+			$data = ['管理员', $model->email, '123456'];
+
+			$result = \common\SMS\SendSms::sendSms($to, $data, $tempId);
 			Yii::$app->session->setFlash('error', "保存成功");
 			$this->goFrom();
 		}else{
