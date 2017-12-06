@@ -111,6 +111,7 @@ class SiteController extends Controller
             $session->set('userId', $model->_user->id);
             $session->set('email', $model->_user->email);
             $session->set('gender', $model->_user->gender);
+            $session->set('role', $model->_user->role);
 
             return $this->goBack();
         } else {

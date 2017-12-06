@@ -13,10 +13,7 @@ use yii\widgets\Breadcrumbs;
 use yii\bootstrap\Alert;
 
 AppAsset::register($this);
-$role = 0;
-if(\Yii::$app->session->get('userId')){
-    $role = \backend\models\Admin::findIdentity(Yii::$app->session->get('userId'))->role;
-}
+$role = Yii::$app->session->get('role');
 
 ?>
 <?php $this->beginPage() ?>
