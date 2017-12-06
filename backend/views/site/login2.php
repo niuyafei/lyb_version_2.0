@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					<div role="tabpanel" class="tab-pane fade in active" id="login">
 							<?php
 								$form = ActiveForm::begin([
-									'action' => ['site/login'],
+									'action' => ['/site/login'],
 									'method' => 'post',
 									'options' => ['class' => 'form-signin']
 								])

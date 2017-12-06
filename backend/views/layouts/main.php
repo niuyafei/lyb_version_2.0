@@ -14,8 +14,8 @@ use yii\bootstrap\Alert;
 
 AppAsset::register($this);
 $role = 0;
-if(!Yii::$app->user->isGuest){
-    $role = \backend\models\Admin::findIdentity(\Yii::$app->user->getId())->role;
+if(\Yii::$app->session->get('userId')){
+    $role = \backend\models\Admin::findIdentity(Yii::$app->session->get('userId'))->role;
 }
 
 ?>
@@ -45,13 +45,13 @@ if(!Yii::$app->user->isGuest){
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <?php if(Yii::$app->user->isGuest): ?>
+                        <?php if(!Yii::$app->session->get('userId')): ?>
                             <li>
                                 <a href="<?= Url::to(['site/login']); ?>">登陆</a>
                             </li>
                         <?php else: ?>
                             <li class="color-gray p-r-20">
-                                <?= Yii::$app->user->identity->nickname; ?>
+                                <?= Yii::$app->session->get('nickname'); ?>
                             </li>
                             <li>
                                 <a href="<?= Url::to(['site/logout']); ?>">退出登录</a>

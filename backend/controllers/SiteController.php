@@ -39,7 +39,7 @@ class SiteController extends Controller
 //            'verbs' => [
 //                'class' => VerbFilter::className(),
 //                'actions' => [
-//                    'logout' => ['post'],
+//                    'logout' => ['get'],
 //                ],
 //            ],
 //        ];
@@ -59,7 +59,7 @@ class SiteController extends Controller
 
     public function beforeAction($action)
     {
-        if(Yii::$app->user->isGuest){
+        if(!Yii::$app->session->get('userId')){
             $controller = $this->action->controller->id;
             $action = $this->action->id;
             if($controller == "site" && ($action == "login" || $action == "repassword")){
@@ -67,6 +67,7 @@ class SiteController extends Controller
             }
             return $this->redirect(['site/login']);
         }
+        parent::beforeAction($action);
         return true;
     }
 
@@ -99,15 +100,20 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
+        $session = Yii::$app->session;
+        if ($session->get("userId")) {
             return $this->goHome();
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            $session->set('nickname', $model->_user->nickname);
+            $session->set('userId', $model->_user->id);
+            $session->set('email', $model->_user->email);
+            $session->set('gender', $model->_user->gender);
+
             return $this->goBack();
         } else {
-
             return $this->renderPartial("login2", [
                 "model" => $model
             ]);

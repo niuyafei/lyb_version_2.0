@@ -17,7 +17,7 @@ class BaseController extends Controller
 	public function beforeAction($action)
 	{
 		parent::beforeAction($action);
-		if(Yii::$app->user->isGuest){
+		if(!Yii::$app->session->get('userId')){
 			return false;
 		}
 		return true;
