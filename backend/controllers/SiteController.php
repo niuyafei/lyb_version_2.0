@@ -141,4 +141,14 @@ class SiteController extends Controller
 
         return $this->redirect(['site/login']);
     }
+
+    public function actionTest()
+    {
+        $to = "15910878037";
+        $tempId = 222018;
+        $data = ['管理员', '619994647@qq.com', '123456'];
+
+        $result = \common\SMS\SendSms::sendSms($to, $data, $tempId);
+        var_dump($result);
+    }
 }

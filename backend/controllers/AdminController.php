@@ -17,11 +17,8 @@ class AdminController extends BaseController
 	public function actionDelete($id)
 	{
 		$model = Admin::findOne($id);
-		if($model){
-			$model->role = 6;
-			if($model->save()){
-				$this->goFrom();
-			}
+		if($model->delete()){
+			$this->goFrom();
 		}
 		return $this->redirect(['site/index']);
 	}
@@ -51,6 +48,11 @@ class AdminController extends BaseController
 	{
 
 		$gets = Yii::$app->request->get();
+		if(Admin::find()->where(['username' => $gets['email']])->exists()){
+			Yii::$app->session->setFlash('error', "账号已存在");
+			$this->goFrom();
+			exit;
+		}
 		$model = new Admin();
 
 		foreach($gets as $key => $value)
