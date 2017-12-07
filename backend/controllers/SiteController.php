@@ -102,7 +102,7 @@ class SiteController extends Controller
     {
         $session = Yii::$app->session;
         if ($session->get("userId")) {
-            return $this->goHome();
+            return $this->redirect(['abordcase/index']);
         }
 
         $model = new LoginForm();
@@ -113,7 +113,7 @@ class SiteController extends Controller
             $session->set('gender', $model->_user->gender);
             $session->set('role', $model->_user->role);
 
-            return $this->goBack();
+            return $this->redirect(['abordcase/index']);
         } else {
             return $this->renderPartial("login2", [
                 "model" => $model
