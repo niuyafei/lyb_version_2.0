@@ -13,29 +13,29 @@ $this->title = "案例详情";
 
 if($model->applicationProject == 1){
 	//美高
-	$result['toefl'] = $model->toefl;
-	$result['ssat'] = $model->ssat;
-	$result['gpa'] = $model->gpa;
+	$result['TOEFL'] = $model->toefl;
+	$result['SSAT'] = $model->ssat;
+	$result['GPA'] = $model->gpa;
 }else if($model->applicationProject == 2){
 	//美本
-	$result['toefl'] = $model->toefl;
-	$result['sat'] = $model->sat;
-	$result['gpa'] = $model->gpa;
-	$result['act'] = $model->act;
+	$result['TOEFL'] = $model->toefl;
+	$result['SAT'] = $model->sat;
+	$result['GPA'] = $model->gpa;
+	$result['ACT'] = $model->act;
 	$result['雅思'] = $model->ielts;
 }else if($model->applicationProject == 3){
 	//美研
-	$result['toefl'] = $model->toefl;
+	$result['TOEFL'] = $model->toefl;
 	$result['大学GPA'] = $model->gpa_u;
-	$result['gre'] = $model->gre;
-	$result['gmat'] = $model->gmat;
+	$result['GRE'] = $model->gre;
+	$result['GMAT'] = $model->gmat;
 	$result['雅思'] = $model->ielts;
 	$result['专业课GPA'] = $model->gpa_major;
 }else if($model->applicationProject == 4){
 	//MBA
-	$result['toefl'] = $model->toefl;
-	$result['gre'] = $model->gre;
-	$result['gmat'] = $model->gmat;
+	$result['TOEFL'] = $model->toefl;
+	$result['GRE'] = $model->gre;
+	$result['GMAT'] = $model->gmat;
 	$result['雅思'] = $model->ielts;
 }
 

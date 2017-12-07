@@ -16,7 +16,9 @@ $this->title = '留学案例';
                 <ul class="case-list-cont">
                     <li><span class="color-gray">学生姓名：</span><?= $value->username; ?></li>
                     <li><span class="color-gray">申请项目：</span><?= \common\models\AbordCase::dropDown("applicationProject", $value->applicationProject); ?></li>
-                    <li><span class="color-gray">成绩信息：</span>SAT <?= $value->sat; ?>，托福 <?= $value->toefl; ?></li>
+                    <?php if($value->sat != '' || $value->toefl != ''): ?>
+                        <li><span class="color-gray">成绩信息：</span><?= $value->sat != '' ? "SAT ".$value->sat : ""; ?>  <?= $value->toefl != '' ? " 托福 ".$value->toefl : ""; ?></li>
+                    <?php endif; ?>
                     <li><span class="color-gray">录取学校：</span><?= $value->admissionSchool; ?></li>
                     <li><span class="color-gray">录取专业：</span><?= $value->admissionMajor; ?></li>
                 </ul>
