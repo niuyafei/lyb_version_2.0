@@ -60,7 +60,7 @@
 						</form>
 
 						<div class="p-t-10 color-ad">
-							<a class="signup" href="login.html">立即登录</a>
+							<a class="signup" href="/site/login">立即登录</a>
 						</div>
 					</div>
 
