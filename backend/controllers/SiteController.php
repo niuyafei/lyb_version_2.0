@@ -51,7 +51,7 @@ class SiteController extends Controller
         if(!Yii::$app->session->get('userId')){
             $controller = $this->action->controller->id;
             $action = $this->action->id;
-            if($controller == "site" && ($action == "login" || $action == "repassword")){
+            if($controller == "site" && ($action == "login" || $action == "repassword" || $action == "verify-code")){
                 return true;
             }
             return $this->redirect(['site/login']);
