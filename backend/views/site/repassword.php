@@ -51,7 +51,7 @@
 								<hr class="form-middleline" />
 								<label for="inputCode" class="sr-only">图形验证码</label>
 								<input type="text" id="inputCode" class="form-control" placeholder="图形验证码" required="" autofocus="">
-								<img src="/img/tuxing.png" class="img-yanzhengma" />
+								<img src="/site/verify-code" id="verifyCode" class="img-yanzhengma" />
 								<hr class="form-middleline" />
 								<label for="inputPassword" class="sr-only">新密码</label>
 								<input type="password" id="inputPassword" class="form-control" placeholder="新密码" required="">
@@ -126,7 +126,10 @@
 		top: 10px;
 	}
 </style>
-
 </body>
-
+<script>
+	$("#verifyCode").click(function(){
+		$(this).attr("src", "/site/verify-code?num="+Math.random());
+	});
+</script>
 </html>

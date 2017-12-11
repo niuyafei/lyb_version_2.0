@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
 							<button class="btn btn-lg btn-primary btn-block m-t-20" type="submit">登录</button>
 						<?php ActiveForm::end(); ?>
 						<div class="p-t-10 color-ad">
-							<a class="signup" href="/site/repassword">找回密码</a>
+							<a class="signup" href="/site/repassword">修改密码</a>
 						</div>
 					</div>
 				</div>

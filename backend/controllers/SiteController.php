@@ -46,27 +46,6 @@ class SiteController extends Controller
 //        ];
 //    }
 
-    /**
-     * @inheritdoc
-     */
-//    public function actions()
-//    {
-//        return [
-//            'captcha' => [
-//                'class' => 'yii\captcha\CaptchaAction',
-//                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-//                'backColor'=>0x000000,
-//                'maxLength' => 4,
-//                'minLength' => 4,
-//                'padding' => 5,
-//                'height'=>40,
-//                'width' => 130,
-//                'foreColor'=>0xffffff,
-//                'offset'=>4,
-//            ],
-//        ];
-//    }
-
     public function beforeAction($action)
     {
         if(!Yii::$app->session->get('userId')){
@@ -156,5 +135,11 @@ class SiteController extends Controller
     public function actionTest()
     {
         var_dump(date("Y-m-d H:i:s"));
+    }
+
+    public function actionVerifyCode()
+    {
+        $VerifyImg = new \backend\models\VerifyImage();
+        $VerifyImg->CreateVerifyImage();
     }
 }
