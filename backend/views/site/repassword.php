@@ -147,12 +147,14 @@
 
 	document.getElementById("yanzhengma").onclick = function() {
 		var verifyCode = $("#code").val();
+		var o = this;
 		$.get("/site/check?verifyCode="+verifyCode, function(re){
 			if(!re){
 				alert('图形验证码错误');
+			}else{
+				time(o);
 			}
 		});
-		time(this);
 	}
 
 	$("#verifyCode").click(function(){
