@@ -105,9 +105,7 @@ class WxpayController extends BaseController
 					//发送给用户
 					$result = \common\SMS\SendSms::sendSms($planModel->phone, [], 221957);
 					//发送给管理员
-					$to = \common\models\Admin::find()->select("phone")->where(['role' => 4])->asArray()->all();
-					$to = \yii\helpers\ArrayHelper::getColumn($to, "phone");
-					$to = implode(",", $to);
+					$to = \common\models\Admin::getAdminsPhoneList();
 					$smsData = [
 						Yii::$app->user->identity->nickname,
 						date('Y'),

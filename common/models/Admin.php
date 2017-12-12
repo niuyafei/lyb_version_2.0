@@ -192,4 +192,13 @@ class Admin extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+    //获取超级管理员手机号列表
+    public static function getAdminsPhoneList()
+    {
+        $to = self::find()->select("phone")->where(['role' => 4])->asArray()->all();
+        $to = \yii\helpers\ArrayHelper::getColumn($to, "phone");
+        $to = implode(",", $to);
+        return $to;
+    }
 }
