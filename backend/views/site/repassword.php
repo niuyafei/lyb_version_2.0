@@ -42,19 +42,19 @@
 					<div role="tabpanel" class="tab-pane fade in active" id="login">
 						<form class="form-signin">
 							<div class="form-boxline">
-								<label for="inputEmail" class="sr-only">手机号</label>
-								<input type="email" id="inputEmail" class="form-control" placeholder="手机号" required="" autofocus="">
+								<label class="sr-only">手机号</label>
+								<input type="text" class="form-control" name="phone" placeholder="手机号" required="" autofocus="">
 								<hr class="form-middleline" />
-								<label for="inputEmail" class="sr-only">手机验证码</label>
-								<input type="email" id="inputEmail" class="form-control" placeholder="手机验证码" required="" autofocus="">
-								<input type="button" id="yanzhengma" value="获取验证码" class="btn btn-sm btn-outline yanzhengma-position" onclick="javascript:send();" style="top: 65px;">
+								<label class="sr-only">手机验证码</label>
+								<input type="text" class="form-control" placeholder="手机验证码" required="" autofocus="">
+								<input type="button" id="yanzhengma" value="获取验证码" class="btn btn-sm btn-outline yanzhengma-position" style="top: 65px;">
 								<hr class="form-middleline" />
-								<label for="inputCode" class="sr-only">图形验证码</label>
-								<input type="text" id="inputCode" class="form-control" placeholder="图形验证码" required="" autofocus="">
+								<label class="sr-only">图形验证码</label>
+								<input type="text" id="code" class="form-control" placeholder="图形验证码" required="" autofocus="">
 								<img src="/site/verify-code" id="verifyCode" class="img-yanzhengma" />
 								<hr class="form-middleline" />
-								<label for="inputPassword" class="sr-only">新密码</label>
-								<input type="password" id="inputPassword" class="form-control" placeholder="新密码" required="">
+								<label class="sr-only">新密码</label>
+								<input type="password" name="newPassword" class="form-control" placeholder="新密码" required="">
 							</div>
 							<button class="btn btn-lg btn-primary btn-block m-t-20" type="submit">提交</button>
 						</form>
@@ -82,7 +82,6 @@
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="/bootstrap/js/ie10-viewport-bug-workaround.js"></script>
-<script src="/bootstrap/js/yanzhengma.js"></script>
 <style type="text/css">
 	.btn-primary {
 		color: #ffffff;
@@ -128,6 +127,34 @@
 </style>
 </body>
 <script>
+	var wait = 60;
+
+	function time(o) {
+		if (wait == 0) {
+			o.removeAttribute("disabled");
+			o.value = "发送验证码";
+			wait = 60;
+		} else {
+			o.setAttribute("disabled", true);
+			o.value = "重新发送(" + wait + ")";
+			wait--;
+			setTimeout(function() {
+					time(o)
+				},
+				1000)
+		}
+	}
+
+	document.getElementById("yanzhengma").onclick = function() {
+		var verifyCode = $("#code").val();
+		$.get("/site/check?verifyCode="+verifyCode, function(re){
+			if(!re){
+				alert('图形验证码错误');
+			}
+		});
+		time(this);
+	}
+
 	$("#verifyCode").click(function(){
 		$(this).attr("src", "/site/verify-code?num="+Math.random());
 	});

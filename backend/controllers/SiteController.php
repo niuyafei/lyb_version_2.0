@@ -17,6 +17,8 @@ use yii\captcha\CaptchaAction;
  */
 class SiteController extends Controller
 {
+    private $allow = ['login', 'repassword', 'verify-code', 'check'];
+
     /**
      * @inheritdoc
      */
@@ -51,7 +53,7 @@ class SiteController extends Controller
         if(!Yii::$app->session->get('userId')){
             $controller = $this->action->controller->id;
             $action = $this->action->id;
-            if($controller == "site" && ($action == "login" || $action == "repassword" || $action == "verify-code")){
+            if($controller == "site" && in_array($action, $this->allow)){
                 return true;
             }
             return $this->redirect(['site/login']);
@@ -141,5 +143,16 @@ class SiteController extends Controller
     {
         $VerifyImg = new \backend\models\VerifyImage();
         $VerifyImg->CreateVerifyImage();
+    }
+
+    public function actionCheck()
+    {
+        $code = Yii::$app->request->get("verifyCode", "");
+        if(strtolower($code) == Yii::$app->session->get("verifyCode")){
+            Yii::$app->session->remove('verifyCode');
+            return true;
+        }else{
+            return false;
+        }
     }
 }

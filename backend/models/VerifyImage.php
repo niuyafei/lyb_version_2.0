@@ -32,7 +32,7 @@ class VerifyImage
 			exit("Error in VerifyImage(class): 字符串长度不够，CreateRandomVerifyCode Failed");
 		}
 		$chars = str_shuffle($chars);
-		return substr($chars, 0, $code_length);
+		return strtolower(substr($chars, 0, $code_length));
 	}
 	/**
 	 * @param int $width
@@ -44,7 +44,7 @@ class VerifyImage
 	 */
 	public function CreateVerifyImage($width = 100, $height = 40, $pixed_num = 80, $line_num = 5, $code_type = 2, $code_length = 4) {
 		$m_verify_code = $this->CreateRandomVerifyCode($code_type, $code_length);
-		$_SESSION['verifyCode'] = $m_verify_code;
+		\Yii::$app->session->set("verifyCode", $m_verify_code);
 		$m_image = imagecreatetruecolor($width, $height);
 		$white = imagecolorallocate($m_image, 255, 255, 255);
 		imagefill($m_image, 0, 0, $white);

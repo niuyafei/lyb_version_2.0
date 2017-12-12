@@ -93,7 +93,7 @@ class WxpayController extends BaseController
 					$planModel->save();
 				}
 
-				//交易发短信给用户
+				//交易完成后发短信给用户
 				//预约咨询
 				if($model->payment == 4){
 					$consultationModel = \common\models\Consultation::findOne($model->consultation_id);
@@ -101,7 +101,11 @@ class WxpayController extends BaseController
 				}
 				//留学规划
 				if($model->payment == 5){
+					//发送给用户
 					$result = \common\SMS\SendSms::sendSms($planModel->phone, [], 221957);
+					//发送给管理员
+					$smsData = [Yii::$app->user->getIdentity()];
+					$result = \common\SMS\SendSms::sendSms($planModel->phone, [], 221967);
 				}
 
 				echo "SUCCESS";
@@ -133,6 +137,6 @@ class WxpayController extends BaseController
 
 	public function actionTest()
 	{
-		echo "true";
+		var_dump(Yii::$app->user->getIdentity());
 	}
 }
