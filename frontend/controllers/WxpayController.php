@@ -104,8 +104,16 @@ class WxpayController extends BaseController
 					//发送给用户
 					$result = \common\SMS\SendSms::sendSms($planModel->phone, [], 221957);
 					//发送给管理员
-					$smsData = [Yii::$app->user->getIdentity()];
-					$result = \common\SMS\SendSms::sendSms($planModel->phone, [], 221967);
+					$smsData = [
+						Yii::$app->user->identity->nickname,
+						date('Y'),
+						date('m'),
+						date('d'),
+						date('H'),
+						date('i'),
+						'留学规划'
+					];
+					$result = \common\SMS\SendSms::sendSms($planModel->phone, $smsData, 221967);
 				}
 
 				echo "SUCCESS";
@@ -137,6 +145,6 @@ class WxpayController extends BaseController
 
 	public function actionTest()
 	{
-		var_dump(Yii::$app->user->getIdentity());
+		var_dump(Yii::$app->user->identity->nickname);
 	}
 }
