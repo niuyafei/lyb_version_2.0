@@ -5,6 +5,9 @@
  * Date: 2017/11/23
  * Time: 上午1:42
  */
+
+use yii\helpers\Html;
+
 ?>
 <!doctype html>
 <html lang="zh-CN">
@@ -40,24 +43,25 @@
 				<h5 class="text-center color-blue">申校系统 1.0</h5>
 				<div class="p-10 m-t-20">
 					<div role="tabpanel" class="tab-pane fade in active" id="login">
-						<form class="form-signin">
+<!--						<form class="form-signin">-->
+						<?= Html::beginForm(['/site/changepassword'], 'POST', ['class' => 'form-signin']) ?>
 							<div class="form-boxline">
 								<label class="sr-only">手机号</label>
 								<input type="text" class="form-control" name="phone" placeholder="手机号" required="" autofocus="">
 								<hr class="form-middleline" />
 								<label class="sr-only">手机验证码</label>
-								<input type="text" class="form-control" placeholder="手机验证码" required="" autofocus="">
+								<input type="text" name="phoneCode" class="form-control" placeholder="手机验证码" required="" autofocus="">
 								<input type="button" id="yanzhengma" value="获取验证码" class="btn btn-sm btn-outline yanzhengma-position" style="top: 65px;">
 								<hr class="form-middleline" />
 								<label class="sr-only">图形验证码</label>
 								<input type="text" id="code" class="form-control" placeholder="图形验证码" required="" autofocus="">
-								<img src="/site/verify-code" id="verifyCode" class="img-yanzhengma" />
+								<img src="/site/verify-code" id="verifyCode" class="img-yanzhengma" style="margin-top: 2px;" />
 								<hr class="form-middleline" />
 								<label class="sr-only">新密码</label>
 								<input type="password" name="newPassword" class="form-control" placeholder="新密码" required="">
 							</div>
 							<button class="btn btn-lg btn-primary btn-block m-t-20" type="submit">提交</button>
-						</form>
+						<?= Html::endForm(); ?>
 
 						<div class="p-t-10 color-ad">
 							<a class="signup" href="/site/login">立即登录</a>
@@ -126,7 +130,18 @@
 	}
 </style>
 </body>
+<link rel="stylesheet" href="/layui/css/layui.css" media="all">
+<script src="/layui/layui.all.js"></script>
 <script>
+	var message = '<?= Yii::$app->session->getFlash('error'); ?>';
+	if(message){
+		layer.open({
+			title:'错误消息',
+			content:message
+		});
+	}
+
+
 	var wait = 60;
 
 	function time(o) {
@@ -152,7 +167,14 @@
 			if(!re){
 				alert('图形验证码错误');
 			}else{
-				time(o);
+				var phone = $("input[name='phone']").val();
+				$.get("/site/send?phone="+phone, function(re){
+					if(re){
+						time(o);
+					}else{
+						alert("手机号错误");
+					}
+				});
 			}
 		});
 	}

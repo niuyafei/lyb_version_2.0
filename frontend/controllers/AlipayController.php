@@ -125,7 +125,7 @@ class AlipayController extends BaseController
                 $planModel->save();
 
             }
-            //交易发短信给用户
+            //交易成功后发短信给用户
             //预约咨询
             if($model->payment == 4){
                 $consultationModel = \common\models\Consultation::findOne($model->consultation_id);
@@ -134,6 +134,18 @@ class AlipayController extends BaseController
             //留学规划
             if($model->payment == 5){
                 $result = \common\SMS\SendSms::sendSms($planModel->phone, [], 221957);
+                //发送给管理员
+                $to = \common\models\Admin::getAdminsPhoneList();
+                $smsData = [
+                    Yii::$app->user->identity->nickname,
+                    date('Y'),
+                    date('m'),
+                    date('d'),
+                    date('H'),
+                    date('i'),
+                    '留学规划'
+                ];
+                $result = \common\SMS\SendSms::sendSms($to, $smsData, 221967);
             }
 
             echo "success";

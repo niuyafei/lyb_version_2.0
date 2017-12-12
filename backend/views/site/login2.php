@@ -104,5 +104,15 @@ $this->params['breadcrumbs'][] = $this->title;
 	}
 </style>
 </body>
-
+<link rel="stylesheet" href="/layui/css/layui.css" media="all">
+<script src="/layui/layui.all.js"></script>
+<script>
+	var message = '<?= Yii::$app->session->getFlash('success'); ?>';
+	if(message){
+		layer.open({
+			title:'提示消息',
+			content:message
+		});
+	}
+</script>
 </html>

@@ -17,7 +17,7 @@ use yii\captcha\CaptchaAction;
  */
 class SiteController extends Controller
 {
-    private $allow = ['login', 'repassword', 'verify-code', 'check'];
+    private $allow = ['login', 'repassword', 'verify-code', 'check', 'send', 'changepassword'];
 
     /**
      * @inheritdoc
@@ -154,5 +154,46 @@ class SiteController extends Controller
         }else{
             return false;
         }
+    }
+
+    //发送验证码
+    public function actionSend()
+    {
+        $phone = Yii::$app->request->get("phone", "");
+        if($phone){
+            $tmpId = "";
+            $code = rand(1000, 9999);
+            $code = 1234;
+            Yii::$app->session->set("PhoneVerifyCode", $code);
+//            $result = \common\SMS\SendSms::sendSms($phone, [], $tmpId);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //修改密码
+    public function actionChangepassword()
+    {
+        //验证手机验证码
+        $post = Yii::$app->request->post();
+        if($post['phoneCode'] == Yii::$app->session->get('PhoneVerifyCode')){
+            if($model = Admin::find()->where(['phone' => $post['phone']])->one()){
+                $model->password_hash = Yii::$app->security->generatePasswordHash($post['newPassword']);
+                if($model->save()){
+                    Yii::$app->session->setFlash('success', "修改成功");
+                    return $this->redirect(['site/login']);
+                }else{
+                    Yii::$app->session->setFlash('error', "修改失败");
+                }
+            }else{
+                //用户不存在
+                Yii::$app->session->setFlash('error', "用户不存在");
+            }
+        }else{
+            //短信验证码错误
+            Yii::$app->session->setFlash('error', "短信验证码错误");
+        }
+        return $this->redirect(['site/repassword']);
     }
 }
