@@ -165,7 +165,7 @@ class SiteController extends Controller
     public function actionSend()
     {
         $phone = Yii::$app->request->get("phone", "");
-        if($phone){
+        if(Admin::find()->where(['phone' => $phone])->exists()){
             $tmpId = "222344";
             $code = rand(1000, 9999);
             Yii::$app->session->set("PhoneVerifyCode", $code);
