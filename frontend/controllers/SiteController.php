@@ -233,7 +233,6 @@ class SiteController extends Controller
         //发送给管理员
         $to = \common\models\Admin::getAdminsPhoneList();
         var_dump($to);
-        $to = "15910878037";
         $smsData = [
             Yii::$app->user->identity->nickname,
             date('Y'),
@@ -244,5 +243,6 @@ class SiteController extends Controller
             '留学规划'
         ];
         $result = \common\SMS\SendSms::sendSms($to, $smsData, 221967);
+        var_dump($result);
     }
 }
