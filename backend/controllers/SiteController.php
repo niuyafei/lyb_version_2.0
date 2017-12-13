@@ -195,4 +195,13 @@ class SiteController extends Controller
         }
         return $this->redirect(['site/repassword']);
     }
+	
+	public function actionTest()
+	{
+		$tmpId = "222344";
+		$code = rand(1000, 9999);
+		Yii::$app->session->set("PhoneVerifyCode", $code);
+		$result = \common\SMS\SendSms::sendSms($phone, [$code], $tmpId);
+		var_dump($result);
+	}
 }
