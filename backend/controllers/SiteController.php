@@ -161,11 +161,10 @@ class SiteController extends Controller
     {
         $phone = Yii::$app->request->get("phone", "");
         if($phone){
-            $tmpId = "";
+            $tmpId = "222344";
             $code = rand(1000, 9999);
-            $code = 1234;
             Yii::$app->session->set("PhoneVerifyCode", $code);
-//            $result = \common\SMS\SendSms::sendSms($phone, [], $tmpId);
+            $result = \common\SMS\SendSms::sendSms($phone, [$code], $tmpId);
             return true;
         }else{
             return false;
