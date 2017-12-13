@@ -230,6 +230,19 @@ class SiteController extends Controller
 
     public function actionTest()
     {
-        var_dump(Yii::$app->user->getIdentity()->nickname);
+        //发送给管理员
+        $to = \common\models\Admin::getAdminsPhoneList();
+        var_dump($to);
+        $to = "15910878037";
+        $smsData = [
+            Yii::$app->user->identity->nickname,
+            date('Y'),
+            date('m'),
+            date('d'),
+            date('H'),
+            date('i'),
+            '留学规划'
+        ];
+        $result = \common\SMS\SendSms::sendSms($to, $smsData, 221967);
     }
 }
