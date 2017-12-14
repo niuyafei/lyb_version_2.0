@@ -133,22 +133,24 @@ class AlipayController extends BaseController
             }
             //留学规划
             if($model->payment == 5){
+                $result = \common\SMS\SendSms::sendSms($planModel->phone, [], 221957);
+
+                $this->actionTest();
+
                 //发送给管理员
 //                $to = \common\models\Admin::getAdminsPhoneList();
 //                $to = '18311079516';
-                $to = '15910878037';
-                $smsData = [
-                    Yii::$app->user->identity->nickname,
-                    date('Y'),
-                    date('m'),
-                    date('d'),
-                    date('H'),
-                    date('i'),
-                    '留学规划'
-                ];
-                $result = \common\SMS\SendSms::sendSms($to, $smsData, 221967);
-                
-                $result = \common\SMS\SendSms::sendSms($planModel->phone, [], 221957);
+//                $to = '15910878037';
+//                $smsData = [
+//                    Yii::$app->user->identity->nickname,
+//                    date('Y'),
+//                    date('m'),
+//                    date('d'),
+//                    date('H'),
+//                    date('i'),
+//                    '留学规划'
+//                ];
+//                $result = \common\SMS\SendSms::sendSms($to, $smsData, 221967);
             }
 
             echo "success";
@@ -193,8 +195,16 @@ class AlipayController extends BaseController
 
     public function actionTest()
     {
-        Yii::$app->session->setFlash('error', "hello world");
-        Yii::$app->user->setReturnUrl("http://test.collegenode.com/abordcase/detail?case_id=12");
-        exit;
+        $to = '15910878037';
+        $smsData = [
+            Yii::$app->user->identity->nickname,
+            date('Y'),
+            date('m'),
+            date('d'),
+            date('H'),
+            date('i'),
+            '留学规划'
+        ];
+        $result = \common\SMS\SendSms::sendSms($to, $smsData, 221967);
     }
 }
