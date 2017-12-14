@@ -102,7 +102,7 @@ class AlipayController extends BaseController
             //留学规划
             //发送给管理员
             $to = \common\models\Admin::getAdminsPhoneList();
-            $to = '15910878037';
+//            $to = '15910878037';
             $smsData = [
                 Yii::$app->user->identity->nickname,
                 date('Y'),
