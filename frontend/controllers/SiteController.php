@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Plan;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -230,6 +231,11 @@ class SiteController extends Controller
 
     public function actionTest()
     {
+        $plan = Plan::find()->where(['user_id' => Yii::$app->user->getId()])->one();
+        var_dump($plan->username);
+        exit;
+
+
         //发送给管理员
         $to = \common\models\Admin::getAdminsPhoneList();
         var_dump($to);
