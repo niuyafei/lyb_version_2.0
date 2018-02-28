@@ -65,7 +65,11 @@ class StudyPlan extends \yii\db\ActiveRecord
         if(is_array($data)){
             $planModel = Plan::findOne($plan_id);
             if($planModel->sat && $planModel->sat <= 1600){
-                $content = explode('；', $data['ylsfx'][0]);
+                if(isset($data['ylsfx'])){
+                    $content = explode('；', $data['ylsfx'][0]);
+                }else{
+                    $content = "";
+                }
                 $content2 = preg_replace("/[\x4e00-\x9fa5]+\d+/", $planModel->sat, $content[1]);
                 preg_match_all("/\d+/", $content[0], $pregArr);
                 $content3 = $content[0];
@@ -74,7 +78,12 @@ class StudyPlan extends \yii\db\ActiveRecord
                 $data['ylsfx'][0] = $content3 . "；" . $content2;
             }else{
                 if(!$planModel->sat && $planModel->act){
-                    $content = explode('；', $data['ylsfx'][0]);
+                    if(isset($data['ylsfx'])){
+                        $content = explode('；', $data['ylsfx'][0]);
+                    }else{
+                        $content = "";
+                    }
+//                    $content = explode('；', $data['ylsfx'][0]);
                     $content2 = preg_replace("/[\x4e00-\x9fa5]+\d+/", $planModel->act, $content[1]);
                     $content2 = str_replace("SAT", "ACT", $content2);
                     $data['ylsfx'][0] = $content2;
