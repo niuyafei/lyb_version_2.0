@@ -67,25 +67,26 @@ class StudyPlan extends \yii\db\ActiveRecord
             if($planModel->sat && $planModel->sat <= 1600){
                 if(isset($data['ylsfx'])){
                     $content = explode('；', $data['ylsfx'][0]);
+                    $content2 = preg_replace("/[\x4e00-\x9fa5]+\d+/", $planModel->sat, $content[1]);
+                    preg_match_all("/\d+/", $content[0], $pregArr);
+                    $content3 = $content[0];
+                    $content3 = str_replace($pregArr[0][0], ceil($pregArr[0][0] / 2400 * 1600), $content3);
+                    $content3 = str_replace($pregArr[0][1], ceil($pregArr[0][1] / 2400 * 1600), $content3);
                 }else{
-                    $content = "";
+                    $content2 = "";
+                    $content3 = "";
                 }
-                $content2 = preg_replace("/[\x4e00-\x9fa5]+\d+/", $planModel->sat, $content[1]);
-                preg_match_all("/\d+/", $content[0], $pregArr);
-                $content3 = $content[0];
-                $content3 = str_replace($pregArr[0][0], ceil($pregArr[0][0] / 2400 * 1600), $content3);
-                $content3 = str_replace($pregArr[0][1], ceil($pregArr[0][1] / 2400 * 1600), $content3);
+
                 $data['ylsfx'][0] = $content3 . "；" . $content2;
             }else{
                 if(!$planModel->sat && $planModel->act){
                     if(isset($data['ylsfx'])){
                         $content = explode('；', $data['ylsfx'][0]);
+                        $content2 = preg_replace("/[\x4e00-\x9fa5]+\d+/", $planModel->act, $content[1]);
+                        $content2 = str_replace("SAT", "ACT", $content2);
                     }else{
-                        $content = "";
+                        $content2 = "";
                     }
-//                    $content = explode('；', $data['ylsfx'][0]);
-                    $content2 = preg_replace("/[\x4e00-\x9fa5]+\d+/", $planModel->act, $content[1]);
-                    $content2 = str_replace("SAT", "ACT", $content2);
                     $data['ylsfx'][0] = $content2;
                 }
             }
