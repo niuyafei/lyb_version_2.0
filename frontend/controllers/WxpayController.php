@@ -35,7 +35,7 @@ class WxpayController extends BaseController
 		$body = $gets['subject'];
 		$trade_no = 'lyb' . time().rand(100, 99);
 		$total_fee = $gets['amount'] * 100;
-		$total_fee = 1;
+//		$total_fee = 1;
 
 		$paymentModel = new Payment();
 		$paymentModel->case_id = $case_id;

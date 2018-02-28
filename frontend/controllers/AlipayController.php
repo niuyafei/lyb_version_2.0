@@ -41,7 +41,7 @@ class AlipayController extends BaseController
 //        //付款金额，必填
         $total_amount = trim($gets['amount']);
         //测试金额0.01
-        $total_amount = 0.01;
+//        $total_amount = 0.01;
 //        //商品描述，可空
         $body = trim($gets['body']);
 
